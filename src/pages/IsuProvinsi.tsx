@@ -31,8 +31,21 @@ import {
   gridProps,
   SENTIMEN_COLOR,
 } from '@/lib/chartTheme'
-import { daftarBerita, daftarIsuProvinsi, daftarKategoriIsu, semuaKlasifikasi } from '@/data/mockData'
+import { daftarIsuProvinsi, daftarKategoriIsu, semuaKlasifikasi } from '@/data/mockData'
+import beritaPapuaRaw from '@/data/beritaPapua.json'
 import type { Isu } from '@/types'
+
+type BeritaRaw = {
+  tanggal: string
+  judul: string
+  sumber: string
+  sentimen: string
+  url: string
+  kategori: string
+  entitasTerkait?: string
+}
+
+const beritaPapua = beritaPapuaRaw as BeritaRaw[]
 
 const columns: ColumnDef<Isu, any>[] = [
   {
@@ -67,6 +80,7 @@ export function IsuProvinsi() {
   const [kategori, setKategori] = useState('')
   const [klasifikasi, setKlasifikasi] = useState('')
 
+  // Tabel isu tetap pakai mock (untuk klasifikasi, trend, OPD)
   const terfilter = useMemo(
     () =>
       daftarIsuProvinsi.filter(
@@ -75,18 +89,17 @@ export function IsuProvinsi() {
     [kategori, klasifikasi],
   )
 
-  // Kategori dari isu Provinsi yang lolos filter (kategori/klasifikasi), dipakai
-  // untuk menarik berita riil yang sepadan agar grafik tren & sentimen konsisten dengan
-  // rentang tanggal data asli (bukan tanggal isu yang jarang/tidak merata).
-  const kategoriTerfilter = useMemo(() => new Set(terfilter.map((isu) => isu.kategori)), [terfilter])
-
+  // Semua grafik memakai data nyata dari beritaPapua.json
   const beritaTerfilter = useMemo(
-    () => daftarBerita.filter((b) => !b.entitasTerkait && kategoriTerfilter.has(b.kategori)),
-    [kategoriTerfilter],
+    () =>
+      beritaPapua.filter(
+        (b) => !b.entitasTerkait && (!kategori || b.kategori === kategori),
+      ),
+    [kategori],
   )
 
   const rentangTanggalData = useMemo(() => {
-    const semuaTanggal = daftarBerita.map((b) => b.tanggal).sort()
+    const semuaTanggal = beritaPapua.map((b) => b.tanggal).sort()
     return { min: semuaTanggal[0], max: semuaTanggal[semuaTanggal.length - 1] }
   }, [])
 
@@ -106,37 +119,26 @@ export function IsuProvinsi() {
     [beritaTerfilter, rentangTanggalData],
   )
 
-  const mediaShare = useMemo(() => {
-    const map = new Map<string, number>()
-    for (const isu of terfilter) {
-      for (const sumber of isu.sumberUtama) {
-        map.set(sumber, (map.get(sumber) ?? 0) + 1)
-      }
-    }
-    return Array.from(map.entries())
-      .map(([name, value]) => ({ name, value }))
-      .sort((a, b) => b.value - a.value)
-  }, [terfilter])
-
+  // Ekspos media: jumlah berita per nama media (dari data nyata)
   const eksposMedia = useMemo(() => {
     const map = new Map<string, number>()
     for (const b of beritaTerfilter) map.set(b.sumber, (map.get(b.sumber) ?? 0) + 1)
     return Array.from(map.entries())
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
-      .slice(0, 8)
+      .slice(0, 10)
   }, [beritaTerfilter])
 
+  // Top 5 kategori dari data nyata
   const top5Isu = useMemo(() => {
+    const src = beritaPapua.filter((b) => !b.entitasTerkait && (!kategori || b.kategori === kategori))
     const map = new Map<string, number>()
-    for (const isu of terfilter) {
-      map.set(isu.kategori, (map.get(isu.kategori) ?? 0) + isu.jumlahBerita)
-    }
+    for (const b of src) map.set(b.kategori, (map.get(b.kategori) ?? 0) + 1)
     return Array.from(map.entries())
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
       .slice(0, 5)
-  }, [terfilter])
+  }, [kategori])
 
   return (
     <div className="space-y-6">
@@ -211,37 +213,20 @@ export function IsuProvinsi() {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Card>
-          <CardHeader title="Media Share" subtitle="Distribusi sumber pemberitaan isu Provinsi (sesuai filter)" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={280}>
-              <BarChart data={mediaShare} layout="vertical" margin={{ left: 8, right: 16 }}>
-                <CartesianGrid {...gridProps} horizontal={false} />
-                <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={140} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="value" name="Isu" fill={chart.gold} radius={[0, 6, 6, 0]} maxBarSize={22} />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media (sesuai filter)" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={280}>
-              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 16 }}>
-                <CartesianGrid {...gridProps} horizontal={false} />
-                <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={140} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22} />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      </div>
+      <Card>
+        <CardHeader title="Ekspos Media" subtitle="Top 10 media yang paling banyak memberitakan (sesuai filter kategori)" />
+        <CardContent>
+          <ResponsiveContainer width="100%" height={320}>
+            <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 24 }}>
+              <CartesianGrid {...gridProps} horizontal={false} />
+              <XAxis type="number" {...axisProps} allowDecimals={false} />
+              <YAxis type="category" dataKey="name" {...axisProps} width={180} />
+              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22} />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
       <Card className="p-5">
         <DataTable data={terfilter} columns={columns} searchPlaceholder="Cari nama isu, OPD..." />
