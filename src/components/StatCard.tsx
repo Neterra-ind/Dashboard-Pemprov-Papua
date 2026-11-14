@@ -37,23 +37,23 @@ export function StatCard({
   const displayValue = typeof value === 'number' ? value.toLocaleString('id-ID') : value
 
   return (
-    <Card className="rise-in relative overflow-hidden p-6">
+    <Card className="rise-in relative overflow-hidden p-5">
       {/* Top accent line */}
       <span className={cn('absolute inset-x-0 top-0 h-1', accentLine)} />
 
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="kpi-number text-[44px] leading-none text-slate-900">{displayValue}</p>
-          <p className="mt-3 text-sm font-semibold text-slate-600">{label}</p>
-          {caption && <p className="mt-1 text-[13px] text-slate-400">{caption}</p>}
+          <p className="kpi-number text-[30px] leading-none text-slate-900 2xl:text-[34px]">{displayValue}</p>
+          <p className="mt-2.5 text-[13px] font-semibold leading-snug text-slate-600">{label}</p>
+          {caption && <p className="mt-0.5 text-xs text-slate-400">{caption}</p>}
         </div>
         <div
           className={cn(
-            'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl',
+            'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl',
             iconStyle,
           )}
         >
-          <Icon className="h-6 w-6" strokeWidth={2} />
+          <Icon className="h-5 w-5" strokeWidth={2} />
         </div>
       </div>
     </Card>

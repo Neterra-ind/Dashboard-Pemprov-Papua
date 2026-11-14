@@ -276,7 +276,7 @@ export function Dashboard() {
       {/* 3 — KPI Cards */}
       <section>
         <SectionLabel hint="periode data aktif">Ringkasan Pemberitaan</SectionLabel>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <StatCard
             label="Total Berita Pemprov Papua"
             value={totalBeritaPemprov}
