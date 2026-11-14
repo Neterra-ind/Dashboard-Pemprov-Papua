@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
 import {
   Area,
   AreaChart,
@@ -15,15 +14,14 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { ExternalLink, Newspaper, TrendingUp } from 'lucide-react'
+import { ExternalLink, TrendingUp } from 'lucide-react'
 import { FilterSelect } from '@/components/FilterSelect'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
-import { KlasifikasiBadge } from '@/components/ui/Badge'
 import { AreaGradient, axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
 import { hitungPerHariRange } from '@/lib/aggregations'
 import { cn } from '@/lib/utils'
-import { daftarIsuGubernur, daftarIsuWakilGubernur, daftarJenisSumber, reputasiByEntitas } from '@/data/mockData'
+import { daftarJenisSumber, reputasiByEntitas } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
 import beritaPapuaRaw from '@/data/beritaPapua.json'
 
@@ -50,11 +48,6 @@ export function IsuPimpinan() {
   const [jenisSumber, setJenisSumber] = useState('')
 
   const reputasi = reputasiByEntitas(tab)
-  const isuTerkait = useMemo(
-    () => (tab === 'Gubernur' ? daftarIsuGubernur : daftarIsuWakilGubernur).slice(0, 8),
-    [tab],
-  )
-
   const beritaTerkait = useMemo(
     () => beritaPapua.filter((b) => b.entitasTerkait === tab && (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber)),
     [tab, jenisSumber],
@@ -217,33 +210,6 @@ export function IsuPimpinan() {
               <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={28} />
             </BarChart>
           </ResponsiveContainer>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader
-          title={`Isu Terkait ${tab}`}
-          subtitle="Isu yang melekat pada entitas ini, diurutkan berdasarkan jumlah berita"
-        />
-        <CardContent className="space-y-3">
-          {isuTerkait.map((isu) => (
-            <Link
-              key={isu.id}
-              to={`/isu/${isu.id}`}
-              className="flex items-start justify-between gap-3 rounded-xl border border-[var(--color-border)] p-3.5 transition-colors hover:border-primary/30 hover:bg-slate-50"
-            >
-              <div className="flex gap-2.5">
-                <Newspaper className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-800">{isu.namaIsu}</p>
-                  <p className="mt-0.5 text-xs text-slate-500">
-                    {isu.kategori} · {isu.jumlahBerita} berita
-                  </p>
-                </div>
-              </div>
-              <KlasifikasiBadge value={isu.klasifikasi} />
-            </Link>
-          ))}
         </CardContent>
       </Card>
 
