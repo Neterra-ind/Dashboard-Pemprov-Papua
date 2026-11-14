@@ -12,4 +12,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    // File sumber mentah (Excel/gambar) di root sering sedang dibuka aplikasi lain dan
+    // terkunci (EBUSY) — jangan dipantau supaya dev server tidak crash.
+    watch: { ignored: ['**/*.xlsx', '**/*.xls', '**/*.csv'] },
+  },
 })
