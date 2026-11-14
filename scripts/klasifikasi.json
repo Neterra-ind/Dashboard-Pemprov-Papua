@@ -1,0 +1,87 @@
+{
+  "_keterangan": "File ini dibaca otomatis oleh importExcel.py. Edit kata kunci di sini tanpa menyentuh kode Python.",
+  "_versi": "1.0",
+  "_sumber": "Glosarium Kinerja Pemda — Neterra",
+
+  "sentimen_override": {
+    "_urutan": "Aturan dicek berurutan: Negatif → Potensi Negatif → Positif. Jika cocok, sentimen dari Excel diganti. Jika tidak cocok, sentimen Excel dipakai.",
+    "Negatif": {
+      "_definisi": "Pemberitaan menyerang pimpinan/pemda; atau isu yang tidak kunjung mendapat respons konkret pemda.",
+      "kata_kunci": [
+        "korupsi", "kpk", "tersangka", "ditangkap", "terlibat kasus",
+        "gagal memimpin", "bupati gagal", "gubernur gagal", "kinerja buruk",
+        "narkoba pejabat", "pejabat terlibat", "suap", "gratifikasi",
+        "dibiarkan rusak", "tidak kunjung diperbaiki", "diabaikan bertahun-tahun",
+        "menyerang pimpinan", "kritik tajam", "unjuk rasa menuntut mundur"
+      ]
+    },
+    "Potensi Negatif": {
+      "_definisi": "Isu/masalah yang relevan dengan urusan pemda dan berpeluang memberikan dampak terhadap tugas/fungsi pemerintah; atau isu yang dapat menjadi kewenangan pemda untuk ditindaklanjuti.",
+      "_mapping_ke_sentimen_dashboard": "Negatif",
+      "kata_kunci": [
+        "kelangkaan", "kekosongan jabatan", "kenaikan harga", "harga naik",
+        "bahan pokok mahal", "bbm langka", "banjir", "longsor", "bencana",
+        "konflik", "kerusakan jalan", "jalan rusak", "fasilitas rusak",
+        "kekerasan anak", "pemalsuan", "nelayan kesulitan", "stunting meningkat",
+        "wabah", "penyakit menyebar", "pasokan terganggu", "krisis air"
+      ]
+    },
+    "Positif": {
+      "_definisi": "Pemberitaan prestasi/inovasi/capaian kinerja pimpinan/OPD/lembaga binaan pemda.",
+      "kata_kunci": [
+        "penghargaan", "prestasi", "inovasi", "capaian kinerja", "realisasi",
+        "juara", "medali", "terbaik nasional", "peringkat pertama",
+        "peluncuran aplikasi", "program berhasil", "apresiasi", "bonus atlet",
+        "desa binaan", "nominasi", "anugerah", "investasi meningkat",
+        "stunting turun", "kemiskinan berkurang", "pertumbuhan ekonomi"
+      ]
+    }
+  },
+
+  "framing_kinerja": {
+    "_keterangan": "Framing ditambahkan sebagai field 'framing' di output JSON. Tidak mempengaruhi sentimen.",
+    "Respons": {
+      "_definisi": "Publikasi tanggapan/tindakan konkret pimpinan/OPD atas isu/masalah.",
+      "kata_kunci": [
+        "mengevakuasi", "satgas", "menindak", "melarang", "menangani",
+        "mengunjungi korban", "memberikan bantuan", "mendistribusikan",
+        "melakukan operasi", "merazia", "menetapkan status darurat",
+        "memerintahkan", "menginstruksikan opd"
+      ]
+    },
+    "Sosialisasi": {
+      "_definisi": "Publikasi kinerja/rencana kerja/program kerja/tupoksi pemda.",
+      "kata_kunci": [
+        "rakor", "sosialisasi", "menggelar", "program", "rencana kerja",
+        "komitmen", "peluncuran", "peresmian", "penandatanganan mou",
+        "kerjasama", "workshop", "bimtek", "pelatihan", "seminar"
+      ]
+    },
+    "Seremoni": {
+      "_definisi": "Publikasi kegiatan seremonial/pernyataan normatif tanpa substansi program konkret.",
+      "kata_kunci": [
+        "menyambut kedatangan", "melantik", "apel", "peringatan hari",
+        "menghadiri", "meresmikan", "memberikan sambutan", "foto bersama",
+        "kunjungan kerja", "audiensi", "penerimaan tamu"
+      ]
+    }
+  },
+
+  "filter_abaikan": {
+    "_keterangan": "Berita yang mengandung kata-kata berikut akan dilewati saat import.",
+    "mengandung_kata": [
+      "pornografi", "judi", "togel", "slot online", "iklan berbayar",
+      "promo diskon", "beli sekarang", "klik link", "sponsored"
+    ],
+    "panjang_judul_minimum_karakter": 25
+  },
+
+  "batasan_relevansi": {
+    "_keterangan": "Topik di luar Papua yang sebaiknya diabaikan meski muncul di feed.",
+    "abaikan_jika_hanya_menyebut": [
+      "jakarta", "jawa barat", "jawa tengah", "jawa timur", "bali",
+      "sumatera", "kalimantan barat", "sulawesi selatan"
+    ],
+    "_catatan": "Aturan ini hanya berlaku jika TIDAK ADA kata 'papua' atau nama kabupaten Papua dalam judul yang sama."
+  }
+}

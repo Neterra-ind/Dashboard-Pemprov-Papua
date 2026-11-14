@@ -5,6 +5,9 @@
    - Kolom input Socmed: Tanggal, Jam, Username, Isi, Sentimen, Platform, ..., Link
    - Output: [{tanggal, judul, sumber, sentimen, url, kategori, entitasTerkait?}]
    Jalankan: python scripts/importExcel.py
+
+   Aturan klasifikasi dibaca dari scripts/klasifikasi.json — edit di sana
+   tanpa menyentuh kode Python ini.
 """
 from __future__ import annotations
 
@@ -23,6 +26,36 @@ except ImportError:
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 OUT = os.path.join(ROOT, "src", "data", "beritaPapua.json")
+
+# ── Muat config klasifikasi ──────────────────────────────────────────────────
+_CONFIG_PATH = os.path.join(os.path.dirname(__file__), "klasifikasi.json")
+try:
+    with open(_CONFIG_PATH, encoding="utf-8") as _f:
+        _CFG = json.load(_f)
+    print(f"Config klasifikasi dimuat dari: {_CONFIG_PATH}")
+except FileNotFoundError:
+    _CFG = {}
+    print("PERINGATAN: klasifikasi.json tidak ditemukan, aturan override dinonaktifkan.", file=sys.stderr)
+
+def _kata_kunci(bagian: str, kunci: str) -> list[str]:
+    return _CFG.get(bagian, {}).get(kunci, {}).get("kata_kunci", [])
+
+SENTIMEN_OVERRIDE_NEG  = [k.lower() for k in _kata_kunci("sentimen_override", "Negatif")]
+SENTIMEN_OVERRIDE_PNEG = [k.lower() for k in _kata_kunci("sentimen_override", "Potensi Negatif")]
+SENTIMEN_OVERRIDE_POS  = [k.lower() for k in _kata_kunci("sentimen_override", "Positif")]
+
+FRAMING_KEYS: dict[str, list[str]] = {
+    name: [k.lower() for k in data.get("kata_kunci", [])]
+    for name, data in _CFG.get("framing_kinerja", {}).items()
+    if not name.startswith("_")
+}
+
+_FILTER = _CFG.get("filter_abaikan", {})
+KATA_ABAIKAN   = [k.lower() for k in _FILTER.get("mengandung_kata", [])]
+MIN_JUDUL_LEN  = int(_FILTER.get("panjang_judul_minimum_karakter", 20))
+
+_BATAS = _CFG.get("batasan_relevansi", {})
+ABAIKAN_WILAYAH = [k.lower() for k in _BATAS.get("abaikan_jika_hanya_menyebut", [])]
 
 SENTIMEN_MAP = {"positive": "Positif", "neutral": "Netral", "negative": "Negatif"}
 
@@ -102,6 +135,47 @@ def parse_sentimen(v) -> str:
     return SENTIMEN_MAP.get(str(v).strip().lower(), "Netral")
 
 
+def override_sentimen(judul: str, sentimen_asal: str) -> str:
+    """Terapkan aturan glosarium: cek kata kunci negatif/positif di judul."""
+    teks = judul.lower()
+    for k in SENTIMEN_OVERRIDE_NEG:
+        if k in teks:
+            return "Negatif"
+    for k in SENTIMEN_OVERRIDE_PNEG:
+        if k in teks:
+            return "Negatif"  # Potensi Negatif → Negatif di skema dashboard
+    for k in SENTIMEN_OVERRIDE_POS:
+        if k in teks:
+            return "Positif"
+    return sentimen_asal
+
+
+def deteksi_framing(judul: str) -> str | None:
+    """Deteksi framing kinerja pemda: Respons, Sosialisasi, atau Seremoni."""
+    teks = judul.lower()
+    for nama, keys in FRAMING_KEYS.items():
+        for k in keys:
+            if k in teks:
+                return nama
+    return None
+
+
+def lolos_filter(judul: str) -> bool:
+    """True jika berita layak dimasukkan berdasarkan aturan filter_abaikan."""
+    if len(judul) < MIN_JUDUL_LEN:
+        return False
+    teks = judul.lower()
+    for k in KATA_ABAIKAN:
+        if k in teks:
+            return False
+    # Abaikan jika hanya menyebut wilayah lain tanpa kata 'papua'
+    if ABAIKAN_WILAYAH and "papua" not in teks:
+        for w in ABAIKAN_WILAYAH:
+            if w in teks:
+                return False
+    return True
+
+
 def iter_rows(path: str, is_socmed: bool, forced_entitas: str | None):
     wb = load_workbook(path, read_only=True, data_only=True)
     ws = wb[wb.sheetnames[0]]
@@ -124,7 +198,7 @@ def iter_rows(path: str, is_socmed: bool, forced_entitas: str | None):
             if not tgl:
                 continue
             judul = strip_html(str(r[i_judul] or "") if i_judul is not None else "")[:MAX_JUDUL]
-            if not judul:
+            if not judul or not lolos_filter(judul):
                 continue
             sumber_raw = str(r[i_media] or "").strip() if i_media is not None else ""
             if not sumber_raw:
@@ -135,10 +209,12 @@ def iter_rows(path: str, is_socmed: bool, forced_entitas: str | None):
             else:
                 sumber = sumber_raw
             narasumber = str(r[i_nara] or "") if i_nara is not None else ""
-            sentimen = parse_sentimen(r[i_sentimen]) if i_sentimen is not None else "Netral"
+            sentimen_asal = parse_sentimen(r[i_sentimen]) if i_sentimen is not None else "Netral"
+            sentimen = override_sentimen(judul, sentimen_asal)
             url = str(r[i_link] or "").strip() if i_link is not None else ""
             kategori = klasifikasi_kategori(judul, narasumber)
             ent = entitas_terkait(judul, narasumber, forced_entitas)
+            framing = deteksi_framing(judul)
             out = {
                 "tanggal": tgl,
                 "judul": judul,
@@ -149,6 +225,8 @@ def iter_rows(path: str, is_socmed: bool, forced_entitas: str | None):
             }
             if ent:
                 out["entitasTerkait"] = ent
+            if framing:
+                out["framing"] = framing
             yield out
         except Exception:
             continue
@@ -216,10 +294,12 @@ def main():
     cats = Counter(r["kategori"] for r in all_rows)
     ents = Counter(r.get("entitasTerkait", "-") for r in all_rows)
     sents = Counter(r["sentimen"] for r in all_rows)
+    framings = Counter(r.get("framing", "-") for r in all_rows)
     print(f"total ditulis: {len(all_rows)}")
     print(f"kategori: {dict(cats)}")
     print(f"entitas: {dict(ents)}")
     print(f"sentimen: {dict(sents)}")
+    print(f"framing: {dict(framings)}")
 
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(all_rows, f, ensure_ascii=False, separators=(",", ":"))
