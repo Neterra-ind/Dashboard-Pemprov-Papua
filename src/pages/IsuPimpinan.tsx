@@ -33,6 +33,10 @@ import fotoWakilGubernur from '@/assets/wakil-gubernur-papua.jpg'
 
 const SENTIMEN_COLOR = { Positif: chart.positive, Negatif: chart.negative }
 
+const KATEGORI_COLORS = [
+  chart.accent, chart.gold, chart.positive, '#8b5cf6', '#f97316', '#06b6d4', '#ec4899', '#14b8a6', '#f43f5e', '#a3e635',
+]
+
 const TABS: { key: EntitasPimpinan; label: string }[] = [
   { key: 'Gubernur', label: 'Isu Gubernur Papua' },
   { key: 'Wakil Gubernur', label: 'Isu Wakil Gubernur Papua' },
@@ -70,6 +74,14 @@ export function IsuPimpinan() {
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
       .slice(0, 7)
+  }, [beritaTerkait])
+
+  const distribusiKategori = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of beritaTerkait) map.set(b.kategori, (map.get(b.kategori) ?? 0) + 1)
+    return Array.from(map.entries())
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value)
   }, [beritaTerkait])
 
   const eksposMedia = useMemo(() => {
@@ -120,7 +132,7 @@ export function IsuPimpinan() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card className="lg:col-span-1">
+        <Card>
           <CardContent className="space-y-3">
             <div className="flex items-start gap-3">
               <img
@@ -183,20 +195,37 @@ export function IsuPimpinan() {
         </Card>
 
         <Card>
-          <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
+          <CardHeader title="Framing Pemberitaan" subtitle="Proporsi berita per kategori topik" />
           <CardContent>
             <ResponsiveContainer width="100%" height={216}>
-              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12 }}>
-                <CartesianGrid {...gridProps} horizontal={false} />
-                <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={90} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
-              </BarChart>
+              <PieChart>
+                <Pie data={distribusiKategori} dataKey="value" nameKey="name" innerRadius={48} outerRadius={78} paddingAngle={2} stroke="none">
+                  {distribusiKategori.map((entry, i) => (
+                    <Cell key={entry.name} fill={KATEGORI_COLORS[i % KATEGORI_COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip content={<ChartTooltip />} />
+                <Legend content={<ChartLegend />} />
+              </PieChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
+        <CardContent>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12 }}>
+              <CartesianGrid {...gridProps} horizontal={false} />
+              <XAxis type="number" {...axisProps} allowDecimals={false} />
+              <YAxis type="category" dataKey="name" {...axisProps} width={120} />
+              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader title={`Top Kategori Isu — ${tab}`} subtitle="Jumlah pemberitaan per kategori (data nyata)" />
