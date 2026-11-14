@@ -27,11 +27,6 @@ const rankingColumns: ColumnDef<RankingOpd, any>[] = [
     header: 'Isu Negatif/Potensi Negatif',
     cell: (info) => <span className="tabular-nums text-rose-600 dark:text-rose-400">{info.getValue<number>()}</span>,
   },
-  {
-    accessorKey: 'severityScore',
-    header: 'Severity Score',
-    cell: (info) => <span className="tabular-nums font-medium">{info.getValue<number>()}</span>,
-  },
 ]
 
 const isuColumns: ColumnDef<Isu, any>[] = [

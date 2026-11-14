@@ -19,7 +19,7 @@ import { DataTable } from '@/components/DataTable'
 import { FilterSelect } from '@/components/FilterSelect'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
-import { KlasifikasiBadge, TrendBadge } from '@/components/ui/Badge'
+import { KlasifikasiBadge } from '@/components/ui/Badge'
 import { hitungPerHariRange } from '@/lib/aggregations'
 import {
   AreaGradient,
@@ -63,11 +63,6 @@ const columns: ColumnDef<Isu, any>[] = [
     accessorKey: 'klasifikasi',
     header: 'Klasifikasi',
     cell: (info) => <KlasifikasiBadge value={info.getValue()} />,
-  },
-  {
-    accessorKey: 'trend',
-    header: 'Trend',
-    cell: (info) => <TrendBadge value={info.getValue()} />,
   },
   {
     accessorKey: 'jumlahBerita',
