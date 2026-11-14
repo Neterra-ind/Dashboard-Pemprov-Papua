@@ -1,0 +1,5310 @@
+[
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #001",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pariwisata terkait Wakil Gubernur Papua #001",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pariwisata terkait Wakil Gubernur Papua #002",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pariwisata terkait Wakil Gubernur Papua #003",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #002",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pariwisata terkait Wakil Gubernur Papua #004",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #001",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #001",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #003",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #002",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan terkait Gubernur Papua #001",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #004",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #003",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #005",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #006",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #001",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #001",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #002",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #003",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #007",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #002",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur terkait Gubernur Papua #003",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #008",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #004",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #004",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #009",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #010",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #011",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #004",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #012",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #013",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #014",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #005",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #015",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #016",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #002",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #001",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #003",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #005",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #017",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Gubernur Papua #002",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #006",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #018",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #003",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #004",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #002",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #019",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #005",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #020",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #003",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pelayanan Publik di Provinsi Papua #001",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pelayanan Publik"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #006",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #006",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #004",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #021",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #007",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #007",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #005",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #008",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan terkait Gubernur Papua #006",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #005",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #022",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #023",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #008",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #007",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #004",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #024",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #009",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #025",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #010",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #006",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #026",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #027",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #008",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #005",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #028",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #029",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #030",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #006",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #031",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #009",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #011",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #009",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #007",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan terkait Gubernur Papua #008",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #032",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #033",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #009",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #010",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #034",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #035",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #011",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #036",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #012",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #013",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #012",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #037",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #038",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #039",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #007",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #010",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #011",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #008",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #040",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #041",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #042",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #043",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #012",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan terkait Gubernur Papua #007",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #044",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #045",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #014",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #005",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #046",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #008",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #010",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #015",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #011",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #012",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #013",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #009",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pelayanan Publik di Provinsi Papua #002",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pelayanan Publik"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #047",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #006",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #007",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #048",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #016",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Sosial & Kemiskinan di Provinsi Papua #001",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Sosial & Kemiskinan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #049",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #010",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #009",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #014",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #013",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #010",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #011",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Gubernur Papua #011",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #012",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #015",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #016",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #050",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #013",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #014",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Sosial & Kemiskinan di Provinsi Papua #002",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Sosial & Kemiskinan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #014",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-23",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #015",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #051",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #052",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #053",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pariwisata terkait Wakil Gubernur Papua #008",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #017",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #054",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan terkait Gubernur Papua #013",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #055",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #009",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #012",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #013",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #056",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #018",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #019",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #017",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #014",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #018",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #057",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #014",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #015",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #058",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #059",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #019",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #060",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #010",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #020",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #061",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #062",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #063",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #064",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #065",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #066",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #067",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #068",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #069",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #016",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #016",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #021",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #017",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #015",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #070",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #022",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pariwisata terkait Gubernur Papua #011",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #017",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #071",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #023",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #072",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #073",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #074",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #075",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #024",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #076",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #015",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #077",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #078",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #079",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #080",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #081",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #082",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #083",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #084",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #025",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #016",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #085",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #016",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #086",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #018",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #012",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #087",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #088",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Infrastruktur terkait Gubernur Papua #017",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #089",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #090",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #091",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #092",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #093",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #094",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #018",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #020",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #018",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pariwisata terkait Wakil Gubernur Papua #013",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pelayanan Publik di Provinsi Papua #003",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pelayanan Publik"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #021",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #019",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #026",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #095",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #096",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #020",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #097",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #019",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #098",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #099",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Gubernur Papua #020",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #100",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #017",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #101",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #102",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #103",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #104",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #105",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #014",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #021",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #106",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #107",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #019",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #108",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #022",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-24",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #018",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Wakil Gubernur Papua #022",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #109",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #110",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #111",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #112",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #113",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #114",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #023",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #027",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #021",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #015",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #023",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #024",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #115",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #116",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #024",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #020",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #025",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #117",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #118",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #016",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #119",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #021",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #017",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #025",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #120",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #022",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #028",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #121",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #122",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #029",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #018",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #123",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan terkait Gubernur Papua #019",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #124",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #030",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #125",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #126",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #127",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #019",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #022",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Wakil Gubernur Papua #026",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #031",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #128",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #027",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #129",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #032",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #020",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #028",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #130",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #023",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #029",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #030",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #024",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #131",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #132",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #133",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #031",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #134",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #135",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #136",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #137",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #138",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #020",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #025",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #139",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #140",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #141",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #142",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #032",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #143",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #144",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #145",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #021",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #146",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #147",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #148",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #026",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-25",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #023",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #149",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #150",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #151",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #152",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #153",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Wakil Gubernur Papua #033",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #154",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #022",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #155",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #034",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Gubernur Papua #035",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #027",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Gubernur Papua #036",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #156",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #157",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #021",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #158",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #023",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #024",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #159",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #037",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #038",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #039",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #024",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #026",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #033",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Gubernur Papua #040",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #041",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #025",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #027",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #160",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #042",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #028",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #043",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #026",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #161",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur terkait Gubernur Papua #029",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #162",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #163",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #034",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #044",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #164",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #035",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur terkait Wakil Gubernur Papua #030",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #036",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #045",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #165",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #046",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #031",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #047",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #037",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #048",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #166",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #167",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #038",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #039",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #027",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur terkait Gubernur Papua #032",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #168",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #169",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #170",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan terkait Wakil Gubernur Papua #028",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #171",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #033",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #034",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #172",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #029",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #173",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #174",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #175",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pelayanan Publik di Provinsi Papua #004",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pelayanan Publik"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Pelayanan Publik di Provinsi Papua #005",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pelayanan Publik"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #176",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #028",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #029",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #030",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #031",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #177",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #049",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #035",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #178",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #036",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #032",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #179",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #033",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #180",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #181",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #034",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #035",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #182",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #025",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #183",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #184",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #036",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #185",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #037",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #038",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #186",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #187",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #039",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #188",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #189",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #037",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #038",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #190",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #191",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-26",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #030",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #192",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #193",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #194",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #195",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #196",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #197",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #050",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #198",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #040",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #051",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #052",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #053",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #199",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #200",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pariwisata terkait Gubernur Papua #022",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #040",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #201",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #054",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #202",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #041",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #042",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #203",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #041",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #204",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #043",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #205",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #206",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #031",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #207",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #055",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #208",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Infrastruktur terkait Gubernur Papua #039",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana terkait Gubernur Papua #056",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #032",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #209",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #210",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #211",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #212",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #057",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #058",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #213",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #059",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #026",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #042",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #044",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #060",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #214",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #215",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #061",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #062",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #023",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #045",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #063",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #216",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #217",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #218",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #033",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #219",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Infrastruktur terkait Gubernur Papua #040",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #024",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #064",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #065",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Sosial & Kemiskinan di Provinsi Papua #003",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Sosial & Kemiskinan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #034",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #220",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #221",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #066",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #043",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #067",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #222",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #068",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #223",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #224",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #225",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #035",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #069",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #070",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #046",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #071",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #041",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #226",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #227",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #228",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #229",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #027",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan terkait Wakil Gubernur Papua #036",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #230",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #072",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #073",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #047",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #037",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #231",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #074",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #232",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Sosial & Kemiskinan terkait Gubernur Papua #004",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Sosial & Kemiskinan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #233",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Kesehatan di Provinsi Papua #028",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Kesehatan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #075",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #076",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #077",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #234",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #235",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #236",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Infrastruktur terkait Gubernur Papua #042",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #237",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #043",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #044",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #238",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #239",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #240",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #048",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #045",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #046",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #049",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #078",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #047",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #241",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #048",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #242",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #243",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #049",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #244",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #245",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #044",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #038",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #050",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #246",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #045",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #051",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #247",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #248",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #046",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #249",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Pelayanan Publik di Provinsi Papua #006",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pelayanan Publik"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #250",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #251",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #052",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #252",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-27",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #053",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #253",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #039",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #254",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #054",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #255",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #256",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #079",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #257",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #258",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #259",
+    "sumber": "Media Contoh F",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Pariwisata terkait Gubernur Papua #025",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #260",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #261",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #047",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #262",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #026",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #080",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #263",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #050",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #081",
+    "sumber": "Media Contoh D",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #082",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #040",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #083",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #264",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #265",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #084",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #266",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #085",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #267",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #268",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #051",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #086",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #087",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #269",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #041",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #055",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #056",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #270",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #271",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #272",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #273",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Ekonomi & Ketahanan Pangan di Provinsi Papua #042",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Ekonomi & Ketahanan Pangan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Wakil Gubernur Papua #274",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Wakil Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #052",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Pendidikan terkait Gubernur Papua #053",
+    "sumber": "Media Contoh E",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pendidikan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Pariwisata terkait Gubernur Papua #027",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Lingkungan & Bencana di Provinsi Papua #088",
+    "sumber": "Media Contoh A",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Lingkungan & Bencana"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #275",
+    "sumber": "Media Contoh B",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #057",
+    "sumber": "Media Contoh C",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #048",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #276",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #058",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #277",
+    "sumber": "Media Contoh A",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #278",
+    "sumber": "Media Contoh B",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Pendidikan di Provinsi Papua #054",
+    "sumber": "Media Contoh C",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Pendidikan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Pariwisata di Provinsi Papua #028",
+    "sumber": "Media Contoh D",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Pariwisata"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Keamanan & Ketertiban di Provinsi Papua #059",
+    "sumber": "Media Contoh E",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Keamanan & Ketertiban"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Infrastruktur di Provinsi Papua #049",
+    "sumber": "Media Contoh F",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Infrastruktur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #279",
+    "sumber": "Media Contoh A",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #280",
+    "sumber": "Media Contoh B",
+    "sentimen": "Positif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #281",
+    "sumber": "Media Contoh C",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #282",
+    "sumber": "Media Contoh D",
+    "sentimen": "Negatif",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan terkait Gubernur Papua #283",
+    "sumber": "Media Contoh E",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan",
+    "entitasTerkait": "Gubernur"
+  },
+  {
+    "tanggal": "2026-07-28",
+    "judul": "[CONTOH] Berita Tata Kelola Pemerintahan di Provinsi Papua #284",
+    "sumber": "Media Contoh F",
+    "sentimen": "Netral",
+    "url": "#",
+    "kategori": "Tata Kelola Pemerintahan"
+  }
+]

@@ -16,7 +16,7 @@ swap the hero illustration, client logo, and content. Everything else re-themes 
 because all components consume the token names — never raw hex.
 
 ```
-Primary (current client — Pemprov DKI Jakarta): #07324F  (navy)
+Primary (current client — Pemprov Papua): #07324F  (navy)
 ```
 
 ---

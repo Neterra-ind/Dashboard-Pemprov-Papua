@@ -1,10 +1,10 @@
-# Regional Media Analytics — Pemprov DKI Jakarta
+# Regional Media Analytics — Pemprov Papua
 
-Dashboard eksekutif untuk memantau isu dan pemberitaan media terkait Provinsi DKI Jakarta: klasifikasi kategori isu, sentimen, ranking OPD, dan alur disposisi/tindak lanjut ke OPD terkait.
+Dashboard eksekutif untuk memantau isu dan pemberitaan media terkait Provinsi Papua: klasifikasi kategori isu, sentimen, ranking OPD, dan alur disposisi/tindak lanjut ke OPD terkait.
 
-Data yang dipakai adalah **3.210 berita riil unik** (23–28 Juli 2026) hasil monitoring media online yang relevan secara spesifik dengan DKI Jakarta (difilter dan dideduplikasi dari 43.624 baris mentah di 4 file sumber: gubernur, wakil gubernur, OPD, dan wilayah), sudah diklasifikasikan otomatis ke 10 kategori isu (Pelayanan Publik, Infrastruktur, Pendidikan, Kesehatan, Ekonomi & Ketahanan Pangan, Pariwisata, Lingkungan & Bencana, Sosial & Kemiskinan, Keamanan & Ketertiban, Tata Kelola Pemerintahan) dan entitas terkait (Gubernur/Wakil Gubernur bila relevan). Bukan data simulasi/dummy.
+> **Status data: PLACEHOLDER.** `src/data/beritaPapua.json` berisi 642 berita **contoh** (judul diawali `[CONTOH]`, sumber `Media Contoh A–F`, url `#`) agar semua halaman bisa tampil. Ini bukan berita riil — ganti dengan hasil monitoring media Papua (kolom: tanggal, judul, sumber, sentimen, url, kategori, entitasTerkait) yang diklasifikasikan ke 10 kategori isu dan entitas terkait (Gubernur/Wakil Gubernur bila relevan).
 
-Project ini adalah **duplikat** dari dashboard serupa untuk Pemkab Wonosobo — struktur komponen, desain, dan tech stack identik, hanya data dan branding yang disesuaikan.
+Project ini adalah **duplikat** dari dashboard Pemprov DKI Jakarta — struktur komponen, desain, dan tech stack identik, hanya data dan branding yang disesuaikan.
 
 ## Stack
 
@@ -13,7 +13,7 @@ React 19 + TypeScript + Vite (rolldown) + Tailwind CSS v4 (CSS-first `@theme`, l
 ## Halaman
 
 - **Executive Summary** (`/`) — ringkasan total berita, grafik ekspos isu harian, sentimen dominan, kartu Issues Negatif, Top 5 Isu Provinsi, dan ranking publikasi kinerja OPD.
-- **Isu Provinsi DKI Jakarta** (`/isu-provinsi`) — daftar isu level provinsi dengan filter kategori/klasifikasi, grafik tren, media share, dan tabel isu.
+- **Isu Provinsi Papua** (`/isu-provinsi`) — daftar isu level provinsi dengan filter kategori/klasifikasi, grafik tren, media share, dan tabel isu.
 - **Isu Gubernur & Wakil Gubernur** (`/isu-pimpinan`) — reputasi, share of voice, dan isu yang melekat pada masing-masing pimpinan.
 - **Pemberitaan OPD** (`/pemberitaan-opd`) — ranking OPD berdasarkan jumlah/isu negatif, plus daftar isu per OPD.
 - **Issues Negatif** (`/early-warning`) — isu berklasifikasi Negatif/Potensi Negatif yang perlu direspons OPD, lengkap tombol disposisi.
@@ -23,7 +23,7 @@ React 19 + TypeScript + Vite (rolldown) + Tailwind CSS v4 (CSS-first `@theme`, l
 
 ## Struktur data penting
 
-- `src/data/beritaJakarta.json` — 3.210 berita riil (tanggal, judul, sumber, sentimen, url, kategori, entitasTerkait).
+- `src/data/beritaPapua.json` — berita (saat ini data contoh/placeholder) (tanggal, judul, sumber, sentimen, url, kategori, entitasTerkait).
 - `src/data/mockData.ts` — clustering berita → Isu (per kombinasi kategori × entitas), generator ringkasan AI, dan penamaan singkat "substansi masalah" untuk kartu Issues Negatif.
 - `src/lib/store.tsx` — state disposisi/tindak lanjut (in-memory, tidak persisten).
 - `src/lib/role.tsx` — konteks role (Eksekutif/Admin OPD/Super Admin), default Eksekutif.
@@ -35,7 +35,7 @@ npm install
 npm run dev
 ```
 
-Dev server berjalan di **port 5174** (beda dari project Wonosobo di 5173) supaya keduanya bisa dijalankan bersamaan.
+Dev server Claude Preview memakai **port 5184** (`.claude/launch.json`; dashboard DKI Jakarta memakai 5183) supaya keduanya bisa dijalankan bersamaan.
 
 Build produksi:
 

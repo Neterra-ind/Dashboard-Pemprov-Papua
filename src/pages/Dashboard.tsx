@@ -44,7 +44,7 @@ import {
   gridProps,
   SENTIMEN_COLOR,
 } from '@/lib/chartTheme'
-import ilustrasiJakarta from '@/assets/ilustrasi-jakarta.jpeg'
+import ilustrasiPapua from '@/assets/ilustrasi-papua.jpeg'
 
 const waktuSekarang = new Date().toLocaleString('id-ID', {
   dateStyle: 'full',
@@ -55,8 +55,8 @@ function HeroBanner() {
   return (
     <div className="relative h-44 overflow-hidden rounded-[20px] border border-[var(--color-border)] shadow-[var(--shadow-card)] sm:h-56">
       <img
-        src={ilustrasiJakarta}
-        alt="Ilustrasi Provinsi DKI Jakarta"
+        src={ilustrasiPapua}
+        alt="Ilustrasi Provinsi Papua"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-primary-strong/90 via-primary/50 to-transparent" />
@@ -65,10 +65,10 @@ function HeroBanner() {
           Government Media Analytics
         </span>
         <h2 className="mt-1 text-lg font-bold leading-tight text-white drop-shadow-sm sm:text-xl">
-          Pemantauan Media Pemprov DKI Jakarta
+          Pemantauan Media Pemprov Papua
         </h2>
         <p className="max-w-md text-xs text-white/85 sm:text-[13px]">
-          Pemantauan pemberitaan, sentimen, dan isu strategis Pemprov DKI Jakarta secara real-time.
+          Pemantauan pemberitaan, sentimen, dan isu strategis Pemprov Papua secara real-time.
         </p>
       </div>
     </div>
@@ -219,7 +219,7 @@ export function Dashboard() {
       b.sentimen,
       b.entitasTerkait ?? '-',
     ])
-    downloadXlsx('Berita-Pemprov-DKI-Jakarta', {
+    downloadXlsx('Berita-Pemprov-Papua', {
       sheetName: 'Berita',
       headers: ['Tanggal', 'Judul', 'Media', 'Jenis Sumber', 'Kategori', 'Sentimen', 'Entitas Terkait'],
       rows,
@@ -238,7 +238,7 @@ export function Dashboard() {
       {/* Page title */}
       <PageHeader
         title="Executive Summary"
-        subtitle={`Ringkasan pemantauan media Pemprov DKI Jakarta · Data per ${waktuSekarang} WIB`}
+        subtitle={`Ringkasan pemantauan media Pemprov Papua · Data per ${waktuSekarang} WIB`}
         action={
           <button
             type="button"
@@ -278,7 +278,7 @@ export function Dashboard() {
         <SectionLabel hint="periode data aktif">Ringkasan Pemberitaan</SectionLabel>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <StatCard
-            label="Total Berita Pemprov DKI Jakarta"
+            label="Total Berita Pemprov Papua"
             value={totalBeritaPemprov}
             icon={Newspaper}
             tone="accent"
@@ -312,7 +312,7 @@ export function Dashboard() {
         <SectionLabel hint="rentang data penuh">Analitik Utama</SectionLabel>
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <Card className="lg:col-span-2">
-            <CardHeader title="Ekspos Isu DKI Jakarta" subtitle="Jumlah berita per hari" />
+            <CardHeader title="Ekspos Isu Papua" subtitle="Jumlah berita per hari" />
             <CardContent>
               <ResponsiveContainer width="100%" height={280}>
                 <AreaChart data={trenBerita} margin={{ top: 4, right: 8, left: -8, bottom: 0 }}>
@@ -426,7 +426,7 @@ export function Dashboard() {
         <SectionLabel>Isu Teratas</SectionLabel>
         <Card id="isu-provinsi" className="scroll-mt-4">
           <CardHeader
-            title="Top 5 Isu Provinsi DKI Jakarta"
+            title="Top 5 Isu Provinsi Papua"
             subtitle="Berdasarkan jumlah berita/postingan"
           />
           <CardContent className="pt-2">

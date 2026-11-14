@@ -23,14 +23,14 @@ import { axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } fr
 import { cn } from '@/lib/utils'
 import { daftarBerita, daftarIsuGubernur, daftarIsuWakilGubernur, reputasiByEntitas } from '@/data/mockData'
 import type { EntitasPimpinan } from '@/types'
-import fotoGubernur from '@/assets/gubernur-pramono-anung.jpg'
-import fotoWakilGubernur from '@/assets/wakil-gubernur-rano-karno.jpg'
+import fotoGubernur from '@/assets/gubernur-papua.jpg'
+import fotoWakilGubernur from '@/assets/wakil-gubernur-papua.jpg'
 
 const SENTIMEN_COLOR = { Positif: chart.positive, Negatif: chart.negative }
 
 const TABS: { key: EntitasPimpinan; label: string }[] = [
-  { key: 'Gubernur', label: 'Isu Gubernur DKI Jakarta' },
-  { key: 'Wakil Gubernur', label: 'Isu Wakil Gubernur DKI Jakarta' },
+  { key: 'Gubernur', label: 'Isu Gubernur Papua' },
+  { key: 'Wakil Gubernur', label: 'Isu Wakil Gubernur Papua' },
 ]
 
 const FOTO_PIMPINAN: Record<EntitasPimpinan, string> = {
@@ -103,7 +103,7 @@ export function IsuPimpinan() {
               />
               <div>
                 <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">{reputasi.nama}</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">{tab} DKI Jakarta</p>
+                <p className="text-xs text-slate-500 dark:text-slate-400">{tab} Papua</p>
                 <p className="text-xs text-slate-500 dark:text-slate-400">
                   Total Berita {beritaTerkait.length}
                 </p>

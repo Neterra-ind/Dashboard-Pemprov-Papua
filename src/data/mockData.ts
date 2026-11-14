@@ -15,12 +15,14 @@ import type {
   TindakLanjut,
   Trend,
 } from '@/types'
-import beritaJakartaMentah from './beritaJakarta.json'
+import beritaPapuaMentah from './beritaPapua.json'
 
-// Dashboard Issue Monitoring — Pemprov DKI Jakarta. Data berita berbasis 3.210 artikel
-// riil (23-28 Juli 2026) hasil monitoring media terkait DKI Jakarta — lihat
-// src/data/beritaJakarta.json. Field lain (skor virality, rekomendasi tindak lanjut,
-// riwayat disposisi) tetap simulasi untuk kebutuhan demo antarmuka.
+// Dashboard Issue Monitoring — Pemprov Papua.
+// PLACEHOLDER: src/data/beritaPapua.json saat ini berisi 642 berita CONTOH (judul diawali
+// "[CONTOH]", sumber "Media Contoh A-F", url "#") — BUKAN berita riil. Ganti dengan hasil
+// monitoring media Papua begitu datanya tersedia (format kolom sama: tanggal, judul, sumber,
+// sentimen, url, kategori, entitasTerkait). Field lain (skor virality, rekomendasi tindak
+// lanjut, riwayat disposisi) tetap simulasi untuk kebutuhan demo antarmuka.
 
 // Seeded PRNG (mulberry32) supaya data mock konsisten setiap reload, bukan acak tiap render.
 function mulberry32(seed: number) {
@@ -58,18 +60,18 @@ function tanggalMundur(hariKe: number) {
 export const daftarOpd: Opd[] = [
   'Dinas Kesehatan',
   'Dinas Pendidikan',
-  'Dinas Bina Marga',
+  'Dinas Pekerjaan Umum',
   'Dinas Perhubungan',
   'Dinas Sosial',
   'Dinas Ketahanan Pangan, Kelautan dan Pertanian',
   'Dinas Pariwisata dan Ekonomi Kreatif',
   'Dinas Perindustrian dan Energi',
   'Dinas Lingkungan Hidup',
-  'Dinas Komunikasi, Informatika dan Statistik',
+  'Dinas Komunikasi dan Informatika',
   'Dinas Perumahan Rakyat dan Kawasan Permukiman',
-  'Satpol PP dan Damkar',
-  'Sekretariat Daerah Provinsi DKI Jakarta',
-  'Kecamatan',
+  'Satuan Polisi Pamong Praja',
+  'Sekretariat Daerah Provinsi Papua',
+  'Pemerintah Kabupaten/Kota',
 ]
 
 export const daftarKategoriIsu: KategoriIsu[] = [
@@ -164,31 +166,24 @@ const REKOMENDASI_POOL = [
 ]
 
 const KATEGORI_OPD_MAP: Record<KategoriIsu, Opd> = {
-  'Pelayanan Publik': 'Dinas Komunikasi, Informatika dan Statistik',
-  Infrastruktur: 'Dinas Bina Marga',
+  'Pelayanan Publik': 'Dinas Komunikasi dan Informatika',
+  Infrastruktur: 'Dinas Pekerjaan Umum',
   Pendidikan: 'Dinas Pendidikan',
   Kesehatan: 'Dinas Kesehatan',
   'Ekonomi & Ketahanan Pangan': 'Dinas Ketahanan Pangan, Kelautan dan Pertanian',
   Pariwisata: 'Dinas Pariwisata dan Ekonomi Kreatif',
   'Lingkungan & Bencana': 'Dinas Lingkungan Hidup',
   'Sosial & Kemiskinan': 'Dinas Sosial',
-  'Keamanan & Ketertiban': 'Satpol PP dan Damkar',
-  'Tata Kelola Pemerintahan': 'Sekretariat Daerah Provinsi DKI Jakarta',
+  'Keamanan & Ketertiban': 'Satuan Polisi Pamong Praja',
+  'Tata Kelola Pemerintahan': 'Sekretariat Daerah Provinsi Papua',
 }
 
 // Kalimat aktif ringkas (maks. 6-8 kata) per klaster kategori×entitas, ditulis berdasarkan
 // substansi riil berita bersentimen negatif pada klaster tersebut — dipakai pada Issues
 // Negatif agar penamaan isu langsung menggambarkan masalah di berita, bukan frasa generik.
-const SUBSTANSI_SPESIFIK_MAP: Record<string, string> = {
-  'Tata Kelola Pemerintahan::none': 'DKI kehilangan Rp2 triliun pajak kendaraan listrik',
-  'Tata Kelola Pemerintahan::Gubernur': 'Purbaya kritik rencana Pemprov DKI terbitkan obligasi',
-  'Lingkungan & Bencana::none': 'Kebakaran gudang dan kapal beruntun landa Jakarta',
-  'Keamanan & Ketertiban::none': 'Polisi tangkap pelaku pencurian sepatu berantai Jaksel',
-  'Ekonomi & Ketahanan Pangan::none': 'Kemacetan parah dipicu kepadatan depo peti kemas',
-  'Infrastruktur::none': 'Kebakaran rumah di Koja rugikan ratusan juta',
-  'Pendidikan::Gubernur': 'Gedung SDN Kebayoran Lama ambruk dibiarkan dua tahun',
-  'Lingkungan & Bencana::Gubernur': 'KPBB kritik rencana pencabutan insentif kendaraan listrik',
-}
+// Masih kosong: diisi setelah berita riil Papua tersedia (kunci 'Kategori::Entitas' atau
+// 'Kategori::none'). Sementara semua isu memakai kerangka SOROTAN_AKTIF_MAP di bawah.
+const SUBSTANSI_SPESIFIK_MAP: Record<string, string> = {}
 
 // Kerangka kalimat aktif ringkas per kategori — cadangan bila klaster kategori×entitas belum
 // memiliki kalimat spesifik di SUBSTANSI_SPESIFIK_MAP di atas.
@@ -210,7 +205,7 @@ function substansiMasalahDari(kategori: KategoriIsu, entitasTerkait: EntitasPimp
   const spesifik = SUBSTANSI_SPESIFIK_MAP[kunci]
   if (spesifik) return `${spesifik}.`
   const sorotan = SOROTAN_AKTIF_MAP[kategori]
-  const klausaEntitas = entitasTerkait ? ` melibatkan ${entitasTerkait} DKI Jakarta` : ''
+  const klausaEntitas = entitasTerkait ? ` melibatkan ${entitasTerkait} Papua` : ''
   return `${sorotan}${klausaEntitas}.`
 }
 
@@ -239,10 +234,9 @@ function levelDariRatio(negatifRatio: number, total: number): LevelRisiko {
 }
 
 // ── Data Sumber (berita/postingan mentah) ──────────────────────────────────
-// Data riil hasil monitoring media (43.624 artikel mentah, 23-28 Juli 2026) yang
-// difilter untuk relevansi spesifik DKI Jakarta dan dideduplikasi menjadi 3.210 baris
-// unik — lihat src/data/beritaJakarta.json. Kategori & entitas terkait diklasifikasikan
-// otomatis berbasis kata kunci pada judul+konten.
+// PLACEHOLDER — lihat src/data/beritaPapua.json (data contoh, bukan berita riil).
+// Kategori & entitas terkait nantinya diklasifikasikan otomatis berbasis kata kunci
+// pada judul+konten berita riil Papua.
 interface BeritaMentah {
   tanggal: string
   judul: string
@@ -253,7 +247,7 @@ interface BeritaMentah {
   entitasTerkait?: EntitasPimpinan
 }
 
-const beritaMentah = beritaJakartaMentah as BeritaMentah[]
+const beritaMentah = beritaPapuaMentah as BeritaMentah[]
 
 // ── Isu — diklasterkan langsung dari berita riil (kategori × entitas terkait) ─────
 // Setiap kombinasi kategori+entitas yang benar-benar muncul di data riil menjadi satu
@@ -292,11 +286,11 @@ export const daftarIsu: Isu[] = Array.from(klasterMap.values())
 
     const urutanTanggal = [...rows].sort((a, b) => (a.tanggal < b.tanggal ? -1 : 1))
     const tanggalMulai = urutanTanggal[0].tanggal
-    // Utamakan judul yang secara eksplisit menyebut Jakarta/DKI sebagai representasi isu,
-    // agar daftar isu (mis. Top 5 Isu Provinsi DKI Jakarta) tidak menampilkan judul yang
-    // sebenarnya membahas daerah/topik lain meski kontennya sempat menyinggung Jakarta.
+    // Utamakan judul yang secara eksplisit menyebut Papua sebagai representasi isu,
+    // agar daftar isu (mis. Top 5 Isu Provinsi Papua) tidak menampilkan judul yang
+    // sebenarnya membahas daerah/topik lain meski kontennya sempat menyinggung Papua.
     const urutanTerbaruDulu = [...urutanTanggal].reverse()
-    const judulRelevanTerbaru = urutanTerbaruDulu.find((r) => /jakarta|dki/i.test(r.judul))
+    const judulRelevanTerbaru = urutanTerbaruDulu.find((r) => /papua/i.test(r.judul))
     const namaIsu = (judulRelevanTerbaru ?? urutanTerbaruDulu[0]).judul
 
     const tanggalUnik = [...new Set(rows.map((r) => r.tanggal))].sort()
@@ -393,8 +387,8 @@ function buatReputasiPimpinan(entitas: EntitasPimpinan, nama: string): ReputasiP
 }
 
 export const daftarReputasiPimpinan: ReputasiPimpinan[] = [
-  buatReputasiPimpinan('Gubernur', 'Pramono Anung'),
-  buatReputasiPimpinan('Wakil Gubernur', 'Rano Karno'),
+  buatReputasiPimpinan('Gubernur', 'Matius D. Fakhiri'),
+  buatReputasiPimpinan('Wakil Gubernur', 'Aryoko Rumaropen'),
 ]
 
 export function reputasiByEntitas(entitas: EntitasPimpinan): ReputasiPimpinan | undefined {
@@ -457,7 +451,7 @@ export const daftarAlertNotifikasi: AlertNotifikasi[] = daftarEarlyWarning
     pesan: `Isu ${isu.klasifikasi === 'Potensi Negatif' ? 'Potensi Negatif' : 'Negatif'} — ${isu.namaIsu} (Severity ${isu.levelRisiko})`,
     channel: pick<'WhatsApp' | 'Telegram'>(['WhatsApp', 'Telegram']),
     tanggal: tanggalMundur(randomInt(0, 7)),
-    penerima: pick(['Sekda', 'Kepala Diskominfotik', 'Tim Humas']),
+    penerima: pick(['Sekda', 'Kepala Diskominfo', 'Tim Humas']),
   }))
   .sort((a, b) => (a.tanggal < b.tanggal ? 1 : -1))
 

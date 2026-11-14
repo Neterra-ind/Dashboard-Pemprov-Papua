@@ -130,7 +130,7 @@ export function IsuProvinsi() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Isu Provinsi DKI Jakarta"
+        title="Isu Provinsi Papua"
         subtitle="Tren pemberitaan, sentimen, dan distribusi media untuk isu-isu tingkat provinsi."
       />
 

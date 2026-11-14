@@ -1,6 +1,6 @@
-// Domain types untuk prototype "Regional Media Analytics — Pemprov DKI Jakarta",
+// Domain types untuk prototype "Regional Media Analytics — Pemprov Papua",
 // duplikat dari prototype dashboard monitoring isu daerah, dengan domain data
-// disesuaikan untuk Provinsi DKI Jakarta (Gubernur/Wakil Gubernur, OPD tingkat provinsi).
+// disesuaikan untuk Provinsi Papua (Gubernur/Wakil Gubernur, OPD tingkat provinsi).
 
 export type ScopeIsu = 'Nasional' | 'Provinsi' | 'Gubernur' | 'Wakil Gubernur'
 
@@ -9,18 +9,18 @@ export type EntitasPimpinan = 'Gubernur' | 'Wakil Gubernur'
 export type Opd =
   | 'Dinas Kesehatan'
   | 'Dinas Pendidikan'
-  | 'Dinas Bina Marga'
+  | 'Dinas Pekerjaan Umum'
   | 'Dinas Perhubungan'
   | 'Dinas Sosial'
   | 'Dinas Ketahanan Pangan, Kelautan dan Pertanian'
   | 'Dinas Pariwisata dan Ekonomi Kreatif'
   | 'Dinas Perindustrian dan Energi'
   | 'Dinas Lingkungan Hidup'
-  | 'Dinas Komunikasi, Informatika dan Statistik'
+  | 'Dinas Komunikasi dan Informatika'
   | 'Dinas Perumahan Rakyat dan Kawasan Permukiman'
-  | 'Satpol PP dan Damkar'
-  | 'Sekretariat Daerah Provinsi DKI Jakarta'
-  | 'Kecamatan'
+  | 'Satuan Polisi Pamong Praja'
+  | 'Sekretariat Daerah Provinsi Papua'
+  | 'Pemerintah Kabupaten/Kota'
 
 export type KategoriIsu =
   | 'Pelayanan Publik'

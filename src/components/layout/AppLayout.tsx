@@ -12,11 +12,11 @@ import {
 } from 'lucide-react'
 import type { Role } from '@/types'
 import logoNeterra from '@/assets/logo-neterra.png'
-import logoDkiJakarta from '@/assets/logo-dki-jakarta.png'
+import logoPapua from '@/assets/logo-papua.png'
 
 const NAV_ITEMS: { to: string; label: string; icon: typeof LayoutDashboard; end?: boolean; roles: Role[] }[] = [
   { to: '/', label: 'Executive Summary', icon: LayoutDashboard, end: true, roles: ['Eksekutif', 'Admin OPD', 'Super Admin'] },
-  { to: '/isu-provinsi', label: 'Isu Provinsi DKI Jakarta', icon: MapPin, roles: ['Eksekutif', 'Super Admin'] },
+  { to: '/isu-provinsi', label: 'Isu Provinsi Papua', icon: MapPin, roles: ['Eksekutif', 'Super Admin'] },
   { to: '/isu-pimpinan', label: 'Isu Gubernur & Wakil Gubernur', icon: UserRound, roles: ['Eksekutif', 'Super Admin'] },
   { to: '/pemberitaan-opd', label: 'Pemberitaan OPD', icon: Building2, roles: ['Eksekutif', 'Super Admin'] },
   { to: '/early-warning', label: 'Issues Negatif', icon: ShieldAlert, roles: ['Eksekutif', 'Super Admin'] },
@@ -27,11 +27,11 @@ const NAV_ITEMS: { to: string; label: string; icon: typeof LayoutDashboard; end?
 function BrandMark() {
   return (
     <div className="flex items-center gap-3 px-2">
-      <img src={logoDkiJakarta} alt="Logo DKI Jakarta" className="h-11 w-11 shrink-0 object-contain" />
+      <img src={logoPapua} alt="Logo Pemprov Papua" className="h-11 w-11 shrink-0 object-contain" />
       <p className="text-[15px] font-bold uppercase leading-tight tracking-wide text-slate-900">
         Pemprov
         <br />
-        DKI Jakarta
+        Papua
       </p>
     </div>
   )

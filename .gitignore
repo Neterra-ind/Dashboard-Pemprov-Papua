@@ -15,11 +15,10 @@ dist-ssr
 
 # Sumber data/aset mentah (sudah diproses/di-copy ke src/data & src/assets)
 *.xlsx
-Ilustrasi.jpeg
-gambar DKI.jpeg
-Logo DKI Jakarta.png
-Pramono Anung.jpg
-Rano Karno.jpg
+Aryoko_Rumaropen,_Wakil_Gubernur_Papua.png
+Logo Pemprov Papua.jpg
+Panorama Budaya Papua_ Honai dan Pegunungan Jayawijaya.png
+wakil gubernur papua aryoko albert.jpeg
 
 # Editor directories and files
 .vscode/*

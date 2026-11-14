@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "dashboard-dki-jakarta-dev",
+      "name": "dashboard-papua-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "5183", "--strictPort"],
-      "port": 5183
+      "runtimeArgs": ["run", "dev", "--", "--port", "5184", "--strictPort"],
+      "port": 5184
     }
   ]
 }
