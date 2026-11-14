@@ -145,14 +145,14 @@ export function IsuPimpinan() {
             </div>
 
             <div>
-              <p className="mb-1 text-xs font-semibold text-slate-500 dark:text-slate-400">Timeline Ekspos Berita</p>
-              <ResponsiveContainer width="100%" height={96}>
-                <AreaChart data={timelineEkspos} margin={{ top: 2, right: 4, left: -28, bottom: 0 }}>
+              <p className="mb-2 text-xs font-semibold text-slate-500 dark:text-slate-400">Timeline Ekspos Berita</p>
+              <ResponsiveContainer width="100%" height={130}>
+                <AreaChart data={timelineEkspos} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
                   <defs>
                     <AreaGradient id="pimpinanTren" color={chart.accent} />
                   </defs>
-                  <XAxis dataKey="tanggal" hide />
-                  <YAxis allowDecimals={false} />
+                  <XAxis dataKey="tanggal" {...axisProps} minTickGap={48} tickFormatter={(v: string) => { const d = new Date(v); return `${d.getDate()}/${d.getMonth() + 1}` }} />
+                  <YAxis {...axisProps} allowDecimals={false} width={28} />
                   <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
                   <Area type="monotone" dataKey="jumlah" name="Berita" stroke={chart.accent} fill="url(#pimpinanTren)" strokeWidth={2} dot={false} />
                 </AreaChart>
