@@ -7,6 +7,7 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
+  LabelList,
   Legend,
   Pie,
   PieChart,
@@ -211,6 +212,25 @@ export function Dashboard() {
     [],
   )
 
+  const puncakPemberitaan = useMemo(() => {
+    const map = new Map<string, { jumlah: number; negatif: number }>()
+    for (const b of beritaFiltered) {
+      const e = map.get(b.tanggal) ?? { jumlah: 0, negatif: 0 }
+      e.jumlah++
+      if (b.sentimen === 'Negatif') e.negatif++
+      map.set(b.tanggal, e)
+    }
+    const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des']
+    return Array.from(map.entries())
+      .map(([tanggal, { jumlah, negatif }]) => {
+        const d = new Date(tanggal)
+        const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
+        return { name: `${d.getDate()} ${BULAN[d.getMonth()]}`, tanggal, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
+      })
+      .sort((a, b) => b.jumlah - a.jumlah)
+      .slice(0, 10)
+  }, [beritaFiltered])
+
   const rankingOpdTeratas = useMemo(
     () =>
       daftarRankingOpd
@@ -387,6 +407,33 @@ export function Dashboard() {
       </section>
 
       {/* 5 — Secondary Analytics */}
+      {/* 6 — Puncak Pemberitaan */}
+      <section>
+        <SectionLabel hint="10 hari dengan berita terbanyak · merah = dominan negatif">Puncak Pemberitaan</SectionLabel>
+        <Card>
+          <CardHeader
+            title="Hari Terpadat Pemberitaan"
+            subtitle={puncakPemberitaan[0] ? `Puncak: ${puncakPemberitaan[0].name} dengan ${puncakPemberitaan[0].jumlah} berita` : ''}
+          />
+          <CardContent>
+            <ResponsiveContainer width="100%" height={320}>
+              <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 40, top: 4, bottom: 4 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={56} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={28}>
+                  {puncakPemberitaan.map((entry) => (
+                    <Cell key={entry.tanggal} fill={entry.fill} />
+                  ))}
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 12, fill: '#64748b', fontVariantNumeric: 'tabular-nums' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </section>
+
       <section className="space-y-4">
         <SectionLabel>Analitik Sekunder</SectionLabel>
 
