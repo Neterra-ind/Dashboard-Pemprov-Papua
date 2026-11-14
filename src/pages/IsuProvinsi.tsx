@@ -127,6 +127,15 @@ export function IsuProvinsi() {
       .slice(0, 8)
   }, [beritaTerfilter])
 
+  const top5Isu = useMemo(
+    () =>
+      [...terfilter]
+        .sort((a, b) => b.jumlahBerita - a.jumlahBerita)
+        .slice(0, 5)
+        .map((isu) => ({ name: isu.namaIsu, value: isu.jumlahBerita })),
+    [terfilter],
+  )
+
   return (
     <div className="space-y-6">
       <PageHeader
@@ -184,6 +193,21 @@ export function IsuProvinsi() {
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader title="Top 5 Isu Provinsi Papua" subtitle="Berdasarkan jumlah berita/postingan" />
+        <CardContent>
+          <ResponsiveContainer width="100%" height={260}>
+            <BarChart data={top5Isu} layout="vertical" margin={{ left: 8, right: 24 }}>
+              <CartesianGrid {...gridProps} horizontal={false} />
+              <XAxis type="number" {...axisProps} allowDecimals={false} />
+              <YAxis type="category" dataKey="name" {...axisProps} width={220} />
+              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={28} />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
