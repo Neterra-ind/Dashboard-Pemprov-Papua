@@ -213,22 +213,25 @@ export function Dashboard() {
   )
 
   const puncakPemberitaan = useMemo(() => {
-    const map = new Map<string, { jumlah: number; negatif: number }>()
+    const map = new Map<string, { judul: string; jumlah: number; negatif: number; tanggal: string }>()
     for (const b of beritaFiltered) {
-      const e = map.get(b.tanggal) ?? { jumlah: 0, negatif: 0 }
+      const e = map.get(b.judul) ?? { judul: b.judul, jumlah: 0, negatif: 0, tanggal: b.tanggal }
       e.jumlah++
       if (b.sentimen === 'Negatif') e.negatif++
-      map.set(b.tanggal, e)
+      if (b.tanggal > e.tanggal) e.tanggal = b.tanggal
+      map.set(b.judul, e)
     }
     const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des']
-    return Array.from(map.entries())
-      .map(([tanggal, { jumlah, negatif }]) => {
-        const d = new Date(tanggal)
-        const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
-        return { name: `${d.getDate()} ${BULAN[d.getMonth()]}`, tanggal, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
-      })
+    return Array.from(map.values())
       .sort((a, b) => b.jumlah - a.jumlah)
       .slice(0, 10)
+      .map(({ judul, jumlah, negatif, tanggal }) => {
+        const d = new Date(tanggal)
+        const tgl = `${d.getDate()} ${BULAN[d.getMonth()]}`
+        const label = judul.length > 38 ? judul.slice(0, 36) + '…' : judul
+        const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
+        return { name: `${label} (${tgl})`, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
+      })
   }, [beritaFiltered])
 
   const rankingOpdTeratas = useMemo(
@@ -416,15 +419,15 @@ export function Dashboard() {
             subtitle={puncakPemberitaan[0] ? `Puncak: ${puncakPemberitaan[0].name} dengan ${puncakPemberitaan[0].jumlah} berita` : ''}
           />
           <CardContent>
-            <ResponsiveContainer width="100%" height={320}>
+            <ResponsiveContainer width="100%" height={360}>
               <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 40, top: 4, bottom: 4 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={56} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={280} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
                 <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={28}>
                   {puncakPemberitaan.map((entry) => (
-                    <Cell key={entry.tanggal} fill={entry.fill} />
+                    <Cell key={entry.judul} fill={entry.fill} />
                   ))}
                   <LabelList dataKey="jumlah" position="right" style={{ fontSize: 12, fill: '#64748b', fontVariantNumeric: 'tabular-nums' }} />
                 </Bar>
