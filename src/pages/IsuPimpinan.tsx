@@ -53,6 +53,15 @@ export function IsuPimpinan() {
 
   const beritaTerkait = useMemo(() => beritaPapua.filter((b) => b.entitasTerkait === tab), [tab])
 
+  const topKategori = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of beritaTerkait) map.set(b.kategori, (map.get(b.kategori) ?? 0) + 1)
+    return Array.from(map.entries())
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 7)
+  }, [beritaTerkait])
+
   const eksposMedia = useMemo(() => {
     const map = new Map<string, number>()
     for (const b of beritaTerkait) {
@@ -187,6 +196,21 @@ export function IsuPimpinan() {
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader title={`Top Kategori Isu — ${tab}`} subtitle="Jumlah pemberitaan per kategori (data nyata)" />
+        <CardContent>
+          <ResponsiveContainer width="100%" height={260}>
+            <BarChart data={topKategori} layout="vertical" margin={{ left: 8, right: 24 }}>
+              <CartesianGrid {...gridProps} horizontal={false} />
+              <XAxis type="number" {...axisProps} allowDecimals={false} />
+              <YAxis type="category" dataKey="name" {...axisProps} width={200} />
+              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={28} />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader
