@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
+  Area,
+  AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
   Cell,
   Legend,
-  Line,
-  LineChart,
   Pie,
   PieChart,
   ResponsiveContainer,
@@ -15,11 +15,12 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { ExternalLink, Newspaper, Share2, ThumbsDown, ThumbsUp, TrendingUp } from 'lucide-react'
+import { ExternalLink, Newspaper, TrendingUp } from 'lucide-react'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { KlasifikasiBadge } from '@/components/ui/Badge'
-import { axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
+import { AreaGradient, axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
+import { hitungPerHariRange } from '@/lib/aggregations'
 import { cn } from '@/lib/utils'
 import { daftarIsuGubernur, daftarIsuWakilGubernur, reputasiByEntitas } from '@/data/mockData'
 import beritaPapuaRaw from '@/data/beritaPapua.json'
@@ -52,6 +53,16 @@ export function IsuPimpinan() {
   )
 
   const beritaTerkait = useMemo(() => beritaPapua.filter((b) => b.entitasTerkait === tab), [tab])
+
+  const timelineEkspos = useMemo(() => {
+    if (beritaTerkait.length === 0) return []
+    const tanggalList = beritaTerkait.map((b) => b.tanggal).sort()
+    return hitungPerHariRange(
+      beritaTerkait.map((b) => ({ tanggal: b.tanggal })),
+      tanggalList[0],
+      tanggalList[tanggalList.length - 1],
+    )
+  }, [beritaTerkait])
 
   const topKategori = useMemo(() => {
     const map = new Map<string, number>()
@@ -123,33 +134,20 @@ export function IsuPimpinan() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between rounded-xl bg-accent-soft px-3 py-2 ring-1 ring-accent/15">
-              <span className="flex items-center gap-1.5 text-xs font-semibold text-accent-pressed">
-                <Share2 className="h-3.5 w-3.5" /> Share of Voice
-              </span>
-              <span className="text-sm font-bold text-accent-pressed">{reputasi.shareOfVoiceRatio}%</span>
+            <div>
+              <p className="mb-1 text-xs font-semibold text-slate-500 dark:text-slate-400">Timeline Ekspos Berita</p>
+              <ResponsiveContainer width="100%" height={96}>
+                <AreaChart data={timelineEkspos} margin={{ top: 2, right: 4, left: -28, bottom: 0 }}>
+                  <defs>
+                    <AreaGradient id="pimpinanTren" color={chart.accent} />
+                  </defs>
+                  <XAxis dataKey="tanggal" hide />
+                  <YAxis allowDecimals={false} />
+                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                  <Area type="monotone" dataKey="jumlah" name="Berita" stroke={chart.accent} fill="url(#pimpinanTren)" strokeWidth={2} dot={false} />
+                </AreaChart>
+              </ResponsiveContainer>
             </div>
-
-            <div className="grid grid-cols-2 gap-2 text-center">
-              <div className="flex items-center justify-center gap-1.5 rounded-xl bg-positive-soft py-2">
-                <ThumbsUp className="h-3.5 w-3.5 text-positive" />
-                <span className="text-xs font-bold text-slate-800">{reputasi.positiveRatio}%</span>
-              </div>
-              <div className="flex items-center justify-center gap-1.5 rounded-xl bg-negative-soft py-2">
-                <ThumbsDown className="h-3.5 w-3.5 text-negative" />
-                <span className="text-xs font-bold text-slate-800">{reputasi.negativeRatio}%</span>
-              </div>
-            </div>
-
-            <ResponsiveContainer width="100%" height={64}>
-              <LineChart data={reputasi.trendData}>
-                <YAxis hide domain={[0, 100]} />
-                <Tooltip
-                  content={<ChartTooltip labelOverride={(p) => (p?.tanggal as string) ?? ''} />}
-                />
-                <Line type="monotone" dataKey="nilai" name="Nilai" stroke={chart.gold} strokeWidth={2.5} dot={false} />
-              </LineChart>
-            </ResponsiveContainer>
 
             <div className="flex flex-wrap gap-1.5">
               {reputasi.topIsu.map((t) => (
