@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-/** Judul halaman standar design system — Dashboard Title 36→48px Bold. */
+/** Judul halaman standar design system — Dashboard Title 24→28px Bold. */
 export function PageHeader({
   title,
   subtitle,
@@ -13,10 +13,10 @@ export function PageHeader({
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
-        <h1 className="text-[32px] font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-[40px] lg:text-[48px]">
+        <h1 className="text-2xl font-bold leading-tight tracking-tight text-slate-900 lg:text-[28px]">
           {title}
         </h1>
-        {subtitle && <p className="mt-2 max-w-2xl text-[15px] text-slate-500">{subtitle}</p>}
+        {subtitle && <p className="mt-1.5 max-w-2xl text-sm text-slate-500">{subtitle}</p>}
       </div>
       {action && <div className="shrink-0">{action}</div>}
     </div>

@@ -54,7 +54,7 @@ export function DetailIsu() {
         <CardContent className="space-y-4">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <h1 className="text-[22px] font-bold leading-tight tracking-tight text-slate-900">{isu.namaIsu}</h1>
+              <h1 className="text-2xl font-bold leading-tight tracking-tight text-slate-900">{isu.namaIsu}</h1>
               <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-slate-500">
                 <span>{isu.scope}</span>
                 <span className="flex items-center gap-1">

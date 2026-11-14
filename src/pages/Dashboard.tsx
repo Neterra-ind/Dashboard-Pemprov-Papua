@@ -360,7 +360,7 @@ export function Dashboard() {
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="pointer-events-none absolute inset-x-0 top-[86px] flex -translate-y-1/2 flex-col items-center">
-                  <span className="kpi-number text-3xl text-slate-900">{totalSentimen}</span>
+                  <span className="kpi-number text-2xl text-slate-900">{totalSentimen}</span>
                   <span className="text-[11px] text-slate-400">total berita</span>
                 </div>
               </div>

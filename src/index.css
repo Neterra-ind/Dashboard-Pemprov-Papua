@@ -143,7 +143,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: 15px; /* Body — 15 / Medium */
+  font-size: 14px; /* Body — 14 / Medium */
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;

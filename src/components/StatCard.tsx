@@ -43,7 +43,7 @@ export function StatCard({
 
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="kpi-number text-[30px] leading-none text-slate-900 2xl:text-[34px]">{displayValue}</p>
+          <p className="kpi-number text-[28px] leading-none text-slate-900 2xl:text-[30px]">{displayValue}</p>
           <p className="mt-2.5 text-[13px] font-semibold leading-snug text-slate-600">{label}</p>
           {caption && <p className="mt-0.5 text-xs text-slate-400">{caption}</p>}
         </div>
