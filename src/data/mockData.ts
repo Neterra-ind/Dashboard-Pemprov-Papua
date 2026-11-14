@@ -87,7 +87,7 @@ export const daftarKategoriIsu: KategoriIsu[] = [
   'Tata Kelola Pemerintahan',
 ]
 
-export const daftarJenisSumber: JenisSumber[] = ['Media Online']
+export const daftarJenisSumber: JenisSumber[] = ['Media Online', 'Media Sosial']
 
 const SENTIMEN: Sentimen[] = ['Positif', 'Netral', 'Negatif']
 

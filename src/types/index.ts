@@ -34,7 +34,7 @@ export type KategoriIsu =
   | 'Keamanan & Ketertiban'
   | 'Tata Kelola Pemerintahan'
 
-export type JenisSumber = 'Media Online'
+export type JenisSumber = 'Media Online' | 'Media Sosial'
 
 export type Sentimen = 'Positif' | 'Netral' | 'Negatif'
 

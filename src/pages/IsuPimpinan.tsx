@@ -16,13 +16,15 @@ import {
   YAxis,
 } from 'recharts'
 import { ExternalLink, Newspaper, TrendingUp } from 'lucide-react'
+import { FilterSelect } from '@/components/FilterSelect'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { KlasifikasiBadge } from '@/components/ui/Badge'
 import { AreaGradient, axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
 import { hitungPerHariRange } from '@/lib/aggregations'
 import { cn } from '@/lib/utils'
-import { daftarIsuGubernur, daftarIsuWakilGubernur, reputasiByEntitas } from '@/data/mockData'
+import { daftarIsuGubernur, daftarIsuWakilGubernur, daftarJenisSumber, reputasiByEntitas } from '@/data/mockData'
+import { getJenisSumber } from '@/lib/utils'
 import beritaPapuaRaw from '@/data/beritaPapua.json'
 
 type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
@@ -45,6 +47,7 @@ const FOTO_PIMPINAN: Record<EntitasPimpinan, string> = {
 
 export function IsuPimpinan() {
   const [tab, setTab] = useState<EntitasPimpinan>('Gubernur')
+  const [jenisSumber, setJenisSumber] = useState('')
 
   const reputasi = reputasiByEntitas(tab)
   const isuTerkait = useMemo(
@@ -52,7 +55,10 @@ export function IsuPimpinan() {
     [tab],
   )
 
-  const beritaTerkait = useMemo(() => beritaPapua.filter((b) => b.entitasTerkait === tab), [tab])
+  const beritaTerkait = useMemo(
+    () => beritaPapua.filter((b) => b.entitasTerkait === tab && (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber)),
+    [tab, jenisSumber],
+  )
 
   const timelineEkspos = useMemo(() => {
     if (beritaTerkait.length === 0) return []
@@ -97,6 +103,10 @@ export function IsuPimpinan() {
         title="Isu Gubernur & Wakil Gubernur"
         subtitle="Pemantauan persepsi publik, citra media, dan narasi yang melekat pada entitas pimpinan daerah — Media Share of Voice (SoV) & sentimen netizen/media."
       />
+
+      <Card className="p-4">
+        <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
+      </Card>
 
       <div className="flex gap-1 border-b border-[var(--color-border)]">
         {TABS.map(({ key, label }) => (

@@ -31,7 +31,8 @@ import {
   gridProps,
   SENTIMEN_COLOR,
 } from '@/lib/chartTheme'
-import { daftarIsuProvinsi, daftarKategoriIsu, semuaKlasifikasi } from '@/data/mockData'
+import { daftarIsuProvinsi, daftarJenisSumber, daftarKategoriIsu, semuaKlasifikasi } from '@/data/mockData'
+import { getJenisSumber } from '@/lib/utils'
 import beritaPapuaRaw from '@/data/beritaPapua.json'
 import type { Isu } from '@/types'
 
@@ -74,6 +75,7 @@ const columns: ColumnDef<Isu, any>[] = [
 export function IsuProvinsi() {
   const [kategori, setKategori] = useState('')
   const [klasifikasi, setKlasifikasi] = useState('')
+  const [jenisSumber, setJenisSumber] = useState('')
 
   // Tabel isu tetap pakai mock (untuk klasifikasi, trend, OPD)
   const terfilter = useMemo(
@@ -88,9 +90,9 @@ export function IsuProvinsi() {
   const beritaTerfilter = useMemo(
     () =>
       beritaPapua.filter(
-        (b) => !b.entitasTerkait && (!kategori || b.kategori === kategori),
+        (b) => !b.entitasTerkait && (!kategori || b.kategori === kategori) && (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber),
       ),
-    [kategori],
+    [kategori, jenisSumber],
   )
 
   const rentangTanggalData = useMemo(() => {
@@ -146,6 +148,7 @@ export function IsuProvinsi() {
         <div className="flex flex-wrap gap-3">
           <FilterSelect label="Kategori Isu" value={kategori} options={daftarKategoriIsu} onChange={setKategori} />
           <FilterSelect label="Klasifikasi" value={klasifikasi} options={semuaKlasifikasi} onChange={setKlasifikasi} />
+          <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
         </div>
       </Card>
 

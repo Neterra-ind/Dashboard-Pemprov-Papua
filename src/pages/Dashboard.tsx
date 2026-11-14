@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Area,
@@ -28,10 +28,12 @@ import {
   daftarEarlyWarning,
   daftarIsu,
   daftarIsuProvinsi,
+  daftarJenisSumber,
   daftarOpd,
   daftarRankingOpd,
   substansiMasalahUntuk,
 } from '@/data/mockData'
+import { getJenisSumber } from '@/lib/utils'
 import beritaPapuaRaw from '@/data/beritaPapua.json'
 
 type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
@@ -143,21 +145,26 @@ function AdminOpdSummary() {
 
 export function Dashboard() {
   const { role } = useRole()
-
   const { statusUntukIsu } = useDisposisi()
+  const [jenisSumber, setJenisSumber] = useState('')
 
-  const totalBeritaPemprov = beritaPapua.length
+  const beritaFiltered = useMemo(
+    () => (jenisSumber ? beritaPapua.filter((b) => getJenisSumber(b.sumber) === jenisSumber) : beritaPapua),
+    [jenisSumber],
+  )
+
+  const totalBeritaPemprov = beritaFiltered.length
   const totalBeritaGubernur = useMemo(
-    () => beritaPapua.filter((b) => b.entitasTerkait === 'Gubernur').length,
-    [],
+    () => beritaFiltered.filter((b) => b.entitasTerkait === 'Gubernur').length,
+    [beritaFiltered],
   )
   const totalBeritaOpd = useMemo(
-    () => beritaPapua.filter((b) => b.kategori === 'Tata Kelola Pemerintahan').length,
-    [],
+    () => beritaFiltered.filter((b) => b.kategori === 'Tata Kelola Pemerintahan').length,
+    [beritaFiltered],
   )
   const totalBeritaNegatif = useMemo(
-    () => beritaPapua.filter((b) => b.sentimen === 'Negatif').length,
-    [],
+    () => beritaFiltered.filter((b) => b.sentimen === 'Negatif').length,
+    [beritaFiltered],
   )
 
   const belumDitindaklanjuti = useMemo(
@@ -171,21 +178,22 @@ export function Dashboard() {
   )
 
   const trenBerita = useMemo(() => {
-    const semuaTanggal = beritaPapua.map((b) => b.tanggal).sort()
+    const semuaTanggal = beritaFiltered.map((b) => b.tanggal).sort()
+    if (!semuaTanggal.length) return []
     return hitungPerHariRange(
-      beritaPapua.map((b) => ({ tanggal: b.tanggal })),
+      beritaFiltered.map((b) => ({ tanggal: b.tanggal })),
       semuaTanggal[0],
       semuaTanggal[semuaTanggal.length - 1],
     )
-  }, [])
+  }, [beritaFiltered])
 
   const distribusiSentimen = useMemo(() => {
     const map = new Map<string, number>()
-    for (const b of beritaPapua) {
+    for (const b of beritaFiltered) {
       map.set(b.sentimen, (map.get(b.sentimen) ?? 0) + 1)
     }
     return Array.from(map.entries()).map(([name, value]) => ({ name, value }))
-  }, [])
+  }, [beritaFiltered])
 
   const totalSentimen = distribusiSentimen.reduce((s, d) => s + d.value, 0)
 
@@ -213,10 +221,11 @@ export function Dashboard() {
   )
 
   function handleExport() {
-    const rows = beritaPapua.map((b) => [
+    const rows = beritaFiltered.map((b) => [
       b.tanggal,
       b.judul,
       b.sumber,
+      getJenisSumber(b.sumber),
       b.kategori,
       b.sentimen,
       b.entitasTerkait ?? '-',
@@ -224,7 +233,7 @@ export function Dashboard() {
     ])
     downloadXlsx('Berita-Pemprov-Papua', {
       sheetName: 'Berita',
-      headers: ['Tanggal', 'Judul', 'Media', 'Kategori', 'Sentimen', 'Entitas Terkait', 'URL'],
+      headers: ['Tanggal', 'Judul', 'Media', 'Jenis Sumber', 'Kategori', 'Sentimen', 'Entitas Terkait', 'URL'],
       rows,
     })
   }
@@ -276,7 +285,12 @@ export function Dashboard() {
         </Link>
       )}
 
-      {/* 3 — KPI Cards */}
+      {/* 3 — Filter Sumber */}
+      <Card className="p-4">
+        <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
+      </Card>
+
+      {/* 4 — KPI Cards */}
       <section>
         <SectionLabel hint="periode data aktif">Ringkasan Pemberitaan</SectionLabel>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">

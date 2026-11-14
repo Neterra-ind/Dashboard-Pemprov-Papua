@@ -9,8 +9,12 @@ import { SentimenBadge } from '@/components/ui/Badge'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { useRole } from '@/lib/role'
-import { daftarBerita, daftarJenisSumber, daftarKategoriIsu } from '@/data/mockData'
-import type { Berita } from '@/types'
+import { getJenisSumber } from '@/lib/utils'
+import { daftarJenisSumber, daftarKategoriIsu } from '@/data/mockData'
+import beritaPapuaRaw from '@/data/beritaPapua.json'
+
+type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
+const beritaPapua = beritaPapuaRaw as BeritaRaw[]
 
 const SUMBER_AKTIF = [{ nama: 'Media Online (RSS/API)', tipe: 'Otomatis', interval: '15 menit', icon: Rss }]
 
@@ -22,16 +26,16 @@ export function DataSumber() {
   const [sampaiTanggal, setSampaiTanggal] = useState('')
 
   const filtered = useMemo(() => {
-    return daftarBerita.filter(
+    return beritaPapua.filter(
       (b) =>
-        (!jenisSumber || b.jenisSumber === jenisSumber) &&
+        (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
         (!kategori || b.kategori === kategori) &&
         (!dariTanggal || b.tanggal >= dariTanggal) &&
         (!sampaiTanggal || b.tanggal <= sampaiTanggal),
     )
   }, [jenisSumber, kategori, dariTanggal, sampaiTanggal])
 
-  const columns = useMemo<ColumnDef<Berita, any>[]>(
+  const columns = useMemo<ColumnDef<BeritaRaw, any>[]>(
     () => [
       {
         accessorKey: 'tanggal',
@@ -59,7 +63,8 @@ export function DataSumber() {
         ),
       },
       {
-        accessorKey: 'jenisSumber',
+        id: 'jenisSumber',
+        accessorFn: (row) => getJenisSumber(row.sumber),
         header: 'Jenis Sumber',
         cell: (info) => (
           <div className="flex items-center gap-2">
