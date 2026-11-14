@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import {
-  AlarmClock,
   ArrowLeft,
   Building2,
   CheckCircle2,
   ClipboardList,
   ExternalLink,
-  Lightbulb,
   ListChecks,
   Sparkles,
 } from 'lucide-react'
@@ -90,32 +88,13 @@ export function DetailIsu() {
         </CardContent>
       </Card>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <Card>
-          <CardHeader title="Ringkasan AI" />
-          <CardContent className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-            <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold" />
-            {isu.ringkasanAI}
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader title="Penyebab" />
-          <CardContent className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
-            <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-500" />
-            {isu.penyebabAI}
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader title="Risiko & Estimasi Eskalasi" />
-          <CardContent className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
-            <div className="flex items-start gap-2">
-              <AlarmClock className="mt-0.5 h-4 w-4 shrink-0 text-rose-500" />
-              {isu.risikoAI}
-            </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">{isu.estimasiEskalasi}</p>
-          </CardContent>
-        </Card>
-      </div>
+      <Card>
+        <CardHeader title="Ringkasan AI" />
+        <CardContent className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
+          <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold" />
+          {isu.ringkasanAI}
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader title="Rekomendasi Tindak Lanjut" />

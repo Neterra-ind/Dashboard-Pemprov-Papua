@@ -25,7 +25,6 @@ import { FilterSelect } from '@/components/FilterSelect'
 import { useRole } from '@/lib/role'
 import { useDisposisi } from '@/lib/store'
 import {
-  daftarBerita,
   daftarEarlyWarning,
   daftarIsu,
   daftarIsuProvinsi,
@@ -33,6 +32,10 @@ import {
   daftarRankingOpd,
   substansiMasalahUntuk,
 } from '@/data/mockData'
+import beritaPapuaRaw from '@/data/beritaPapua.json'
+
+type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
+const beritaPapua = beritaPapuaRaw as BeritaRaw[]
 import { hitungPerHariRange, levelKeAngka } from '@/lib/aggregations'
 import {
   AreaGradient,
@@ -143,17 +146,17 @@ export function Dashboard() {
 
   const { statusUntukIsu } = useDisposisi()
 
-  const totalBeritaPemprov = daftarBerita.length
+  const totalBeritaPemprov = beritaPapua.length
   const totalBeritaGubernur = useMemo(
-    () => daftarBerita.filter((b) => b.entitasTerkait === 'Gubernur').length,
+    () => beritaPapua.filter((b) => b.entitasTerkait === 'Gubernur').length,
     [],
   )
   const totalBeritaOpd = useMemo(
-    () => daftarBerita.filter((b) => b.kategori === 'Tata Kelola Pemerintahan').length,
+    () => beritaPapua.filter((b) => b.kategori === 'Tata Kelola Pemerintahan').length,
     [],
   )
   const totalBeritaNegatif = useMemo(
-    () => daftarBerita.filter((b) => b.sentimen === 'Negatif').length,
+    () => beritaPapua.filter((b) => b.sentimen === 'Negatif').length,
     [],
   )
 
@@ -168,9 +171,9 @@ export function Dashboard() {
   )
 
   const trenBerita = useMemo(() => {
-    const semuaTanggal = daftarBerita.map((b) => b.tanggal).sort()
+    const semuaTanggal = beritaPapua.map((b) => b.tanggal).sort()
     return hitungPerHariRange(
-      daftarBerita.map((b) => ({ tanggal: b.tanggal })),
+      beritaPapua.map((b) => ({ tanggal: b.tanggal })),
       semuaTanggal[0],
       semuaTanggal[semuaTanggal.length - 1],
     )
@@ -178,7 +181,7 @@ export function Dashboard() {
 
   const distribusiSentimen = useMemo(() => {
     const map = new Map<string, number>()
-    for (const b of daftarBerita) {
+    for (const b of beritaPapua) {
       map.set(b.sentimen, (map.get(b.sentimen) ?? 0) + 1)
     }
     return Array.from(map.entries()).map(([name, value]) => ({ name, value }))
@@ -210,18 +213,18 @@ export function Dashboard() {
   )
 
   function handleExport() {
-    const rows = daftarBerita.map((b) => [
+    const rows = beritaPapua.map((b) => [
       b.tanggal,
       b.judul,
       b.sumber,
-      b.jenisSumber,
       b.kategori,
       b.sentimen,
       b.entitasTerkait ?? '-',
+      b.url,
     ])
     downloadXlsx('Berita-Pemprov-Papua', {
       sheetName: 'Berita',
-      headers: ['Tanggal', 'Judul', 'Media', 'Jenis Sumber', 'Kategori', 'Sentimen', 'Entitas Terkait'],
+      headers: ['Tanggal', 'Judul', 'Media', 'Kategori', 'Sentimen', 'Entitas Terkait', 'URL'],
       rows,
     })
   }

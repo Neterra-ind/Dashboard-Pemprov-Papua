@@ -15,13 +15,17 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { Newspaper, Share2, ThumbsDown, ThumbsUp, TrendingUp } from 'lucide-react'
+import { ExternalLink, Newspaper, Share2, ThumbsDown, ThumbsUp, TrendingUp } from 'lucide-react'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { KlasifikasiBadge } from '@/components/ui/Badge'
 import { axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
 import { cn } from '@/lib/utils'
-import { daftarBerita, daftarIsuGubernur, daftarIsuWakilGubernur, reputasiByEntitas } from '@/data/mockData'
+import { daftarIsuGubernur, daftarIsuWakilGubernur, reputasiByEntitas } from '@/data/mockData'
+import beritaPapuaRaw from '@/data/beritaPapua.json'
+
+type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
+const beritaPapua = beritaPapuaRaw as BeritaRaw[]
 import type { EntitasPimpinan } from '@/types'
 import fotoGubernur from '@/assets/gubernur-papua.jpg'
 import fotoWakilGubernur from '@/assets/wakil-gubernur-papua.jpg'
@@ -47,7 +51,7 @@ export function IsuPimpinan() {
     [tab],
   )
 
-  const beritaTerkait = useMemo(() => daftarBerita.filter((b) => b.entitasTerkait === tab), [tab])
+  const beritaTerkait = useMemo(() => beritaPapua.filter((b) => b.entitasTerkait === tab), [tab])
 
   const eksposMedia = useMemo(() => {
     const map = new Map<string, number>()
@@ -207,6 +211,37 @@ export function IsuPimpinan() {
               </div>
               <KlasifikasiBadge value={isu.klasifikasi} />
             </Link>
+          ))}
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader
+          title={`Berita Terkait ${tab}`}
+          subtitle={`${beritaTerkait.length} berita · klik untuk buka sumber asli`}
+        />
+        <CardContent className="space-y-2">
+          {beritaTerkait.length === 0 && (
+            <p className="text-sm text-slate-400">Belum ada berita tercatat untuk entitas ini.</p>
+          )}
+          {beritaTerkait.slice(0, 20).map((b, i) => (
+            <a
+              key={`${b.url}-${i}`}
+              href={b.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-3 rounded-lg border border-slate-100 p-3 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/60"
+            >
+              <div className="min-w-0 flex-1">
+                <p className="line-clamp-2 text-sm font-medium text-slate-800 hover:underline dark:text-slate-100">
+                  {b.judul}
+                </p>
+                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+                  {b.sumber} · {b.tanggal} · {b.sentimen}
+                </p>
+              </div>
+              <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" aria-hidden="true" />
+            </a>
           ))}
         </CardContent>
       </Card>
