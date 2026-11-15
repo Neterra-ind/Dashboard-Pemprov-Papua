@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+﻿import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Area,
@@ -277,7 +277,7 @@ export function Dashboard() {
       } else {
         current = current ? `${current} ${w}` : w
       }
-      if (lines.length === 2) { current = '…'; break }
+      if (lines.length === 2) { lines[1] += '…'; current = ''; break }
     }
     if (current) lines.push(current)
     const lineH = 13
