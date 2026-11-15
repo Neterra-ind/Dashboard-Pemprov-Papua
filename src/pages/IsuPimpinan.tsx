@@ -102,11 +102,46 @@ export function IsuPimpinan() {
       .sort((a, b) => b.jumlah - a.jumlah)
       .slice(0, 10)
       .map(({ judul, jumlah, negatif }) => {
-        const label = judul.length > 42 ? judul.slice(0, 40) + '…' : judul
         const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
-        return { name: label, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
+        return { name: judul, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
       })
   }, [beritaTerkait])
+
+  function WrapTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
+    const text = payload?.value ?? ''
+    const maxChars = 22
+    const words = text.split(' ')
+    const lines: string[] = []
+    let current = ''
+    for (const w of words) {
+      if ((current + (current ? ' ' : '') + w).length > maxChars && current) {
+        lines.push(current)
+        current = w
+      } else {
+        current = current ? `${current} ${w}` : w
+      }
+      if (lines.length === 2) { current = '…'; break }
+    }
+    if (current) lines.push(current)
+    const lineH = 13
+    const totalH = lines.length * lineH
+    return (
+      <g transform={`translate(${x},${y})`}>
+        {lines.map((l, i) => (
+          <text
+            key={i}
+            x={0}
+            y={i * lineH - totalH / 2 + lineH * 0.5}
+            textAnchor="end"
+            fill="#64748b"
+            fontSize={11}
+          >
+            {l}
+          </text>
+        ))}
+      </g>
+    )
+  }
 
   if (!reputasi) return null
 
@@ -236,7 +271,7 @@ export function IsuPimpinan() {
               <p className="mb-4 text-base font-bold text-slate-800 dark:text-slate-100">
                 {puncakPemberitaan[0]?.judul?.slice(0, 60)}{puncakPemberitaan[0]?.judul?.length > 60 ? '…' : ''} paling banyak diberitakan ({puncakPemberitaan[0]?.jumlah} berita)
               </p>
-              <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 36)}>
+              <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 44)}>
                 <BarChart
                   data={puncakPemberitaan}
                   layout="vertical"
@@ -249,7 +284,7 @@ export function IsuPimpinan() {
                 >
                   <CartesianGrid {...gridProps} horizontal={false} />
                   <XAxis type="number" {...axisProps} allowDecimals={false} />
-                  <YAxis type="category" dataKey="name" {...axisProps} width={200} tick={{ fontSize: 11 }} />
+                  <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
                   <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
                   <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
                     {puncakPemberitaan.map((entry, i) => (
