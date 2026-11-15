@@ -79,6 +79,7 @@ export interface Isu {
   sumberUtama: JenisSumber[]
   tanggalMulai: string
   trend: Trend
+  tipe?: string
 }
 
 // Data Sumber — berita/postingan mentah
