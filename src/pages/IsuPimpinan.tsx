@@ -6,6 +6,7 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
+  LabelList,
   Legend,
   Pie,
   PieChart,
@@ -72,6 +73,28 @@ export function IsuPimpinan() {
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
       .slice(0, 8)
+  }, [beritaTerkait])
+
+  const puncakPemberitaan = useMemo(() => {
+    const map = new Map<string, { judul: string; jumlah: number; negatif: number; tanggal: string }>()
+    for (const b of beritaTerkait) {
+      const e = map.get(b.judul) ?? { judul: b.judul, jumlah: 0, negatif: 0, tanggal: b.tanggal }
+      e.jumlah++
+      if (b.sentimen === 'Negatif') e.negatif++
+      if (b.tanggal > e.tanggal) e.tanggal = b.tanggal
+      map.set(b.judul, e)
+    }
+    const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des']
+    return Array.from(map.values())
+      .sort((a, b) => b.jumlah - a.jumlah)
+      .slice(0, 10)
+      .map(({ judul, jumlah, negatif, tanggal }) => {
+        const d = new Date(tanggal)
+        const tgl = `${d.getDate()} ${BULAN[d.getMonth()]}`
+        const label = judul.length > 42 ? judul.slice(0, 40) + '…' : judul
+        const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
+        return { name: `${label} (${tgl})`, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
+      })
   }, [beritaTerkait])
 
   if (!reputasi) return null
@@ -176,6 +199,31 @@ export function IsuPimpinan() {
         </Card>
 
       </div>
+
+      {puncakPemberitaan.length > 0 && (
+        <Card>
+          <CardContent>
+            <p className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
+            <p className="mb-4 text-base font-bold text-slate-800 dark:text-slate-100">
+              {puncakPemberitaan[0]?.judul?.slice(0, 60)}{puncakPemberitaan[0]?.judul?.length > 60 ? '…' : ''} paling banyak diberitakan ({puncakPemberitaan[0]?.jumlah} berita)
+            </p>
+            <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 36)}>
+              <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={260} tick={{ fontSize: 11 }} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                  {puncakPemberitaan.map((entry, i) => (
+                    <Cell key={i} fill={entry.fill} />
+                  ))}
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
