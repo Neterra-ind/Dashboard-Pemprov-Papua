@@ -22,6 +22,7 @@ import { downloadXlsx } from '@/lib/exportXlsx'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader, SectionLabel } from '@/components/ui/PageHeader'
 import { StatusBadge } from '@/components/ui/Badge'
+import { DateRangeFilter } from '@/components/DateRangeFilter'
 import { FilterSelect } from '@/components/FilterSelect'
 import { useRole } from '@/lib/role'
 import { useDisposisi } from '@/lib/store'
@@ -148,10 +149,17 @@ export function Dashboard() {
   const { role } = useRole()
   const { statusUntukIsu } = useDisposisi()
   const [jenisSumber, setJenisSumber] = useState('')
+  const [dariTanggal, setDariTanggal] = useState('')
+  const [sampaiTanggal, setSampaiTanggal] = useState('')
 
   const beritaFiltered = useMemo(
-    () => (jenisSumber ? beritaPapua.filter((b) => getJenisSumber(b.sumber) === jenisSumber) : beritaPapua),
-    [jenisSumber],
+    () => beritaPapua.filter(
+      (b) =>
+        (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
+        (!dariTanggal || b.tanggal >= dariTanggal) &&
+        (!sampaiTanggal || b.tanggal <= sampaiTanggal),
+    ),
+    [jenisSumber, dariTanggal, sampaiTanggal],
   )
 
   const totalBeritaPemprov = beritaFiltered.length
@@ -310,7 +318,24 @@ export function Dashboard() {
 
       {/* 3 — Filter Sumber */}
       <Card className="p-4">
-        <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
+        <div className="flex flex-wrap items-end gap-3">
+          <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
+          <DateRangeFilter
+            dari={dariTanggal}
+            sampai={sampaiTanggal}
+            onDariChange={setDariTanggal}
+            onSampaiChange={setSampaiTanggal}
+          />
+          {(dariTanggal || sampaiTanggal) && (
+            <button
+              type="button"
+              onClick={() => { setDariTanggal(''); setSampaiTanggal('') }}
+              className="self-end rounded-lg border border-slate-200 px-2.5 py-2 text-xs text-slate-500 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800"
+            >
+              Reset Tanggal
+            </button>
+          )}
+        </div>
       </Card>
 
       {/* 4 — KPI Cards */}
