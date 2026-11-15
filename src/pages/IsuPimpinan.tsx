@@ -50,18 +50,23 @@ export function IsuPimpinan() {
   const [jenisSumber, setJenisSumber] = useState('')
   const [dariTanggal, setDariTanggal] = useState('')
   const [sampaiTanggal, setSampaiTanggal] = useState('')
+  const [selectedJudul, setSelectedJudul] = useState<string | null>(null)
 
   const reputasi = reputasiByEntitas(tab)
-  const beritaTerkait = useMemo(
-    () => beritaPapua.filter(
+  const beritaTerkait = useMemo(() => {
+    setSelectedJudul(null)
+    return beritaPapua.filter(
       (b) =>
         b.entitasTerkait === tab &&
         (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
         (!dariTanggal || b.tanggal >= dariTanggal) &&
         (!sampaiTanggal || b.tanggal <= sampaiTanggal),
-    ),
-    [tab, jenisSumber, dariTanggal, sampaiTanggal],
-  )
+    )
+  }, [tab, jenisSumber, dariTanggal, sampaiTanggal])
+
+  const beritaDitampilkan = selectedJudul
+    ? beritaTerkait.filter((b) => b.judul === selectedJudul)
+    : beritaTerkait
 
   const timelineEkspos = useMemo(() => {
     if (beritaTerkait.length === 0) return []
@@ -232,14 +237,27 @@ export function IsuPimpinan() {
                 {puncakPemberitaan[0]?.judul?.slice(0, 60)}{puncakPemberitaan[0]?.judul?.length > 60 ? '…' : ''} paling banyak diberitakan ({puncakPemberitaan[0]?.jumlah} berita)
               </p>
               <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 36)}>
-                <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 40, top: 0, bottom: 0 }}>
+                <BarChart
+                  data={puncakPemberitaan}
+                  layout="vertical"
+                  margin={{ left: 8, right: 40, top: 0, bottom: 0 }}
+                  style={{ cursor: 'pointer' }}
+                  onClick={(d) => {
+                    const judul = d?.activePayload?.[0]?.payload?.judul
+                    if (judul) setSelectedJudul((prev) => prev === judul ? null : judul)
+                  }}
+                >
                   <CartesianGrid {...gridProps} horizontal={false} />
                   <XAxis type="number" {...axisProps} allowDecimals={false} />
                   <YAxis type="category" dataKey="name" {...axisProps} width={200} tick={{ fontSize: 11 }} />
                   <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
                   <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
                     {puncakPemberitaan.map((entry, i) => (
-                      <Cell key={i} fill={entry.fill} />
+                      <Cell
+                        key={i}
+                        fill={entry.fill}
+                        opacity={selectedJudul && selectedJudul !== entry.judul ? 0.3 : 1}
+                      />
                     ))}
                     <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
                   </Bar>
@@ -268,13 +286,29 @@ export function IsuPimpinan() {
       <Card>
         <CardHeader
           title={`Berita Terkait ${tab}`}
-          subtitle={`${beritaTerkait.length} berita · klik untuk buka sumber asli`}
+          subtitle={
+            selectedJudul
+              ? `${beritaDitampilkan.length} berita untuk judul terpilih · klik baris untuk buka · klik lagi bar untuk reset`
+              : `${beritaTerkait.length} berita · klik bar di atas untuk filter · klik untuk buka sumber asli`
+          }
         />
         <CardContent className="space-y-2">
-          {beritaTerkait.length === 0 && (
+          {selectedJudul && (
+            <div className="flex items-center justify-between rounded-lg bg-accent/10 px-3 py-2">
+              <p className="text-xs font-medium text-accent-pressed line-clamp-1">{selectedJudul}</p>
+              <button
+                type="button"
+                onClick={() => setSelectedJudul(null)}
+                className="ml-3 shrink-0 text-xs text-slate-400 hover:text-slate-700"
+              >
+                ✕ Reset
+              </button>
+            </div>
+          )}
+          {beritaDitampilkan.length === 0 && (
             <p className="text-sm text-slate-400">Belum ada berita tercatat untuk entitas ini.</p>
           )}
-          {beritaTerkait.slice(0, 20).map((b, i) => (
+          {beritaDitampilkan.slice(0, 20).map((b, i) => (
             <a
               key={`${b.url}-${i}`}
               href={b.url}
