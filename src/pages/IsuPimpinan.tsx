@@ -6,6 +6,7 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
+  LabelList,
   Legend,
   Pie,
   PieChart,
@@ -32,10 +33,6 @@ import fotoGubernur from '@/assets/gubernur-papua.jpg'
 import fotoWakilGubernur from '@/assets/wakil-gubernur-papua.jpg'
 
 const SENTIMEN_COLOR = { Positif: chart.positive, Negatif: chart.negative }
-
-const KATEGORI_COLORS = [
-  chart.accent, chart.gold, chart.positive, '#8b5cf6', '#f97316', '#06b6d4', '#ec4899', '#14b8a6', '#f43f5e', '#a3e635',
-]
 
 const TABS: { key: EntitasPimpinan; label: string }[] = [
   { key: 'Gubernur', label: 'Isu Gubernur Papua' },
@@ -77,11 +74,28 @@ export function IsuPimpinan() {
   }, [beritaTerkait])
 
   const distribusiKategori = useMemo(() => {
-    const map = new Map<string, number>()
-    for (const b of beritaTerkait) map.set(b.kategori, (map.get(b.kategori) ?? 0) + 1)
-    return Array.from(map.entries())
-      .map(([name, value]) => ({ name, value }))
-      .sort((a, b) => b.value - a.value)
+    const map = new Map<string, { jumlah: number; negatif: number; tMin: string; tMax: string }>()
+    for (const b of beritaTerkait) {
+      const e = map.get(b.kategori) ?? { jumlah: 0, negatif: 0, tMin: b.tanggal, tMax: b.tanggal }
+      e.jumlah++
+      if (b.sentimen === 'Negatif') e.negatif++
+      if (b.tanggal < e.tMin) e.tMin = b.tanggal
+      if (b.tanggal > e.tMax) e.tMax = b.tanggal
+      map.set(b.kategori, e)
+    }
+    const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des']
+    const fmt = (d: string) => { const dt = new Date(d); return `${dt.getDate()} ${BULAN[dt.getMonth()]}` }
+    const sorted = Array.from(map.entries())
+      .map(([kategori, { jumlah, negatif, tMin, tMax }]) => ({
+        name: tMin === tMax ? `${kategori} (${fmt(tMin)})` : `${kategori} (${fmt(tMin)}–${fmt(tMax)})`,
+        kategori,
+        jumlah,
+        negatif,
+      }))
+      .sort((a, b) => b.jumlah - a.jumlah)
+    const maxNegatif = Math.max(0, ...sorted.map(d => d.negatif))
+    const highlightKategori = sorted.find(d => d.negatif === maxNegatif && d.negatif > 0)?.kategori
+    return sorted.map(d => ({ ...d, highlight: d.kategori === highlightKategori }))
   }, [beritaTerkait])
 
   const eksposMedia = useMemo(() => {
@@ -131,7 +145,7 @@ export function IsuPimpinan() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <CardContent className="space-y-3">
             <div className="flex items-start gap-3">
@@ -194,23 +208,37 @@ export function IsuPimpinan() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader title="Framing Pemberitaan" subtitle="Proporsi berita per kategori topik" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={216}>
-              <PieChart>
-                <Pie data={distribusiKategori} dataKey="value" nameKey="name" innerRadius={48} outerRadius={78} paddingAngle={2} stroke="none">
-                  {distribusiKategori.map((entry, i) => (
-                    <Cell key={entry.name} fill={KATEGORI_COLORS[i % KATEGORI_COLORS.length]} />
-                  ))}
-                </Pie>
-                <Tooltip content={<ChartTooltip />} />
-                <Legend content={<ChartLegend />} />
-              </PieChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
       </div>
+
+      {/* Editorial Ranked Bar Chart — Kategori Pemberitaan */}
+      <Card>
+        <CardContent className="pb-4 pt-5">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+            Kategori Pemberitaan &middot; {tab}
+          </p>
+          {distribusiKategori[0] && (
+            <p className="mt-1 text-base font-bold leading-snug text-slate-900 dark:text-slate-50">
+              Isu &ldquo;{distribusiKategori[0].kategori}&rdquo; paling banyak diberitakan{' '}
+              <span className="text-accent">dengan {distribusiKategori[0].jumlah} berita</span>
+            </p>
+          )}
+          <div className="mt-4">
+            <ResponsiveContainer width="100%" height={Math.max(200, distribusiKategori.length * 36)}>
+              <BarChart data={distribusiKategori} layout="vertical" margin={{ left: 8, right: 48, top: 4, bottom: 4 }}>
+                <XAxis type="number" hide />
+                <YAxis type="category" dataKey="name" {...axisProps} width={240} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Berita" radius={[0, 3, 3, 0]} maxBarSize={22}>
+                  {distribusiKategori.map((entry) => (
+                    <Cell key={entry.kategori} fill={entry.highlight ? '#ef4444' : '#1e293b'} />
+                  ))}
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 12, fill: '#64748b', fontVariantNumeric: 'tabular-nums' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
