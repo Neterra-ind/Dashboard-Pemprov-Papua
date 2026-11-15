@@ -16,6 +16,7 @@ import {
   YAxis,
 } from 'recharts'
 import { ExternalLink, TrendingUp } from 'lucide-react'
+import { DateRangeFilter } from '@/components/DateRangeFilter'
 import { FilterSelect } from '@/components/FilterSelect'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
@@ -47,11 +48,19 @@ const FOTO_PIMPINAN: Record<EntitasPimpinan, string> = {
 export function IsuPimpinan() {
   const [tab, setTab] = useState<EntitasPimpinan>('Gubernur')
   const [jenisSumber, setJenisSumber] = useState('')
+  const [dariTanggal, setDariTanggal] = useState('')
+  const [sampaiTanggal, setSampaiTanggal] = useState('')
 
   const reputasi = reputasiByEntitas(tab)
   const beritaTerkait = useMemo(
-    () => beritaPapua.filter((b) => b.entitasTerkait === tab && (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber)),
-    [tab, jenisSumber],
+    () => beritaPapua.filter(
+      (b) =>
+        b.entitasTerkait === tab &&
+        (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
+        (!dariTanggal || b.tanggal >= dariTanggal) &&
+        (!sampaiTanggal || b.tanggal <= sampaiTanggal),
+    ),
+    [tab, jenisSumber, dariTanggal, sampaiTanggal],
   )
 
   const timelineEkspos = useMemo(() => {
@@ -112,7 +121,24 @@ export function IsuPimpinan() {
       />
 
       <Card className="p-4">
-        <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
+        <div className="flex flex-wrap items-end gap-3">
+          <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
+          <DateRangeFilter
+            dari={dariTanggal}
+            sampai={sampaiTanggal}
+            onDariChange={setDariTanggal}
+            onSampaiChange={setSampaiTanggal}
+          />
+          {(dariTanggal || sampaiTanggal) && (
+            <button
+              type="button"
+              onClick={() => { setDariTanggal(''); setSampaiTanggal('') }}
+              className="self-end rounded-lg border border-slate-200 px-2.5 py-2 text-xs text-slate-500 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-400 dark:hover:bg-slate-800"
+            >
+              Reset Tanggal
+            </button>
+          )}
+        </div>
       </Card>
 
       <div className="flex gap-1 border-b border-[var(--color-border)]">
