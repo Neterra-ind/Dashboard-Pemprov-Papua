@@ -128,21 +128,6 @@ export function IsuPimpinan() {
               </div>
             </div>
 
-            <div>
-              <p className="mb-2 text-xs font-semibold text-slate-500 dark:text-slate-400">Timeline Ekspos Berita</p>
-              <ResponsiveContainer width="100%" height={130}>
-                <AreaChart data={timelineEkspos} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
-                  <defs>
-                    <AreaGradient id="pimpinanTren" color={chart.accent} />
-                  </defs>
-                  <XAxis dataKey="tanggal" {...axisProps} minTickGap={48} tickFormatter={(v: string) => { const d = new Date(v); return `${d.getDate()}/${d.getMonth() + 1}` }} />
-                  <YAxis {...axisProps} allowDecimals={false} width={28} />
-                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                  <Area type="monotone" dataKey="jumlah" name="Berita" stroke={chart.accent} fill="url(#pimpinanTren)" strokeWidth={2} dot={false} />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-
             <div className="flex flex-wrap gap-1.5">
               {reputasi.topIsu.map((t) => (
                 <span
@@ -174,6 +159,24 @@ export function IsuPimpinan() {
         </Card>
 
       </div>
+
+      <Card>
+        <CardHeader title="Timeline Ekspos Berita" subtitle="Jumlah berita per hari (sesuai filter)" />
+        <CardContent>
+          <ResponsiveContainer width="100%" height={220}>
+            <AreaChart data={timelineEkspos} margin={{ top: 4, right: 8, left: -8, bottom: 0 }}>
+              <defs>
+                <AreaGradient id="pimpinanTren" color={chart.accent} />
+              </defs>
+              <CartesianGrid {...gridProps} />
+              <XAxis dataKey="tanggal" {...axisProps} minTickGap={40} tickFormatter={(v: string) => { const d = new Date(v); return `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}` }} />
+              <YAxis {...axisProps} allowDecimals={false} width={36} />
+              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+              <Area type="monotone" dataKey="jumlah" name="Berita" stroke={chart.accent} fill="url(#pimpinanTren)" strokeWidth={2} dot={false} />
+            </AreaChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
