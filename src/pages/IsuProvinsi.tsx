@@ -268,7 +268,7 @@ export function IsuProvinsi() {
         <Card>
           <CardHeader title="Top 5 Kategori Isu Provinsi Papua" subtitle="Jumlah berita/postingan per kategori isu" />
           <CardContent>
-            <ResponsiveContainer width="100%" height={260}>
+            <ResponsiveContainer width="100%" height={Math.max(160, top5Isu.length * 48)}>
               <BarChart data={top5Isu} layout="vertical" margin={{ left: 8, right: 24 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
@@ -302,7 +302,7 @@ export function IsuProvinsi() {
       <Card>
         <CardHeader title="Ekspos Media" subtitle="Top 10 media yang paling banyak memberitakan (sesuai filter kategori)" />
         <CardContent>
-          <ResponsiveContainer width="100%" height={320}>
+          <ResponsiveContainer width="100%" height={Math.max(160, eksposMedia.length * 44)}>
             <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 24 }}>
               <CartesianGrid {...gridProps} horizontal={false} />
               <XAxis type="number" {...axisProps} allowDecimals={false} />

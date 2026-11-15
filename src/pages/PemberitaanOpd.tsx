@@ -87,7 +87,7 @@ export function PemberitaanOpd() {
         <Card>
           <CardHeader title="OPD Terpopuler" subtitle="Berdasarkan total berita/postingan" />
           <CardContent>
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={Math.max(160, topPopuler.length * 44)}>
               <BarChart data={topPopuler} layout="vertical" margin={{ left: 8, right: 16 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
@@ -102,7 +102,7 @@ export function PemberitaanOpd() {
         <Card>
           <CardHeader title="OPD Paling Banyak Diberitakan Negatif" subtitle="Isu Negatif + Potensi Negatif" />
           <CardContent>
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={Math.max(160, topNegatif.length * 44)}>
               <BarChart data={topNegatif} layout="vertical" margin={{ left: 8, right: 16 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />

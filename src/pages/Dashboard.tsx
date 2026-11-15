@@ -522,7 +522,7 @@ export function Dashboard() {
         <Card>
           <CardHeader title="Publikasi Kinerja OPD" subtitle="OPD dengan isu negatif terbanyak" />
           <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width="100%" height={Math.max(160, rankingOpdTeratas.length * 44)}>
               <BarChart data={rankingOpdTeratas} layout="vertical" margin={{ left: 8, right: 16 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
