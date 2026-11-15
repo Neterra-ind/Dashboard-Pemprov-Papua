@@ -57,6 +57,35 @@ const isuColumns: ColumnDef<Isu, any>[] = [
   },
 ]
 
+function WrapTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
+  const text = payload?.value ?? ''
+  const maxChars = 22
+  const words = text.split(' ')
+  const lines: string[] = []
+  let current = ''
+  for (const w of words) {
+    if ((current + (current ? ' ' : '') + w).length > maxChars && current) {
+      lines.push(current)
+      current = w
+    } else {
+      current = current ? `${current} ${w}` : w
+    }
+    if (lines.length === 2) { lines[1] += '…'; current = ''; break }
+  }
+  if (current) lines.push(current)
+  const lineH = 13
+  const totalH = lines.length * lineH
+  return (
+    <g transform={`translate(${x},${y})`}>
+      {lines.map((l, i) => (
+        <text key={i} x={0} y={i * lineH - totalH / 2 + lineH * 0.5} textAnchor="end" fill="#64748b" fontSize={11}>
+          {l}
+        </text>
+      ))}
+    </g>
+  )
+}
+
 function NameJabatanTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
   const parts = (payload?.value ?? '||').split('||')
   const nama = parts[0]
@@ -76,9 +105,18 @@ const eksposMediaOpd = Object.entries(
   .slice(0, 10)
 
 const puncakPemberitaanOpd = Object.entries(
-  beritaPapua.reduce((acc, b) => { acc[b.tanggal] = (acc[b.tanggal] || 0) + 1; return acc }, {} as Record<string, number>)
-).map(([name, value]) => ({ name, value }))
-  .sort((a, b) => b.value - a.value)
+  beritaPapua.reduce((acc, b) => {
+    if (!acc[b.judul]) acc[b.judul] = { jumlah: 0, negatif: 0 }
+    acc[b.judul].jumlah++
+    if (b.sentimen === 'Negatif') acc[b.judul].negatif++
+    return acc
+  }, {} as Record<string, { jumlah: number; negatif: number }>)
+).map(([judul, { jumlah, negatif }]) => ({
+  name: judul,
+  jumlah,
+  fill: jumlah > 0 && negatif / jumlah > 0.5 ? '#ef4444' : '#1e293b',
+}))
+  .sort((a, b) => b.jumlah - a.jumlah)
   .slice(0, 10)
 
 const topNarasumberOpd = daftarNarasumber
@@ -168,16 +206,19 @@ export function PemberitaanOpd() {
         </Card>
 
         <Card>
-          <CardHeader title="Puncak Pemberitaan" subtitle="Tanggal dengan volume berita tertinggi" />
+          <CardHeader title="Puncak Pemberitaan" subtitle="Isu/judul berita yang paling banyak diliput" />
           <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaanOpd.length * 44)}>
-              <BarChart data={puncakPemberitaanOpd} layout="vertical" margin={{ left: 8, right: 48 }}>
+            <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaanOpd.length * 48)}>
+              <BarChart data={puncakPemberitaanOpd} layout="vertical" margin={{ left: 8, right: 40, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={80} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22}>
-                  <LabelList dataKey="value" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                  {puncakPemberitaanOpd.map((entry, i) => (
+                    <Cell key={i} fill={entry.fill} />
+                  ))}
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
