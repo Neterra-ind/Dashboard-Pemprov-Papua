@@ -264,20 +264,40 @@ export function IsuProvinsi() {
         </Card>
       </div>
 
-      <Card>
-        <CardHeader title="Top 5 Kategori Isu Provinsi Papua" subtitle="Jumlah berita/postingan per kategori isu" />
-        <CardContent>
-          <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={top5Isu} layout="vertical" margin={{ left: 8, right: 24 }}>
-              <CartesianGrid {...gridProps} horizontal={false} />
-              <XAxis type="number" {...axisProps} allowDecimals={false} />
-              <YAxis type="category" dataKey="name" {...axisProps} width={200} />
-              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={28} />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <Card>
+          <CardHeader title="Top 5 Kategori Isu Provinsi Papua" subtitle="Jumlah berita/postingan per kategori isu" />
+          <CardContent>
+            <ResponsiveContainer width="100%" height={260}>
+              <BarChart data={top5Isu} layout="vertical" margin={{ left: 8, right: 24 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={28} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader title="Puncak Pemberitaan" subtitle="Top 10 judul berita terbanyak (merah = dominan negatif)" />
+          <CardContent>
+            <ResponsiveContainer width="100%" height={Math.max(260, puncakPemberitaan.length * 44)}>
+              <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                  {puncakPemberitaan.map((entry, i) => <Cell key={i} fill={entry.fill} />)}
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
 
       <Card>
         <CardHeader title="Ekspos Media" subtitle="Top 10 media yang paling banyak memberitakan (sesuai filter kategori)" />
@@ -293,26 +313,6 @@ export function IsuProvinsi() {
           </ResponsiveContainer>
         </CardContent>
       </Card>
-
-      {puncakPemberitaan.length > 0 && (
-        <Card>
-          <CardContent>
-            <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
-            <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 44)}>
-              <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
-                <CartesianGrid {...gridProps} horizontal={false} />
-                <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
-                  {puncakPemberitaan.map((entry, i) => <Cell key={i} fill={entry.fill} />)}
-                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      )}
 
       <Card className="p-5">
         <DataTable data={terfilter} columns={columns} searchPlaceholder="Cari nama isu, OPD..." />
