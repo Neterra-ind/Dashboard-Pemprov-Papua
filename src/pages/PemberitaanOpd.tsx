@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import type { ColumnDef } from '@tanstack/react-table'
-import { Bar, BarChart, CartesianGrid, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, Cell, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { DataTable } from '@/components/DataTable'
 import { FilterSelect } from '@/components/FilterSelect'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
@@ -69,6 +69,18 @@ function NameJabatanTick({ x, y, payload }: { x?: number; y?: number; payload?: 
   )
 }
 
+const eksposMediaOpd = Object.entries(
+  beritaPapua.reduce((acc, b) => { acc[b.sumber] = (acc[b.sumber] || 0) + 1; return acc }, {} as Record<string, number>)
+).map(([name, value]) => ({ name, value }))
+  .sort((a, b) => b.value - a.value)
+  .slice(0, 10)
+
+const puncakPemberitaanOpd = Object.entries(
+  beritaPapua.reduce((acc, b) => { acc[b.tanggal] = (acc[b.tanggal] || 0) + 1; return acc }, {} as Record<string, number>)
+).map(([name, value]) => ({ name, value }))
+  .sort((a, b) => b.value - a.value)
+  .slice(0, 10)
+
 const topNarasumberOpd = daftarNarasumber
   .map(({ nama, jabatan, kunci }) => ({
     label: `${nama}||${jabatan}`,
@@ -133,6 +145,40 @@ export function PemberitaanOpd() {
                 <YAxis type="category" dataKey="name" {...axisProps} width={150} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
                 <Bar dataKey="value" name="Isu negatif" fill={chart.negative} radius={[0, 6, 6, 0]} maxBarSize={22} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <Card>
+          <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
+          <CardContent>
+            <ResponsiveContainer width="100%" height={Math.max(200, eksposMediaOpd.length * 36)}>
+              <BarChart data={eksposMediaOpd} layout="vertical" margin={{ left: 8, right: 12 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={120} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader title="Puncak Pemberitaan" subtitle="Tanggal dengan volume berita tertinggi" />
+          <CardContent>
+            <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaanOpd.length * 44)}>
+              <BarChart data={puncakPemberitaanOpd} layout="vertical" margin={{ left: 8, right: 48 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={80} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22}>
+                  <LabelList dataKey="value" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                </Bar>
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
