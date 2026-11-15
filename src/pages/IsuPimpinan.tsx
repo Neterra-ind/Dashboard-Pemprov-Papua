@@ -23,7 +23,7 @@ import { PageHeader } from '@/components/ui/PageHeader'
 import { AreaGradient, axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
 import { hitungPerHariRange } from '@/lib/aggregations'
 import { cn } from '@/lib/utils'
-import { daftarJenisSumber, reputasiByEntitas } from '@/data/mockData'
+import { daftarJenisSumber, daftarNarasumber, reputasiByEntitas } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
 import beritaPapuaRaw from '@/data/beritaPapua.json'
 
@@ -107,6 +107,16 @@ export function IsuPimpinan() {
       })
   }, [beritaTerkait])
 
+  const topNarasumber = useMemo(() =>
+    daftarNarasumber
+      .map(({ nama, jabatan, kunci }) => ({
+        label: `${nama}||${jabatan}`,
+        jumlah: beritaTerkait.filter(b => kunci.some(k => b.judul.includes(k))).length,
+      }))
+      .filter(n => n.jumlah > 0)
+      .sort((a, b) => b.jumlah - a.jumlah)
+  , [beritaTerkait])
+
   function WrapTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
     const text = payload?.value ?? ''
     const maxChars = 22
@@ -139,6 +149,18 @@ export function IsuPimpinan() {
             {l}
           </text>
         ))}
+      </g>
+    )
+  }
+
+  function NameJabatanTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
+    const parts = (payload?.value ?? '||').split('||')
+    const nama = parts[0]
+    const jabatan = parts[1] ?? ''
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text x={0} y={-4} textAnchor="end" fill="#1e293b" fontSize={11} fontWeight={600} className="dark:fill-slate-200">{nama}</text>
+        <text x={0} y={9} textAnchor="end" fill="#94a3b8" fontSize={10}>{jabatan}</text>
       </g>
     )
   }
@@ -314,6 +336,25 @@ export function IsuPimpinan() {
           </CardContent>
         </Card>
       </div>
+
+      {topNarasumber.length > 0 && (
+        <Card>
+          <CardHeader title="Narasumber Aktif" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita" />
+          <CardContent>
+            <ResponsiveContainer width="100%" height={Math.max(160, topNarasumber.length * 52)}>
+              <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader

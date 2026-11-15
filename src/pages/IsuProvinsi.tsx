@@ -33,7 +33,7 @@ import {
   gridProps,
   SENTIMEN_COLOR,
 } from '@/lib/chartTheme'
-import { daftarIsuProvinsi, daftarJenisSumber, daftarKategoriIsu, semuaKlasifikasi } from '@/data/mockData'
+import { daftarIsuProvinsi, daftarJenisSumber, daftarKategoriIsu, daftarNarasumber, semuaKlasifikasi } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
 import beritaPapuaRaw from '@/data/beritaPapua.json'
 import type { Isu } from '@/types'
@@ -162,6 +162,28 @@ export function IsuProvinsi() {
       .sort((a, b) => b.value - a.value)
       .slice(0, 5)
   }, [kategori])
+
+  const topNarasumber = useMemo(() =>
+    daftarNarasumber
+      .map(({ nama, jabatan, kunci }) => ({
+        label: `${nama}||${jabatan}`,
+        jumlah: beritaTerfilter.filter(b => kunci.some(k => b.judul.includes(k))).length,
+      }))
+      .filter(n => n.jumlah > 0)
+      .sort((a, b) => b.jumlah - a.jumlah)
+  , [beritaTerfilter])
+
+  function NameJabatanTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
+    const parts = (payload?.value ?? '||').split('||')
+    const nama = parts[0]
+    const jabatan = parts[1] ?? ''
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text x={0} y={-4} textAnchor="end" fill="#1e293b" fontSize={11} fontWeight={600}>{nama}</text>
+        <text x={0} y={9} textAnchor="end" fill="#94a3b8" fontSize={10}>{jabatan}</text>
+      </g>
+    )
+  }
 
   function WrapTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
     const text = payload?.value ?? ''
@@ -313,6 +335,25 @@ export function IsuProvinsi() {
           </ResponsiveContainer>
         </CardContent>
       </Card>
+
+      {topNarasumber.length > 0 && (
+        <Card>
+          <CardHeader title="Narasumber Aktif" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita provinsi" />
+          <CardContent>
+            <ResponsiveContainer width="100%" height={Math.max(160, topNarasumber.length * 52)}>
+              <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      )}
 
       <Card className="p-5">
         <DataTable data={terfilter} columns={columns} searchPlaceholder="Cari nama isu, OPD..." />

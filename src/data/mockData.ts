@@ -459,3 +459,11 @@ export const semuaLevelRisiko: LevelRisiko[] = ['Low', 'Medium', 'High', 'Critic
 export const semuaSentimenList: Sentimen[] = SENTIMEN
 export const semuaKlasifikasi: Klasifikasi[] = ['Positif', 'Negatif', 'Potensi Negatif']
 export const semuaScopeIsu: ScopeIsu[] = ['Nasional', 'Provinsi', 'Gubernur', 'Wakil Gubernur']
+
+export const daftarNarasumber = [
+  { nama: 'Prabowo', jabatan: 'Presiden RI', kunci: ['Prabowo'] },
+  { nama: 'Gibran Rakabuming', jabatan: 'Wakil Presiden RI', kunci: ['Gibran'] },
+  { nama: 'Bahlil Lahadalia', jabatan: 'Menteri ESDM', kunci: ['Bahlil'] },
+  { nama: 'Matius D. Fakhiri', jabatan: 'Gubernur Papua', kunci: ['Matius', 'Fakhiri'] },
+  { nama: 'Aryoko Rumaropen', jabatan: 'Wakil Gubernur Papua', kunci: ['Aryoko', 'Rumaropen'] },
+]

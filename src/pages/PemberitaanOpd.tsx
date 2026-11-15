@@ -1,14 +1,18 @@
 import { useMemo, useState } from 'react'
 import type { ColumnDef } from '@tanstack/react-table'
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, CartesianGrid, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { DataTable } from '@/components/DataTable'
 import { FilterSelect } from '@/components/FilterSelect'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { KlasifikasiBadge } from '@/components/ui/Badge'
 import { axisProps, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
-import { daftarIsu, daftarOpd, daftarRankingOpd } from '@/data/mockData'
+import { daftarIsu, daftarNarasumber, daftarOpd, daftarRankingOpd } from '@/data/mockData'
 import type { Isu, RankingOpd } from '@/types'
+import beritaPapuaRaw from '@/data/beritaPapua.json'
+
+type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
+const beritaPapua = beritaPapuaRaw as BeritaRaw[]
 
 const rankingColumns: ColumnDef<RankingOpd, any>[] = [
   { accessorKey: 'opd', header: 'OPD' },
@@ -52,6 +56,26 @@ const isuColumns: ColumnDef<Isu, any>[] = [
     cell: (info) => <span className="tabular-nums">{info.getValue<number>()}</span>,
   },
 ]
+
+function NameJabatanTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
+  const parts = (payload?.value ?? '||').split('||')
+  const nama = parts[0]
+  const jabatan = parts[1] ?? ''
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text x={0} y={-4} textAnchor="end" fill="#1e293b" fontSize={11} fontWeight={600}>{nama}</text>
+      <text x={0} y={9} textAnchor="end" fill="#94a3b8" fontSize={10}>{jabatan}</text>
+    </g>
+  )
+}
+
+const topNarasumberOpd = daftarNarasumber
+  .map(({ nama, jabatan, kunci }) => ({
+    label: `${nama}||${jabatan}`,
+    jumlah: beritaPapua.filter(b => !b.entitasTerkait && kunci.some(k => b.judul.includes(k))).length,
+  }))
+  .filter(n => n.jumlah > 0)
+  .sort((a, b) => b.jumlah - a.jumlah)
 
 export function PemberitaanOpd() {
   const [opd, setOpd] = useState('')
@@ -114,6 +138,25 @@ export function PemberitaanOpd() {
           </CardContent>
         </Card>
       </div>
+
+      {topNarasumberOpd.length > 0 && (
+        <Card>
+          <CardHeader title="Narasumber Aktif" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita OPD" />
+          <CardContent>
+            <ResponsiveContainer width="100%" height={Math.max(160, topNarasumberOpd.length * 52)}>
+              <BarChart data={topNarasumberOpd} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      )}
 
       <Card className="p-5">
         <DataTable data={daftarRankingOpd} columns={rankingColumns} searchPlaceholder="Cari OPD..." />
