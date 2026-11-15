@@ -325,7 +325,7 @@ export function IsuPimpinan() {
           <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(200, eksposMedia.length * 36)}>
-              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12 }}>
+              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
                 <YAxis type="category" dataKey="name" {...axisProps} width={120} />
