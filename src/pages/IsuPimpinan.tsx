@@ -223,45 +223,47 @@ export function IsuPimpinan() {
 
       </div>
 
-      {puncakPemberitaan.length > 0 && (
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        {puncakPemberitaan.length > 0 && (
+          <Card>
+            <CardContent>
+              <p className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
+              <p className="mb-4 text-base font-bold text-slate-800 dark:text-slate-100">
+                {puncakPemberitaan[0]?.judul?.slice(0, 60)}{puncakPemberitaan[0]?.judul?.length > 60 ? '…' : ''} paling banyak diberitakan ({puncakPemberitaan[0]?.jumlah} berita)
+              </p>
+              <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 36)}>
+                <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 40, top: 0, bottom: 0 }}>
+                  <CartesianGrid {...gridProps} horizontal={false} />
+                  <XAxis type="number" {...axisProps} allowDecimals={false} />
+                  <YAxis type="category" dataKey="name" {...axisProps} width={200} tick={{ fontSize: 11 }} />
+                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                  <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                    {puncakPemberitaan.map((entry, i) => (
+                      <Cell key={i} fill={entry.fill} />
+                    ))}
+                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        )}
+
         <Card>
+          <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
           <CardContent>
-            <p className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
-            <p className="mb-4 text-base font-bold text-slate-800 dark:text-slate-100">
-              {puncakPemberitaan[0]?.judul?.slice(0, 60)}{puncakPemberitaan[0]?.judul?.length > 60 ? '…' : ''} paling banyak diberitakan ({puncakPemberitaan[0]?.jumlah} berita)
-            </p>
-            <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 36)}>
-              <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+            <ResponsiveContainer width="100%" height={Math.max(200, eksposMedia.length * 36)}>
+              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={260} tick={{ fontSize: 11 }} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={120} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
-                  {puncakPemberitaan.map((entry, i) => (
-                    <Cell key={i} fill={entry.fill} />
-                  ))}
-                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                </Bar>
+                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
-      )}
-
-      <Card>
-        <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
-        <CardContent>
-          <ResponsiveContainer width="100%" height={220}>
-            <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12 }}>
-              <CartesianGrid {...gridProps} horizontal={false} />
-              <XAxis type="number" {...axisProps} allowDecimals={false} />
-              <YAxis type="category" dataKey="name" {...axisProps} width={120} />
-              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
+      </div>
 
       <Card>
         <CardHeader
