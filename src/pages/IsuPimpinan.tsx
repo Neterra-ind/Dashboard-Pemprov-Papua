@@ -93,16 +93,13 @@ export function IsuPimpinan() {
       if (b.tanggal > e.tanggal) e.tanggal = b.tanggal
       map.set(b.judul, e)
     }
-    const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des']
     return Array.from(map.values())
       .sort((a, b) => b.jumlah - a.jumlah)
       .slice(0, 10)
-      .map(({ judul, jumlah, negatif, tanggal }) => {
-        const d = new Date(tanggal)
-        const tgl = `${d.getDate()} ${BULAN[d.getMonth()]}`
+      .map(({ judul, jumlah, negatif }) => {
         const label = judul.length > 42 ? judul.slice(0, 40) + '…' : judul
         const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
-        return { name: `${label} (${tgl})`, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
+        return { name: label, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
       })
   }, [beritaTerkait])
 
