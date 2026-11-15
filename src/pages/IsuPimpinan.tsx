@@ -267,10 +267,7 @@ export function IsuPimpinan() {
         {puncakPemberitaan.length > 0 && (
           <Card>
             <CardContent>
-              <p className="mb-0.5 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
-              <p className="mb-4 text-base font-bold text-slate-800 dark:text-slate-100">
-                {puncakPemberitaan[0]?.judul?.slice(0, 60)}{puncakPemberitaan[0]?.judul?.length > 60 ? '…' : ''} paling banyak diberitakan ({puncakPemberitaan[0]?.jumlah} berita)
-              </p>
+              <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
               <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 44)}>
                 <BarChart
                   data={puncakPemberitaan}
