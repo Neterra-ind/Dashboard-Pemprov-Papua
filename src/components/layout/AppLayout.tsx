@@ -28,8 +28,8 @@ function BrandMark() {
   return (
     <div className="flex items-center gap-3 px-2">
       <img src={logoPapua} alt="Logo Pemprov Papua" className="h-11 w-11 shrink-0 object-contain" />
-      <p className="text-[15px] font-bold uppercase leading-tight tracking-wide text-slate-900">
-        Pemprov
+      <p className="text-[11px] font-bold uppercase leading-tight tracking-wide text-slate-900">
+        Pemerintah Provinsi
         <br />
         Papua
       </p>
