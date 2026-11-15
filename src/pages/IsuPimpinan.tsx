@@ -285,42 +285,42 @@ export function IsuPimpinan() {
 
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        {puncakPemberitaan.length > 0 && (
-          <Card>
-            <CardContent>
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
-              <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 44)}>
-                <BarChart
-                  data={puncakPemberitaan}
-                  layout="vertical"
-                  margin={{ left: 8, right: 40, top: 0, bottom: 0 }}
-                  style={{ cursor: 'pointer' }}
-                  onClick={(d) => {
-                    const judul = d?.activePayload?.[0]?.payload?.judul
-                    if (judul) setSelectedJudul((prev) => prev === judul ? null : judul)
-                  }}
-                >
-                  <CartesianGrid {...gridProps} horizontal={false} />
-                  <XAxis type="number" {...axisProps} allowDecimals={false} />
-                  <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
-                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                  <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
-                    {puncakPemberitaan.map((entry, i) => (
-                      <Cell
-                        key={i}
-                        fill={entry.fill}
-                        opacity={selectedJudul && selectedJudul !== entry.judul ? 0.3 : 1}
-                      />
-                    ))}
-                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        )}
+      {puncakPemberitaan.length > 0 && (
+        <Card>
+          <CardContent>
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
+            <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 44)}>
+              <BarChart
+                data={puncakPemberitaan}
+                layout="vertical"
+                margin={{ left: 8, right: 40, top: 0, bottom: 0 }}
+                style={{ cursor: 'pointer' }}
+                onClick={(d) => {
+                  const judul = d?.activePayload?.[0]?.payload?.judul
+                  if (judul) setSelectedJudul((prev) => prev === judul ? null : judul)
+                }}
+              >
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                  {puncakPemberitaan.map((entry, i) => (
+                    <Cell
+                      key={i}
+                      fill={entry.fill}
+                      opacity={selectedJudul && selectedJudul !== entry.judul ? 0.3 : 1}
+                    />
+                  ))}
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      )}
 
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
           <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
           <CardContent>
@@ -335,26 +335,26 @@ export function IsuPimpinan() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-      </div>
 
-      {topNarasumber.length > 0 && (
-        <Card>
-          <CardHeader title="Narasumber Aktif" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(160, topNarasumber.length * 52)}>
-              <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
-                <CartesianGrid {...gridProps} horizontal={false} />
-                <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
-                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      )}
+        {topNarasumber.length > 0 && (
+          <Card>
+            <CardHeader title="Narasumber Aktif" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita" />
+            <CardContent>
+              <ResponsiveContainer width="100%" height={Math.max(160, topNarasumber.length * 52)}>
+                <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                  <CartesianGrid {...gridProps} horizontal={false} />
+                  <XAxis type="number" {...axisProps} allowDecimals={false} />
+                  <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                  <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
+                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        )}
+      </div>
 
       <Card>
         <CardHeader

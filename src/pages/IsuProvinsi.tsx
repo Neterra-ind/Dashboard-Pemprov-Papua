@@ -321,39 +321,41 @@ export function IsuProvinsi() {
         </Card>
       </div>
 
-      <Card>
-        <CardHeader title="Ekspos Media" subtitle="Top 10 media yang paling banyak memberitakan (sesuai filter kategori)" />
-        <CardContent>
-          <ResponsiveContainer width="100%" height={Math.max(160, eksposMedia.length * 44)}>
-            <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 24 }}>
-              <CartesianGrid {...gridProps} horizontal={false} />
-              <XAxis type="number" {...axisProps} allowDecimals={false} />
-              <YAxis type="category" dataKey="name" {...axisProps} width={180} />
-              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22} />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
-
-      {topNarasumber.length > 0 && (
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
-          <CardHeader title="Narasumber Aktif" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita provinsi" />
+          <CardHeader title="Ekspos Media" subtitle="Top 10 media yang paling banyak memberitakan (sesuai filter kategori)" />
           <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(160, topNarasumber.length * 52)}>
-              <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+            <ResponsiveContainer width="100%" height={Math.max(160, eksposMedia.length * 44)}>
+              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 24 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={180} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
-                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                </Bar>
+                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
-      )}
+
+        {topNarasumber.length > 0 && (
+          <Card>
+            <CardHeader title="Narasumber Aktif" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita provinsi" />
+            <CardContent>
+              <ResponsiveContainer width="100%" height={Math.max(160, topNarasumber.length * 52)}>
+                <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                  <CartesianGrid {...gridProps} horizontal={false} />
+                  <XAxis type="number" {...axisProps} allowDecimals={false} />
+                  <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                  <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
+                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        )}
+      </div>
 
       <Card className="p-5">
         <DataTable data={terfilter} columns={columns} searchPlaceholder="Cari nama isu, OPD..." />
