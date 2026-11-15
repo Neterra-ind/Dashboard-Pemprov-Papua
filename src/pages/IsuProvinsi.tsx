@@ -290,8 +290,8 @@ export function IsuProvinsi() {
         <Card>
           <CardHeader title="Top 5 Kategori Isu Provinsi Papua" subtitle="Jumlah berita/postingan per kategori isu" />
           <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(160, top5Isu.length * 48)}>
-              <BarChart data={top5Isu} layout="vertical" margin={{ left: 8, right: 24 }}>
+            <ResponsiveContainer width="100%" height={Math.max(160, top5Isu.length * 40)}>
+              <BarChart data={top5Isu} layout="vertical" margin={{ left: 8, right: 24, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
                 <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
@@ -326,7 +326,7 @@ export function IsuProvinsi() {
           <CardHeader title="Ekspos Media" subtitle="Top 10 media yang paling banyak memberitakan (sesuai filter kategori)" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(160, eksposMedia.length * 44)}>
-              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 24 }}>
+              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 24, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
                 <YAxis type="category" dataKey="name" {...axisProps} width={180} />
