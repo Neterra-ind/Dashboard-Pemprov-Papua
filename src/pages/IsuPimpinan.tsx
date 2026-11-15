@@ -6,7 +6,6 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
-  LabelList,
   Legend,
   Pie,
   PieChart,
@@ -62,31 +61,6 @@ export function IsuPimpinan() {
       tanggalList[0],
       tanggalList[tanggalList.length - 1],
     )
-  }, [beritaTerkait])
-
-  const distribusiKategori = useMemo(() => {
-    const map = new Map<string, { jumlah: number; negatif: number; tMin: string; tMax: string }>()
-    for (const b of beritaTerkait) {
-      const e = map.get(b.kategori) ?? { jumlah: 0, negatif: 0, tMin: b.tanggal, tMax: b.tanggal }
-      e.jumlah++
-      if (b.sentimen === 'Negatif') e.negatif++
-      if (b.tanggal < e.tMin) e.tMin = b.tanggal
-      if (b.tanggal > e.tMax) e.tMax = b.tanggal
-      map.set(b.kategori, e)
-    }
-    const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des']
-    const fmt = (d: string) => { const dt = new Date(d); return `${dt.getDate()} ${BULAN[dt.getMonth()]}` }
-    const sorted = Array.from(map.entries())
-      .map(([kategori, { jumlah, negatif, tMin, tMax }]) => ({
-        name: tMin === tMax ? `${kategori} (${fmt(tMin)})` : `${kategori} (${fmt(tMin)}–${fmt(tMax)})`,
-        kategori,
-        jumlah,
-        negatif,
-      }))
-      .sort((a, b) => b.jumlah - a.jumlah)
-    const maxNegatif = Math.max(0, ...sorted.map(d => d.negatif))
-    const highlightKategori = sorted.find(d => d.negatif === maxNegatif && d.negatif > 0)?.kategori
-    return sorted.map(d => ({ ...d, highlight: d.kategori === highlightKategori }))
   }, [beritaTerkait])
 
   const eksposMedia = useMemo(() => {
@@ -200,36 +174,6 @@ export function IsuPimpinan() {
         </Card>
 
       </div>
-
-      {/* Editorial Ranked Bar Chart — Kategori Pemberitaan */}
-      <Card>
-        <CardContent className="pb-4 pt-5">
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500">
-            Kategori Pemberitaan &middot; {tab}
-          </p>
-          {distribusiKategori[0] && (
-            <p className="mt-1 text-base font-bold leading-snug text-slate-900 dark:text-slate-50">
-              Isu &ldquo;{distribusiKategori[0].kategori}&rdquo; paling banyak diberitakan{' '}
-              <span className="text-accent">dengan {distribusiKategori[0].jumlah} berita</span>
-            </p>
-          )}
-          <div className="mt-4">
-            <ResponsiveContainer width="100%" height={Math.max(200, distribusiKategori.length * 36)}>
-              <BarChart data={distribusiKategori} layout="vertical" margin={{ left: 8, right: 48, top: 4, bottom: 4 }}>
-                <XAxis type="number" hide />
-                <YAxis type="category" dataKey="name" {...axisProps} width={240} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="jumlah" name="Berita" radius={[0, 3, 3, 0]} maxBarSize={22}>
-                  {distribusiKategori.map((entry) => (
-                    <Cell key={entry.kategori} fill={entry.highlight ? '#ef4444' : '#1e293b'} />
-                  ))}
-                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 12, fill: '#64748b', fontVariantNumeric: 'tabular-nums' }} />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
 
       <Card>
         <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
