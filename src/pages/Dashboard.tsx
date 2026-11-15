@@ -221,24 +221,19 @@ export function Dashboard() {
   )
 
   const puncakPemberitaan = useMemo(() => {
-    const map = new Map<string, { judul: string; jumlah: number; negatif: number; tanggal: string }>()
+    const map = new Map<string, { judul: string; jumlah: number; negatif: number }>()
     for (const b of beritaFiltered) {
-      const e = map.get(b.judul) ?? { judul: b.judul, jumlah: 0, negatif: 0, tanggal: b.tanggal }
+      const e = map.get(b.judul) ?? { judul: b.judul, jumlah: 0, negatif: 0 }
       e.jumlah++
       if (b.sentimen === 'Negatif') e.negatif++
-      if (b.tanggal > e.tanggal) e.tanggal = b.tanggal
       map.set(b.judul, e)
     }
-    const BULAN = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des']
     return Array.from(map.values())
       .sort((a, b) => b.jumlah - a.jumlah)
       .slice(0, 10)
-      .map(({ judul, jumlah, negatif, tanggal }) => {
-        const d = new Date(tanggal)
-        const tgl = `${d.getDate()} ${BULAN[d.getMonth()]}`
-        const label = judul.length > 38 ? judul.slice(0, 36) + '…' : judul
+      .map(({ judul, jumlah, negatif }) => {
         const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
-        return { name: `${label} (${tgl})`, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
+        return { name: judul, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
       })
   }, [beritaFiltered])
 
@@ -267,6 +262,33 @@ export function Dashboard() {
       headers: ['Tanggal', 'Judul', 'Media', 'Jenis Sumber', 'Kategori', 'Sentimen', 'Entitas Terkait', 'URL'],
       rows,
     })
+  }
+
+  function WrapTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
+    const text = payload?.value ?? ''
+    const maxChars = 22
+    const words = text.split(' ')
+    const lines: string[] = []
+    let current = ''
+    for (const w of words) {
+      if ((current + (current ? ' ' : '') + w).length > maxChars && current) {
+        lines.push(current)
+        current = w
+      } else {
+        current = current ? `${current} ${w}` : w
+      }
+      if (lines.length === 2) { current = '…'; break }
+    }
+    if (current) lines.push(current)
+    const lineH = 13
+    const totalH = lines.length * lineH
+    return (
+      <g transform={`translate(${x},${y})`}>
+        {lines.map((l, i) => (
+          <text key={i} x={0} y={i * lineH - totalH / 2 + lineH * 0.5} textAnchor="end" fill="#64748b" fontSize={11}>{l}</text>
+        ))}
+      </g>
+    )
   }
 
   if (role === 'Admin OPD') {
@@ -437,24 +459,24 @@ export function Dashboard() {
       {/* 5 — Secondary Analytics */}
       {/* 6 — Puncak Pemberitaan */}
       <section>
-        <SectionLabel hint="10 hari dengan berita terbanyak · merah = dominan negatif">Puncak Pemberitaan</SectionLabel>
+        <SectionLabel hint="10 judul dengan berita terbanyak · merah = dominan negatif">Puncak Pemberitaan</SectionLabel>
         <Card>
           <CardHeader
-            title="Hari Terpadat Pemberitaan"
-            subtitle={puncakPemberitaan[0] ? `Puncak: ${puncakPemberitaan[0].name} dengan ${puncakPemberitaan[0].jumlah} berita` : ''}
+            title="Puncak Pemberitaan"
+            subtitle={puncakPemberitaan[0] ? `Terbanyak: ${puncakPemberitaan[0].jumlah} berita` : ''}
           />
           <CardContent>
-            <ResponsiveContainer width="100%" height={360}>
-              <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 40, top: 4, bottom: 4 }}>
+            <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 44)}>
+              <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={280} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={28}>
+                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
                   {puncakPemberitaan.map((entry) => (
                     <Cell key={entry.judul} fill={entry.fill} />
                   ))}
-                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 12, fill: '#64748b', fontVariantNumeric: 'tabular-nums' }} />
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>

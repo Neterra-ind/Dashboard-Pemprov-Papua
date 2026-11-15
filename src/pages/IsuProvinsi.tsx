@@ -7,6 +7,7 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
+  LabelList,
   Legend,
   Pie,
   PieChart,
@@ -134,6 +135,23 @@ export function IsuProvinsi() {
       .slice(0, 10)
   }, [beritaTerfilter])
 
+  const puncakPemberitaan = useMemo(() => {
+    const map = new Map<string, { judul: string; jumlah: number; negatif: number }>()
+    for (const b of beritaTerfilter) {
+      const e = map.get(b.judul) ?? { judul: b.judul, jumlah: 0, negatif: 0 }
+      e.jumlah++
+      if (b.sentimen === 'Negatif') e.negatif++
+      map.set(b.judul, e)
+    }
+    return Array.from(map.values())
+      .sort((a, b) => b.jumlah - a.jumlah)
+      .slice(0, 10)
+      .map(({ judul, jumlah, negatif }) => {
+        const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
+        return { name: judul, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
+      })
+  }, [beritaTerfilter])
+
   // Top 5 kategori dari data nyata
   const top5Isu = useMemo(() => {
     const src = beritaPapua.filter((b) => !b.entitasTerkait && (!kategori || b.kategori === kategori))
@@ -144,6 +162,33 @@ export function IsuProvinsi() {
       .sort((a, b) => b.value - a.value)
       .slice(0, 5)
   }, [kategori])
+
+  function WrapTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
+    const text = payload?.value ?? ''
+    const maxChars = 22
+    const words = text.split(' ')
+    const lines: string[] = []
+    let current = ''
+    for (const w of words) {
+      if ((current + (current ? ' ' : '') + w).length > maxChars && current) {
+        lines.push(current)
+        current = w
+      } else {
+        current = current ? `${current} ${w}` : w
+      }
+      if (lines.length === 2) { current = '…'; break }
+    }
+    if (current) lines.push(current)
+    const lineH = 13
+    const totalH = lines.length * lineH
+    return (
+      <g transform={`translate(${x},${y})`}>
+        {lines.map((l, i) => (
+          <text key={i} x={0} y={i * lineH - totalH / 2 + lineH * 0.5} textAnchor="end" fill="#64748b" fontSize={11}>{l}</text>
+        ))}
+      </g>
+    )
+  }
 
   return (
     <div className="space-y-6">
@@ -248,6 +293,26 @@ export function IsuProvinsi() {
           </ResponsiveContainer>
         </CardContent>
       </Card>
+
+      {puncakPemberitaan.length > 0 && (
+        <Card>
+          <CardContent>
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
+            <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 44)}>
+              <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                  {puncakPemberitaan.map((entry, i) => <Cell key={i} fill={entry.fill} />)}
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      )}
 
       <Card className="p-5">
         <DataTable data={terfilter} columns={columns} searchPlaceholder="Cari nama isu, OPD..." />
