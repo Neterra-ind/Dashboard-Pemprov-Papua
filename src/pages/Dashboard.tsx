@@ -457,12 +457,12 @@ export function Dashboard() {
       </section>
 
       {/* 5 — Secondary Analytics */}
-      {/* 6 — Puncak Pemberitaan */}
+      {/* 6 — Isu Dominan */}
       <section>
-        <SectionLabel hint="10 judul dengan berita terbanyak · merah = dominan negatif">Puncak Pemberitaan</SectionLabel>
+        <SectionLabel hint="10 judul dengan berita terbanyak · merah = dominan negatif">Isu Dominan</SectionLabel>
         <Card>
           <CardHeader
-            title="Puncak Pemberitaan"
+            title="Isu Dominan"
             subtitle={puncakPemberitaan[0] ? `Terbanyak: ${puncakPemberitaan[0].jumlah} berita` : ''}
           />
           <CardContent>

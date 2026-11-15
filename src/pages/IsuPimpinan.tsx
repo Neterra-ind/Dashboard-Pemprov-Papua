@@ -23,7 +23,7 @@ import { PageHeader } from '@/components/ui/PageHeader'
 import { AreaGradient, axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
 import { hitungPerHariRange } from '@/lib/aggregations'
 import { cn } from '@/lib/utils'
-import { daftarJenisSumber, daftarNarasumber, reputasiByEntitas } from '@/data/mockData'
+import { daftarIsuGubernur, daftarIsuWakilGubernur, daftarJenisSumber, daftarNarasumber, reputasiByEntitas } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
 import beritaPapuaRaw from '@/data/beritaPapua.json'
 
@@ -89,23 +89,19 @@ export function IsuPimpinan() {
       .slice(0, 8)
   }, [beritaTerkait])
 
+  // Isu Dominan = isu pimpinan (unit analisis per-topik, hasil clustering
+  // judul+isi di mockData.ts). Isu Gubernur/Wakil Gubernur ditampilkan semua (tidak
+  // dibatasi top-N seperti Isu Provinsi), supaya setiap isu yang pernah diberitakan
+  // tetap terlihat untuk kebutuhan monitoring pimpinan.
   const puncakPemberitaan = useMemo(() => {
-    const map = new Map<string, { judul: string; jumlah: number; negatif: number; tanggal: string }>()
-    for (const b of beritaTerkait) {
-      const e = map.get(b.judul) ?? { judul: b.judul, jumlah: 0, negatif: 0, tanggal: b.tanggal }
-      e.jumlah++
-      if (b.sentimen === 'Negatif') e.negatif++
-      if (b.tanggal > e.tanggal) e.tanggal = b.tanggal
-      map.set(b.judul, e)
-    }
-    return Array.from(map.values())
-      .sort((a, b) => b.jumlah - a.jumlah)
-      .slice(0, 10)
-      .map(({ judul, jumlah, negatif }) => {
-        const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
-        return { name: judul, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
-      })
-  }, [beritaTerkait])
+    const daftarIsuTab = tab === 'Gubernur' ? daftarIsuGubernur : daftarIsuWakilGubernur
+    return daftarIsuTab.map((isu) => ({
+      name: isu.namaIsu,
+      judul: isu.namaIsu,
+      jumlah: isu.jumlahBerita,
+      fill: isu.klasifikasi === 'Negatif' ? '#ef4444' : '#1e293b',
+    }))
+  }, [tab])
 
   const topNarasumber = useMemo(() =>
     daftarNarasumber
@@ -288,7 +284,7 @@ export function IsuPimpinan() {
       {puncakPemberitaan.length > 0 && (
         <Card>
           <CardContent>
-            <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Puncak Pemberitaan</p>
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Isu Dominan</p>
             <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaan.length * 44)}>
               <BarChart
                 data={puncakPemberitaan}

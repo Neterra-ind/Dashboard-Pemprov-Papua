@@ -135,22 +135,19 @@ export function IsuProvinsi() {
       .slice(0, 10)
   }, [beritaTerfilter])
 
+  // Isu Dominan = top isu provinsi (unit analisis per-topik, hasil clustering
+  // judul+isi di mockData.ts — daftarIsuProvinsi sudah dibatasi top 10 di sana),
+  // bukan lagi dihitung dari kecocokan judul persis.
   const puncakPemberitaan = useMemo(() => {
-    const map = new Map<string, { judul: string; jumlah: number; negatif: number }>()
-    for (const b of beritaTerfilter) {
-      const e = map.get(b.judul) ?? { judul: b.judul, jumlah: 0, negatif: 0 }
-      e.jumlah++
-      if (b.sentimen === 'Negatif') e.negatif++
-      map.set(b.judul, e)
-    }
-    return Array.from(map.values())
-      .sort((a, b) => b.jumlah - a.jumlah)
-      .slice(0, 10)
-      .map(({ judul, jumlah, negatif }) => {
-        const isNegatif = jumlah > 0 && negatif / jumlah > 0.5
-        return { name: judul, judul, jumlah, fill: isNegatif ? '#ef4444' : '#1e293b' }
-      })
-  }, [beritaTerfilter])
+    return daftarIsuProvinsi
+      .filter((isu) => !kategori || isu.kategori === kategori)
+      .map((isu) => ({
+        name: isu.namaIsu,
+        judul: isu.namaIsu,
+        jumlah: isu.jumlahBerita,
+        fill: isu.klasifikasi === 'Negatif' ? '#ef4444' : '#1e293b',
+      }))
+  }, [kategori])
 
   // Top 5 kategori dari data nyata
   const top5Isu = useMemo(() => {
@@ -303,7 +300,7 @@ export function IsuProvinsi() {
         </Card>
 
         <Card>
-          <CardHeader title="Puncak Pemberitaan" subtitle="Top 10 judul berita terbanyak (merah = dominan negatif)" />
+          <CardHeader title="Isu Dominan" subtitle="Top 10 judul berita terbanyak (merah = dominan negatif)" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(260, puncakPemberitaan.length * 44)}>
               <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>

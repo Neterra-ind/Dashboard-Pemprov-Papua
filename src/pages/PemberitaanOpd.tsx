@@ -206,7 +206,7 @@ export function PemberitaanOpd() {
         </Card>
 
         <Card>
-          <CardHeader title="Puncak Pemberitaan" subtitle="Isu/judul berita yang paling banyak diliput" />
+          <CardHeader title="Isu Dominan" subtitle="Isu/judul berita yang paling banyak diliput" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaanOpd.length * 48)}>
               <BarChart data={puncakPemberitaanOpd} layout="vertical" margin={{ left: 8, right: 40, top: 0, bottom: 0 }}>
