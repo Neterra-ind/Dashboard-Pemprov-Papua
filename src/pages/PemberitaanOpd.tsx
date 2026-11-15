@@ -194,10 +194,10 @@ export function PemberitaanOpd() {
           <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(200, eksposMediaOpd.length * 36)}>
-              <BarChart data={eksposMediaOpd} layout="vertical" margin={{ left: 8, right: 12 }}>
+              <BarChart data={eksposMediaOpd} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={120} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={150} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
                 <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
               </BarChart>
