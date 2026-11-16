@@ -19,7 +19,7 @@ const NAV_ITEMS: { to: string; label: string; icon: typeof LayoutDashboard; end?
   { to: '/isu-provinsi', label: 'Isu Provinsi Papua', icon: MapPin, roles: ['Eksekutif', 'Super Admin'] },
   { to: '/isu-pimpinan', label: 'Isu Gubernur & Wakil Gubernur', icon: UserRound, roles: ['Eksekutif', 'Super Admin'] },
   { to: '/pemberitaan-opd', label: 'Pemberitaan OPD', icon: Building2, roles: ['Eksekutif', 'Super Admin'] },
-  { to: '/early-warning', label: 'Issues Negatif', icon: ShieldAlert, roles: ['Eksekutif', 'Super Admin'] },
+  { to: '/early-warning', label: 'Isu Negatif', icon: ShieldAlert, roles: ['Eksekutif', 'Super Admin'] },
   { to: '/tindak-lanjut', label: 'Tindak Lanjut', icon: ClipboardCheck, roles: ['Admin OPD', 'Super Admin'] },
   { to: '/data-sumber', label: 'Data Sumber', icon: Newspaper, roles: ['Eksekutif', 'Super Admin'] },
 ]

@@ -35,7 +35,7 @@ export function EarlyWarning() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Issues Negatif"
+        title="Isu Negatif"
         subtitle="Berita negatif atau berpotensi negatif yang perlu direspons OPD. Disposisikan ke OPD terkait langsung dari sini."
       />
 
