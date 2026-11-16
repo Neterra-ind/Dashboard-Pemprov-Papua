@@ -96,7 +96,7 @@ export function IsuPimpinan() {
   const isuGubernur = useMemo(() => {
     const daftarIsuTab = tab === 'Gubernur' ? daftarIsuGubernur : daftarIsuWakilGubernur
     return daftarIsuTab
-      .filter(isu => (isu.tipe ?? 'gubernur') !== 'personal')
+      .filter(isu => (isu.tipe ?? 'gubernur') !== 'personal' && isu.jumlahBerita > 1)
       .map(isu => ({
         name: isu.namaIsu,
         judul: isu.namaIsu,
@@ -299,32 +299,24 @@ export function IsuPimpinan() {
           <Card>
             <CardContent>
               <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Isu Gubernur</p>
-              <ResponsiveContainer width="100%" height={Math.max(200, isuGubernur.length * 44)}>
-                <BarChart
-                  data={isuGubernur}
-                  layout="vertical"
-                  margin={{ left: 8, right: 40, top: 0, bottom: 0 }}
-                  style={{ cursor: 'pointer' }}
-                  onClick={(d) => {
-                    const judul = d?.activePayload?.[0]?.payload?.judul
-                    if (judul) setSelectedJudul((prev) => prev === judul ? null : judul)
-                  }}
-                >
-                  <CartesianGrid {...gridProps} horizontal={false} />
-                  <XAxis type="number" {...axisProps} allowDecimals={false} />
-                  <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
-                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                  <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={isuGubernur}
+                    dataKey="jumlah"
+                    nameKey="name"
+                    innerRadius={70}
+                    outerRadius={110}
+                    paddingAngle={2}
+                    stroke="none"
+                  >
                     {isuGubernur.map((entry, i) => (
-                      <Cell
-                        key={i}
-                        fill={entry.fill}
-                        opacity={selectedJudul && selectedJudul !== entry.judul ? 0.3 : 1}
-                      />
+                      <Cell key={i} fill={entry.fill} />
                     ))}
-                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                  </Bar>
-                </BarChart>
+                  </Pie>
+                  <Tooltip content={<ChartTooltip />} />
+                  <Legend content={<ChartLegend />} />
+                </PieChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
