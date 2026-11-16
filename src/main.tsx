@@ -9,10 +9,11 @@ import { DisposisiProvider } from './lib/store.tsx'
 // Hosted single-file exports (e.g. Artifacts) have no server to rewrite deep links,
 // so they use hash-based routing; the normal dev/build app keeps BrowserRouter.
 const Router = import.meta.env.VITE_HASH_ROUTER === 'true' ? HashRouter : BrowserRouter
+const basename = import.meta.env.VITE_HASH_ROUTER === 'true' ? undefined : import.meta.env.BASE_URL
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Router>
+    <Router basename={basename}>
       <RoleProvider>
         <DisposisiProvider>
           <App />
