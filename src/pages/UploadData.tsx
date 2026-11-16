@@ -98,6 +98,13 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
     if (teks.includes('gubernur') || teks.includes('gov')) entitasTerkait = 'Gubernur'
     if (teks.includes('wakil gubernur') || teks.includes('wagub')) entitasTerkait = 'Wakil Gubernur'
 
+    // Kolom kurasi AI (opsional — hanya ada jika file sudah dikurasi)
+    const sentimenKurasi = r['sentimenkurasi'] ?? r['sentimen_kurasi'] ?? r['kurasisentimen'] ?? ''
+    const framingKinerja = r['framingkinerja'] ?? r['framing_kinerja'] ?? r['framing'] ?? ''
+    const statusDuplikasi = r['statusduplikasi'] ?? r['status_duplikasi'] ?? r['duplikasi'] ?? ''
+    const narasumberJabatan = r['narasumberjabatan'] ?? r['narasumber_jabatan'] ?? r['narasumber'] ?? ''
+    const alasanKurasi = r['alasankurasi'] ?? r['alasan_kurasi'] ?? r['alasan'] ?? ''
+
     return {
       tanggal,
       judul,
@@ -108,6 +115,12 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
       isi: isi.slice(0, 200),
       entitasTerkait,
       tipe: 'gubernur',
+      // Kurasi AI — disertakan hanya jika ada isinya
+      ...(sentimenKurasi && { sentimen_kurasi: sentimenKurasi }),
+      ...(framingKinerja && { framing_kinerja: framingKinerja as import('@/types').FramingKinerja }),
+      ...(statusDuplikasi && { status_duplikasi: statusDuplikasi as import('@/types').StatusDuplikasi }),
+      ...(narasumberJabatan && { narasumber_jabatan: narasumberJabatan }),
+      ...(alasanKurasi && { alasan_kurasi: alasanKurasi }),
     }
   }
 
@@ -456,6 +469,10 @@ export function UploadData() {
               </p>
               <div className="overflow-x-auto rounded-lg border border-slate-200">
                 <table className="w-full text-xs">
+                  {(() => {
+                    const adaKurasi = hasil.rows.some((r) => !!(r as any).framing_kinerja)
+                    return (
+                      <>
                   <thead className="bg-slate-50 text-slate-600">
                     <tr>
                       <th className="px-3 py-2 text-left font-semibold">Tanggal</th>
@@ -463,6 +480,9 @@ export function UploadData() {
                       <th className="px-3 py-2 text-left font-semibold">Sumber</th>
                       <th className="px-3 py-2 text-left font-semibold">Kategori</th>
                       <th className="px-3 py-2 text-left font-semibold">Sentimen</th>
+                      {adaKurasi && (
+                        <th className="px-3 py-2 text-left font-semibold">Framing</th>
+                      )}
                       {hasil.format === 'socmed' && (
                         <th className="px-3 py-2 text-left font-semibold">Engagement</th>
                       )}
@@ -484,6 +504,11 @@ export function UploadData() {
                         <td className="px-3 py-2">
                           <StatusChip sentimen={row.sentimen} />
                         </td>
+                        {adaKurasi && (
+                          <td className="px-3 py-2 whitespace-nowrap text-[11px] text-slate-500">
+                            {(row as any).framing_kinerja ?? '—'}
+                          </td>
+                        )}
                         {hasil.format === 'socmed' && (
                           <td className="px-3 py-2 whitespace-nowrap text-slate-500">
                             {row.engagement
@@ -493,6 +518,10 @@ export function UploadData() {
                         )}
                       </tr>
                     ))}
+                  </tbody>
+                      </>
+                    )
+                  })()}
                   </tbody>
                 </table>
                 {hasil.rows.length > 10 && (
@@ -522,7 +551,7 @@ export function UploadData() {
                 ))}
               </div>
               <p className="mt-2 text-xs text-blue-500">
-                Kolom opsional: Narasumber
+                Kolom opsional: Narasumber, Sentimen_Kurasi, Framing_Kinerja, Status_Duplikasi, Alasan_Kurasi
               </p>
             </div>
             <div className="rounded-lg border border-purple-100 bg-purple-50/50 p-4">
