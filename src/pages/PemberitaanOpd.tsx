@@ -8,30 +8,11 @@ import { PageHeader } from '@/components/ui/PageHeader'
 import { KlasifikasiBadge } from '@/components/ui/Badge'
 import { axisProps, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
 import { daftarIsu, daftarNarasumber, daftarOpd, daftarRankingOpd } from '@/data/mockData'
-import type { Isu, RankingOpd } from '@/types'
+import type { Isu } from '@/types'
 import beritaPapuaRaw from '@/data/beritaPapua.json'
 
 type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
 const beritaPapua = beritaPapuaRaw as BeritaRaw[]
-
-const rankingColumns: ColumnDef<RankingOpd, any>[] = [
-  { accessorKey: 'opd', header: 'OPD' },
-  {
-    accessorKey: 'jumlahBerita',
-    header: 'Total Berita',
-    cell: (info) => <span className="tabular-nums">{info.getValue<number>()}</span>,
-  },
-  {
-    accessorKey: 'jumlahPositif',
-    header: 'Isu Positif',
-    cell: (info) => <span className="tabular-nums text-emerald-600 dark:text-emerald-400">{info.getValue<number>()}</span>,
-  },
-  {
-    accessorKey: 'jumlahNegatif',
-    header: 'Isu Negatif/Potensi Negatif',
-    cell: (info) => <span className="tabular-nums text-rose-600 dark:text-rose-400">{info.getValue<number>()}</span>,
-  },
-]
 
 const isuColumns: ColumnDef<Isu, any>[] = [
   {
@@ -139,14 +120,6 @@ export function PemberitaanOpd() {
     [],
   )
 
-  const topNegatif = useMemo(
-    () =>
-      [...daftarRankingOpd]
-        .sort((a, b) => b.jumlahNegatif - a.jumlahNegatif)
-        .slice(0, 8)
-        .map((r) => ({ name: r.opd.replace('Dinas ', ''), value: r.jumlahNegatif })),
-    [],
-  )
 
   const isuTerfilter = useMemo(() => (opd ? daftarIsu.filter((isu) => isu.opd === opd) : daftarIsu), [opd])
 

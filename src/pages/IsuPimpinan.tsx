@@ -345,7 +345,7 @@ export function IsuPimpinan() {
                 layout="vertical"
                 margin={{ left: 8, right: 40, top: 0, bottom: 0 }}
                 style={{ cursor: 'pointer' }}
-                onClick={(d) => {
+                onClick={(d: any) => {
                   const judul = d?.activePayload?.[0]?.payload?.judul
                   if (judul) setSelectedJudul((prev) => prev === judul ? null : judul)
                 }}
