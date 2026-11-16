@@ -20,8 +20,7 @@ import { DataTable } from '@/components/DataTable'
 import { DateRangeFilter } from '@/components/DateRangeFilter'
 import { FilterSelect } from '@/components/FilterSelect'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
-import { PageHeader } from '@/components/ui/PageHeader'
-import { KlasifikasiBadge } from '@/components/ui/Badge'
+import { PageHeader, SectionLabel } from '@/components/ui/PageHeader'
 import { hitungPerHariRange } from '@/lib/aggregations'
 import {
   AreaGradient,
@@ -33,81 +32,153 @@ import {
   gridProps,
   SENTIMEN_COLOR,
 } from '@/lib/chartTheme'
-import { daftarIsuProvinsi, daftarJenisSumber, daftarKategoriIsu, daftarNarasumber, semuaKlasifikasi } from '@/data/mockData'
+import { daftarJenisSumber, daftarKategoriIsu, daftarNarasumber } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
-import beritaPapuaRaw from '@/data/beritaPapua.json'
-import type { Isu } from '@/types'
+import { useBerita } from '@/lib/beritaStore'
+import type { BeritaRaw, FramingKinerja, StatusDuplikasi } from '@/types'
 
-type BeritaRaw = {
-  tanggal: string
-  judul: string
-  sumber: string
-  sentimen: string
-  url: string
-  kategori: string
-  entitasTerkait?: string
+const FRAMING_COLOR: Record<string, string> = {
+  'Respons': 'bg-blue-50 text-blue-700',
+  'Sosialisasi': 'bg-teal-50 text-teal-700',
+  'Seremoni': 'bg-purple-50 text-purple-700',
+  'Klarifikasi': 'bg-amber-50 text-amber-700',
+  'Program/Kinerja': 'bg-emerald-50 text-emerald-700',
+  'Isu Terhubung': 'bg-orange-50 text-orange-700',
+  'Hal Terhubung': 'bg-slate-100 text-slate-600',
+  'Seremoni Pasif': 'bg-violet-50 text-violet-700',
 }
 
-const beritaPapua = beritaPapuaRaw as BeritaRaw[]
+const SENTIMEN_KURASI_COLOR: Record<string, string> = {
+  'Positif': 'bg-emerald-100 text-emerald-700',
+  'Negatif': 'bg-red-100 text-red-700',
+  'Potensi Negatif': 'bg-amber-100 text-amber-700',
+  'Netral': 'bg-slate-100 text-slate-600',
+}
 
-const columns: ColumnDef<Isu, any>[] = [
+const columns: ColumnDef<BeritaRaw, any>[] = [
   {
-    accessorKey: 'namaIsu',
-    header: 'Nama Isu',
+    accessorKey: 'tanggal',
+    header: 'Tanggal',
+    cell: (info) => <span className="whitespace-nowrap tabular-nums text-xs text-slate-500">{info.getValue<string>()}</span>,
+  },
+  {
+    accessorKey: 'judul',
+    header: 'Judul',
+    cell: (info) => {
+      const b = info.row.original as BeritaRaw & { framing_kinerja?: FramingKinerja; status_duplikasi?: StatusDuplikasi; sentimen_kurasi?: string }
+      return (
+        <div className="max-w-xs space-y-1">
+          <p className="font-medium text-slate-800 text-sm leading-snug">{info.getValue<string>()}</p>
+          <p className="text-xs text-slate-400">{b.sumber} · {b.kategori}</p>
+          <div className="flex flex-wrap gap-1">
+            {b.sentimen_kurasi && (
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${SENTIMEN_KURASI_COLOR[b.sentimen_kurasi] ?? 'bg-slate-100 text-slate-600'}`}>
+                {b.sentimen_kurasi}
+              </span>
+            )}
+            {b.framing_kinerja && (
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${FRAMING_COLOR[b.framing_kinerja] ?? 'bg-slate-100 text-slate-600'}`}>
+                {b.framing_kinerja}
+              </span>
+            )}
+            {b.status_duplikasi && b.status_duplikasi !== 'Unik' && (
+              <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-medium text-amber-700">
+                {b.status_duplikasi}
+              </span>
+            )}
+          </div>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: 'sentimen',
+    header: 'Sentimen',
+    cell: (info) => {
+      const val = info.getValue<string>()
+      const colorMap: Record<string, string> = {
+        Positif: 'text-emerald-600',
+        Negatif: 'text-red-600',
+        Netral: 'text-slate-500',
+        'Potensi Negatif': 'text-amber-600',
+      }
+      return <span className={`text-xs font-semibold ${colorMap[val] ?? 'text-slate-500'}`}>{val}</span>
+    },
+  },
+  {
+    id: 'framing_kinerja',
+    accessorFn: (row) => (row as any).framing_kinerja ?? '',
+    header: 'Framing Kinerja',
+    cell: (info) => {
+      const val = info.getValue<string>()
+      if (!val) return <span className="text-xs text-slate-300">—</span>
+      return (
+        <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${FRAMING_COLOR[val] ?? 'bg-slate-100 text-slate-600'}`}>
+          {val}
+        </span>
+      )
+    },
+  },
+  {
+    accessorKey: 'url',
+    header: '',
     cell: (info) => (
-      <div className="max-w-sm">
-        <p className="font-medium text-slate-800 dark:text-slate-100">{info.getValue<string>()}</p>
-        <p className="text-xs text-slate-500 dark:text-slate-400">{info.row.original.opd}</p>
-      </div>
+      <a href={info.getValue<string>()} target="_blank" rel="noreferrer" className="text-xs text-primary hover:underline">
+        Buka ↗
+      </a>
     ),
-  },
-  { accessorKey: 'kategori', header: 'Kategori' },
-  {
-    accessorKey: 'klasifikasi',
-    header: 'Klasifikasi',
-    cell: (info) => <KlasifikasiBadge value={info.getValue()} />,
-  },
-  {
-    accessorKey: 'jumlahBerita',
-    header: 'Jml Berita',
-    cell: (info) => <span className="tabular-nums">{info.getValue<number>()}</span>,
   },
 ]
 
+const DUPLIKASI_OPTIONS: StatusDuplikasi[] = ['Unik', 'Pengulangan Berita', 'Potensi Duplikat']
+
 export function IsuProvinsi() {
+  const { berita: semuaBerita } = useBerita()
   const [kategori, setKategori] = useState('')
-  const [klasifikasi, setKlasifikasi] = useState('')
   const [jenisSumber, setJenisSumber] = useState('')
+  const [duplikasiFilter, setDuplikasiFilter] = useState('')
   const [dariTanggal, setDariTanggal] = useState('')
   const [sampaiTanggal, setSampaiTanggal] = useState('')
 
-  // Tabel isu tetap pakai mock (untuk klasifikasi, trend, OPD)
-  const terfilter = useMemo(
-    () =>
-      daftarIsuProvinsi.filter(
-        (isu) => (!kategori || isu.kategori === kategori) && (!klasifikasi || isu.klasifikasi === klasifikasi),
-      ),
-    [kategori, klasifikasi],
+  // Berita tingkat provinsi (bukan entitas pimpinan)
+  const beritaProvinsi = useMemo(
+    () => semuaBerita.filter((b) => !b.entitasTerkait || (b.entitasTerkait !== 'Gubernur' && b.entitasTerkait !== 'Wakil Gubernur')),
+    [semuaBerita],
   )
 
-  // Semua grafik memakai data nyata dari beritaPapua.json
+  const adaKurasi = useMemo(
+    () => beritaProvinsi.some((b) => !!(b as any).framing_kinerja),
+    [beritaProvinsi],
+  )
+
+  // Berita dengan filter aktif (grafik)
   const beritaTerfilter = useMemo(
     () =>
-      beritaPapua.filter(
+      beritaProvinsi.filter(
         (b) =>
-          !b.entitasTerkait &&
           (!kategori || b.kategori === kategori) &&
           (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
           (!dariTanggal || b.tanggal >= dariTanggal) &&
           (!sampaiTanggal || b.tanggal <= sampaiTanggal),
       ),
-    [kategori, jenisSumber, dariTanggal, sampaiTanggal],
+    [beritaProvinsi, kategori, jenisSumber, dariTanggal, sampaiTanggal],
+  )
+
+  // Tabel drill-down — tambah filter duplikasi
+  const beritaDrilldown = useMemo(
+    () =>
+      beritaTerfilter.filter((b) => {
+        if (!duplikasiFilter) return true
+        const dup = (b as any).status_duplikasi as string | undefined
+        return (dup ?? 'Unik') === duplikasiFilter
+      }),
+    [beritaTerfilter, duplikasiFilter],
   )
 
   const rentangTanggalData = useMemo(() => {
-    const semuaTanggal = beritaPapua.map((b) => b.tanggal).sort()
-    return { min: semuaTanggal[0], max: semuaTanggal[semuaTanggal.length - 1] }
-  }, [])
+    const semuaTanggal = beritaProvinsi.map((b) => b.tanggal).sort()
+    return { min: semuaTanggal[0] ?? '', max: semuaTanggal[semuaTanggal.length - 1] ?? '' }
+  }, [beritaProvinsi])
 
   const volumeSentimen = useMemo(() => {
     const map = new Map<string, number>()
@@ -117,15 +188,16 @@ export function IsuProvinsi() {
 
   const trenMingguan = useMemo(
     () =>
-      hitungPerHariRange(
-        beritaTerfilter.map((b) => ({ tanggal: b.tanggal })),
-        rentangTanggalData.min,
-        rentangTanggalData.max,
-      ),
+      rentangTanggalData.min
+        ? hitungPerHariRange(
+            beritaTerfilter.map((b) => ({ tanggal: b.tanggal })),
+            rentangTanggalData.min,
+            rentangTanggalData.max,
+          )
+        : [],
     [beritaTerfilter, rentangTanggalData],
   )
 
-  // Ekspos media: jumlah berita per nama media (dari data nyata)
   const eksposMedia = useMemo(() => {
     const map = new Map<string, number>()
     for (const b of beritaTerfilter) map.set(b.sumber, (map.get(b.sumber) ?? 0) + 1)
@@ -135,29 +207,48 @@ export function IsuProvinsi() {
       .slice(0, 10)
   }, [beritaTerfilter])
 
-  // Isu Dominan = top isu provinsi (unit analisis per-topik, hasil clustering
-  // judul+isi di mockData.ts — daftarIsuProvinsi sudah dibatasi top 10 di sana),
-  // bukan lagi dihitung dari kecocokan judul persis.
+  // Isu Dominan: top 10 judul terbanyak dari data aktual
   const puncakPemberitaan = useMemo(() => {
-    return daftarIsuProvinsi
-      .filter((isu) => !kategori || isu.kategori === kategori)
-      .map((isu) => ({
-        name: isu.namaIsu,
-        judul: isu.namaIsu,
-        jumlah: isu.jumlahBerita,
-        fill: isu.klasifikasi === 'Negatif' ? '#ef4444' : '#1e293b',
+    const map = new Map<string, { jumlah: number; negatif: number }>()
+    for (const b of beritaTerfilter) {
+      const e = map.get(b.judul) ?? { jumlah: 0, negatif: 0 }
+      e.jumlah++
+      if (b.sentimen === 'Negatif') e.negatif++
+      map.set(b.judul, e)
+    }
+    return Array.from(map.entries())
+      .map(([judul, { jumlah, negatif }]) => ({
+        name: judul,
+        jumlah,
+        fill: jumlah > 0 && negatif / jumlah > 0.5 ? '#ef4444' : '#1e293b',
       }))
-  }, [kategori])
-
-  const topNarasumber = useMemo(() =>
-    daftarNarasumber
-      .map(({ nama, jabatan, kunci }) => ({
-        label: `${nama}||${jabatan}`,
-        jumlah: beritaTerfilter.filter(b => kunci.some(k => b.judul.includes(k))).length,
-      }))
-      .filter(n => n.jumlah > 0)
       .sort((a, b) => b.jumlah - a.jumlah)
-  , [beritaTerfilter])
+      .slice(0, 10)
+  }, [beritaTerfilter])
+
+  const topNarasumber = useMemo(
+    () =>
+      daftarNarasumber
+        .map(({ nama, jabatan, kunci }) => ({
+          label: `${nama}||${jabatan}`,
+          jumlah: beritaTerfilter.filter((b) => kunci.some((k) => b.judul.includes(k))).length,
+        }))
+        .filter((n) => n.jumlah > 0)
+        .sort((a, b) => b.jumlah - a.jumlah),
+    [beritaTerfilter],
+  )
+
+  // Framing Kinerja (hanya jika ada kurasi AI)
+  const framingKinerja = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of beritaTerfilter) {
+      const f = (b as any).framing_kinerja as string | undefined
+      if (f && f.trim()) map.set(f.trim(), (map.get(f.trim()) ?? 0) + 1)
+    }
+    return Array.from(map.entries())
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value)
+  }, [beritaTerfilter])
 
   function NameJabatanTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
     const parts = (payload?.value ?? '||').split('||')
@@ -208,8 +299,15 @@ export function IsuProvinsi() {
       <Card className="p-5">
         <div className="flex flex-wrap items-end gap-3">
           <FilterSelect label="Kategori Isu" value={kategori} options={daftarKategoriIsu} onChange={setKategori} />
-          <FilterSelect label="Klasifikasi" value={klasifikasi} options={semuaKlasifikasi} onChange={setKlasifikasi} />
           <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
+          {adaKurasi && (
+            <FilterSelect
+              label="Status Duplikasi"
+              value={duplikasiFilter}
+              options={DUPLIKASI_OPTIONS}
+              onChange={setDuplikasiFilter}
+            />
+          )}
           <DateRangeFilter
             dari={dariTanggal}
             sampai={sampaiTanggal}
@@ -329,9 +427,36 @@ export function IsuProvinsi() {
         )}
       </div>
 
-      <Card className="p-5">
-        <DataTable data={terfilter} columns={columns} searchPlaceholder="Cari nama isu, OPD..." />
-      </Card>
+      {/* Framing Kinerja — hanya jika ada data kurasi AI */}
+      {adaKurasi && framingKinerja.length > 0 && (
+        <div>
+          <SectionLabel hint="dari kurasi AI">Framing Kinerja</SectionLabel>
+          <Card>
+            <CardHeader title="Distribusi Framing Kinerja" subtitle="Bagaimana media membingkai liputan isu provinsi" />
+            <CardContent>
+              <ResponsiveContainer width="100%" height={Math.max(180, framingKinerja.length * 44)}>
+                <BarChart data={framingKinerja} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                  <CartesianGrid {...gridProps} horizontal={false} />
+                  <XAxis type="number" {...axisProps} allowDecimals={false} />
+                  <YAxis type="category" dataKey="name" {...axisProps} width={140} />
+                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                  <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
+                    <LabelList dataKey="value" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Tabel daftar berita aktual */}
+      <div>
+        <SectionLabel>Daftar Berita ({beritaDrilldown.length})</SectionLabel>
+        <Card className="p-5">
+          <DataTable data={beritaDrilldown} columns={columns} searchPlaceholder="Cari judul berita, media..." />
+        </Card>
+      </div>
     </div>
   )
 }
