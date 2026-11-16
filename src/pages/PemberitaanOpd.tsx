@@ -154,7 +154,6 @@ export function PemberitaanOpd() {
     <div className="space-y-6">
       <PageHeader
         title="Pemberitaan OPD"
-        subtitle="Monitoring isu dan kinerja publikasi setiap Organisasi Perangkat Daerah — ranking OPD terpopuler dan OPD paling banyak diberitakan negatif."
       />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">

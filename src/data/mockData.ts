@@ -16,6 +16,7 @@ import type {
   Trend,
 } from '@/types'
 import beritaPapuaMentah from './beritaPapua.json'
+import { ambilIsuUntukTampilan, nilaiMayoritas, ringkasKlasterIsu } from '@/lib/klasterIsu'
 
 // Dashboard Issue Monitoring — Pemprov Papua.
 // PLACEHOLDER: src/data/beritaPapua.json saat ini berisi 642 berita CONTOH (judul diawali
@@ -240,6 +241,7 @@ function levelDariRatio(negatifRatio: number, total: number): LevelRisiko {
 interface BeritaMentah {
   tanggal: string
   judul: string
+  isi?: string
   sumber: string
   sentimen: Sentimen
   url: string
@@ -249,28 +251,25 @@ interface BeritaMentah {
 
 const beritaMentah = beritaPapuaMentah as BeritaMentah[]
 
-// ── Isu — diklasterkan langsung dari berita riil (kategori × entitas terkait) ─────
-// Setiap kombinasi kategori+entitas yang benar-benar muncul di data riil menjadi satu
-// Isu, dengan jumlah berita, sentimen dominan, severity, dan tren dihitung dari data
-// riil tersebut (bukan lagi isu simulasi acak).
-interface KlasterBerita {
-  kategori: KategoriIsu
-  entitasTerkait?: EntitasPimpinan
-  rows: BeritaMentah[]
-}
+// ── Isu — diklasterkan dari kemiripan judul+isi berita riil (unit analisis =
+// topik/event, bukan kategori×entitas) ────────────────────────────────────
+// Setiap klaster berisi berita yang membahas kejadian yang sama (dilihat dari
+// kemiripan judul dan potongan awal isi), dari media berbeda sekalipun. Kategori,
+// entitas terkait, sentimen dominan, severity, dan tren dihitung dari anggota
+// klaster tersebut — bukan lagi dari kombinasi kategori×entitas yang terlalu lebar
+// (hanya menghasilkan ~20-30 "isu" kategori besar, bukan topik spesifik).
+const AMBANG_KEMIRIPAN_ISU = 0.5
 
-const klasterMap = new Map<string, KlasterBerita>()
-for (const r of beritaMentah) {
-  const key = `${r.kategori}::${r.entitasTerkait ?? 'none'}`
-  if (!klasterMap.has(key)) {
-    klasterMap.set(key, { kategori: r.kategori, entitasTerkait: r.entitasTerkait, rows: [] })
-  }
-  klasterMap.get(key)!.rows.push(r)
-}
+const klasterHasil = ringkasKlasterIsu(beritaMentah, AMBANG_KEMIRIPAN_ISU)
 
-export const daftarIsu: Isu[] = Array.from(klasterMap.values())
+// Peta dari tiap baris berita mentah (by reference) ke id isu klasternya —
+// dipakai di bawah untuk membangun daftarBerita tanpa bergantung pada key
+// kategori::entitas yang sudah tidak jadi unit analisis isu.
+const isuIdByBerita = new WeakMap<BeritaMentah, string>()
+
+export const daftarIsu: Isu[] = klasterHasil
   .map((klaster, index) => {
-    const { kategori, entitasTerkait, rows } = klaster
+    const rows = klaster.anggota
     const total = rows.length
     const jumlahPerSentimen: Record<Sentimen, number> = { Positif: 0, Netral: 0, Negatif: 0 }
     for (const r of rows) jumlahPerSentimen[r.sentimen]++
@@ -278,6 +277,12 @@ export const daftarIsu: Isu[] = Array.from(klasterMap.values())
       (a, b) => b[1] - a[1],
     )[0][0]
     const negatifRatio = jumlahPerSentimen.Negatif / total
+
+    // Kategori & entitas isu diambil dari mayoritas anggota klaster — karena unit
+    // analisisnya kini per-topik, 1 isu idealnya satu kategori yang sama, tapi
+    // klaster yang longgar (ambang rendah) bisa saja mencampur sedikit kategori.
+    const kategori = nilaiMayoritas(rows.map((r) => r.kategori))
+    const entitasTerkait = nilaiMayoritas(rows.map((r) => r.entitasTerkait))
 
     const level = levelDariRatio(negatifRatio, total)
     const klasifikasi = klasifikasiDariRatio(negatifRatio)
@@ -287,7 +292,7 @@ export const daftarIsu: Isu[] = Array.from(klasterMap.values())
     const urutanTanggal = [...rows].sort((a, b) => (a.tanggal < b.tanggal ? -1 : 1))
     const tanggalMulai = urutanTanggal[0].tanggal
     // Utamakan judul yang secara eksplisit menyebut Papua sebagai representasi isu,
-    // agar daftar isu (mis. Top 5 Isu Provinsi Papua) tidak menampilkan judul yang
+    // agar daftar isu (mis. Top 10 Isu Provinsi Papua) tidak menampilkan judul yang
     // sebenarnya membahas daerah/topik lain meski kontennya sempat menyinggung Papua.
     const urutanTerbaruDulu = [...urutanTanggal].reverse()
     const judulRelevanTerbaru = urutanTerbaruDulu.find((r) => /papua/i.test(r.judul))
@@ -301,6 +306,7 @@ export const daftarIsu: Isu[] = Array.from(klasterMap.values())
 
     const id = `isu-${index + 1}-${scope.toLowerCase().replace(/\s+/g, '-')}`
     substansiMasalahById.set(id, substansiMasalahDari(kategori, entitasTerkait))
+    for (const r of rows) isuIdByBerita.set(r, id)
 
     return {
       id,
@@ -326,9 +332,21 @@ export const daftarIsu: Isu[] = Array.from(klasterMap.values())
   })
   .sort((a, b) => b.jumlahBerita - a.jumlahBerita)
 
-export const daftarIsuProvinsi = daftarIsu.filter((isu) => isu.scope === 'Provinsi')
-export const daftarIsuGubernur = daftarIsu.filter((isu) => isu.entitasTerkait === 'Gubernur')
-export const daftarIsuWakilGubernur = daftarIsu.filter((isu) => isu.entitasTerkait === 'Wakil Gubernur')
+// Isu Provinsi dibatasi top 10 (volume isu tingkat provinsi bisa sangat banyak dan
+// kurang fokus bila ditampilkan semua). Isu Gubernur/Wakil Gubernur/OPD ditampilkan
+// lengkap — lihat ambilIsuUntukTampilan di src/lib/klasterIsu.ts.
+export const daftarIsuProvinsi = ambilIsuUntukTampilan(
+  daftarIsu.filter((isu) => isu.scope === 'Provinsi'),
+  'Provinsi',
+)
+export const daftarIsuGubernur = ambilIsuUntukTampilan(
+  daftarIsu.filter((isu) => isu.entitasTerkait === 'Gubernur'),
+  'Gubernur',
+)
+export const daftarIsuWakilGubernur = ambilIsuUntukTampilan(
+  daftarIsu.filter((isu) => isu.entitasTerkait === 'Wakil Gubernur'),
+  'Wakil Gubernur',
+)
 
 export const daftarEarlyWarning: Isu[] = daftarIsu.filter(
   (isu) => isu.klasifikasi === 'Negatif' || isu.klasifikasi === 'Potensi Negatif',
@@ -338,11 +356,12 @@ export function isuById(id: string): Isu | undefined {
   return daftarIsu.find((isu) => isu.id === id)
 }
 
-const isuByKlaster = new Map(daftarIsu.map((isu) => [`${isu.kategori}::${isu.entitasTerkait ?? 'none'}`, isu]))
+const petaIsuById = new Map(daftarIsu.map((isu) => [isu.id, isu]))
 
 export const daftarBerita: Berita[] = beritaMentah
   .map((r, i) => {
-    const isuAcuan = isuByKlaster.get(`${r.kategori}::${r.entitasTerkait ?? 'none'}`)!
+    const isuId = isuIdByBerita.get(r)!
+    const isuAcuan = petaIsuById.get(isuId)!
     return {
       id: `berita-${i + 1}`,
       isuId: isuAcuan.id,

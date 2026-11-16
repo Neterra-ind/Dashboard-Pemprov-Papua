@@ -92,6 +92,9 @@ GUB_KEYS = ["matius d. fakhiri", "matius fakhiri", "mathius d. fakhiri", "mathiu
 WAGUB_KEYS = ["aryoko rumaropen", "wakil gubernur papua", "wagub papua"]
 
 MAX_JUDUL = 200
+# Potongan awal Isi yang disimpan — cukup untuk clustering kemiripan topik,
+# tidak perlu isi lengkap (menjaga ukuran JSON dashboard tetap kecil).
+MAX_ISI = 240
 # Batas target total baris untuk menjaga ukuran JSON dashboard.
 TARGET_ROWS = 4000
 
@@ -188,6 +191,10 @@ def iter_rows(path: str, is_socmed: bool, forced_entitas: str | None):
     i_tgl = idx.get("Tanggal")
     # Untuk socmed, pakai Isi sebagai teks "judul" (socmed tidak punya kolom Judul).
     i_judul = idx.get("Judul") if "Judul" in idx else idx.get("Isi")
+    # Potongan awal Isi dipakai untuk clustering isu (judul+isi) — hanya relevan untuk
+    # berita News (yang punya Judul terpisah dari Isi); untuk socmed, Isi == judul, jadi
+    # tidak perlu disimpan dobel.
+    i_isi = idx.get("Isi") if "Judul" in idx else None
     i_sentimen = idx.get("Sentimen")
     i_media = idx.get("Media") if "Media" in idx else idx.get("Platform")
     i_nara = idx.get("Narasumber") if "Narasumber" in idx else idx.get("Username")
@@ -209,6 +216,7 @@ def iter_rows(path: str, is_socmed: bool, forced_entitas: str | None):
             else:
                 sumber = sumber_raw
             narasumber = str(r[i_nara] or "") if i_nara is not None else ""
+            isi_potongan = strip_html(str(r[i_isi] or ""))[:MAX_ISI] if i_isi is not None else ""
             sentimen_asal = parse_sentimen(r[i_sentimen]) if i_sentimen is not None else "Netral"
             sentimen = override_sentimen(judul, sentimen_asal)
             url = str(r[i_link] or "").strip() if i_link is not None else ""
@@ -223,6 +231,8 @@ def iter_rows(path: str, is_socmed: bool, forced_entitas: str | None):
                 "url": url or "#",
                 "kategori": kategori,
             }
+            if isi_potongan:
+                out["isi"] = isi_potongan
             if ent:
                 out["entitasTerkait"] = ent
             if framing:

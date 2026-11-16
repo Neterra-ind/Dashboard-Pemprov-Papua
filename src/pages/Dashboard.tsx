@@ -29,7 +29,6 @@ import { useDisposisi } from '@/lib/store'
 import {
   daftarEarlyWarning,
   daftarIsu,
-  daftarIsuProvinsi,
   daftarJenisSumber,
   daftarOpd,
   daftarRankingOpd,
@@ -206,10 +205,6 @@ export function Dashboard() {
 
   const totalSentimen = distribusiSentimen.reduce((s, d) => s + d.value, 0)
 
-  const topIsuProvinsi = useMemo(
-    () => [...daftarIsuProvinsi].sort((a, b) => b.jumlahBerita - a.jumlahBerita).slice(0, 5),
-    [],
-  )
   const earlyWarningTeratas = useMemo(
     () =>
       [...daftarEarlyWarning]
@@ -534,35 +529,6 @@ export function Dashboard() {
         </Card>
       </section>
 
-      {/* 6 — Detailed Table */}
-      <section>
-        <SectionLabel>Isu Teratas</SectionLabel>
-        <Card id="isu-provinsi" className="scroll-mt-4">
-          <CardHeader
-            title="Top 5 Isu Provinsi Papua"
-            subtitle="Berdasarkan jumlah berita/postingan"
-          />
-          <CardContent className="pt-2">
-            <div className="divide-y divide-[var(--color-border)]">
-              {topIsuProvinsi.map((isu, idx) => (
-                <div key={isu.id} className="flex items-center gap-4 py-3.5">
-                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary-soft text-xs font-bold text-primary">
-                    {idx + 1}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-semibold text-slate-800">{isu.namaIsu}</p>
-                    <p className="text-xs text-slate-500">{isu.kategori}</p>
-                  </div>
-                  <span className="shrink-0 text-sm font-semibold tabular-nums text-slate-700">
-                    {isu.jumlahBerita}
-                    <span className="ml-1 text-xs font-normal text-slate-400">brt</span>
-                  </span>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </section>
     </div>
   )
 }
