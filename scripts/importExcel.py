@@ -186,7 +186,9 @@ def iter_rows(path: str, is_socmed: bool, forced_entitas: str | None):
     header = next(rows, None)
     if not header:
         return
+    # idx dibangun dua versi: asli (untuk kolom baku IMD) dan lowercase (untuk kolom kurasi AI)
     idx = {str(h).strip(): i for i, h in enumerate(header) if h is not None}
+    idx_lower = {str(h).strip().lower(): i for i, h in enumerate(header) if h is not None}
     # Field posisi
     i_tgl = idx.get("Tanggal")
     # Untuk socmed, pakai Isi sebagai teks "judul" (socmed tidak punya kolom Judul).
@@ -236,7 +238,24 @@ def iter_rows(path: str, is_socmed: bool, forced_entitas: str | None):
             if ent:
                 out["entitasTerkait"] = ent
             if framing:
-                out["framing"] = framing
+                out["framing_kinerja"] = framing
+
+            # ── Kolom kurasi AI (hanya ada di file _KURASI.xlsx) ──────────────
+            # Gunakan idx_lower agar tidak sensitif terhadap huruf kapital header.
+            for col_name, out_key in [
+                ("sentimen_kurasi",    "sentimen_kurasi"),
+                ("klasifikasi",        "klasifikasi"),
+                ("framing_kinerja",    "framing_kinerja"),
+                ("narasumber_jabatan", "narasumber_jabatan"),
+                ("status_duplikasi",   "status_duplikasi"),
+                ("alasan_kurasi",      "alasan_kurasi"),
+            ]:
+                col_i = idx_lower.get(col_name)
+                if col_i is not None:
+                    val = str(r[col_i] or "").strip()
+                    if val:
+                        out[out_key] = val
+
             yield out
         except Exception:
             continue

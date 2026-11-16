@@ -127,6 +127,41 @@ export function IsuPimpinan() {
       .sort((a, b) => b.jumlah - a.jumlah)
   , [beritaTerkait])
 
+  // Framing Kinerja — dari kolom kurasi AI
+  const framingKinerja = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of beritaTerkait) {
+      const f = (b as any).framing_kinerja as string | undefined
+      if (f && f.trim()) {
+        map.set(f.trim(), (map.get(f.trim()) ?? 0) + 1)
+      }
+    }
+    return Array.from(map.entries())
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value)
+  }, [beritaTerkait])
+
+  // Narasumber dari kurasi AI — format "Jabatan, Instansi, Nama"
+  const narasumberKurasi = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of beritaTerkait) {
+      const nj = (b as any).narasumber_jabatan as string | undefined
+      if (!nj) continue
+      for (const entri of nj.split(';')) {
+        const bagian = entri.trim().split(',').map(s => s.trim())
+        const jabatan = bagian[0] ?? ''
+        const nama = bagian[2] ?? bagian[1] ?? ''
+        if (!nama || nama === '-') continue
+        const label = `${nama}||${jabatan}`
+        map.set(label, (map.get(label) ?? 0) + 1)
+      }
+    }
+    return Array.from(map.entries())
+      .map(([label, jumlah]) => ({ label, jumlah }))
+      .sort((a, b) => b.jumlah - a.jumlah)
+      .slice(0, 10)
+  }, [beritaTerkait])
+
   function WrapTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
     const text = payload?.value ?? ''
     const maxChars = 22
@@ -294,6 +329,53 @@ export function IsuPimpinan() {
 
       </div>
 
+      {/* Framing Kinerja — hanya tampil jika data kurasi AI tersedia */}
+      {framingKinerja.length > 0 && (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <Card>
+            <CardHeader
+              title="Framing Kinerja"
+              subtitle="Bagaimana pimpinan diposisikan dalam pemberitaan — hasil kurasi AI"
+            />
+            <CardContent>
+              <ResponsiveContainer width="100%" height={Math.max(180, framingKinerja.length * 36)}>
+                <BarChart data={framingKinerja} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                  <CartesianGrid {...gridProps} horizontal={false} />
+                  <XAxis type="number" {...axisProps} allowDecimals={false} />
+                  <YAxis type="category" dataKey="name" {...axisProps} width={130} />
+                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                  <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22}>
+                    <LabelList dataKey="value" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+
+          {narasumberKurasi.length > 0 && (
+            <Card>
+              <CardHeader
+                title="Narasumber & Jabatan"
+                subtitle="Diekstrak dari isi berita oleh AI — format: Jabatan, Instansi"
+              />
+              <CardContent>
+                <ResponsiveContainer width="100%" height={Math.max(160, narasumberKurasi.length * 52)}>
+                  <BarChart data={narasumberKurasi} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                    <CartesianGrid {...gridProps} horizontal={false} />
+                    <XAxis type="number" {...axisProps} allowDecimals={false} />
+                    <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                    <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                    <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
+                      <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {isuGubernur.length > 0 && (
           <Card>
@@ -412,25 +494,51 @@ export function IsuPimpinan() {
           {beritaDitampilkan.length === 0 && (
             <p className="text-sm text-slate-400">Belum ada berita tercatat untuk entitas ini.</p>
           )}
-          {beritaDitampilkan.slice(0, 20).map((b, i) => (
-            <a
-              key={`${b.url}-${i}`}
-              href={b.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-start gap-3 rounded-lg border border-slate-100 p-3 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/60"
-            >
-              <div className="min-w-0 flex-1">
-                <p className="line-clamp-2 text-sm font-medium text-slate-800 hover:underline dark:text-slate-100">
-                  {b.judul}
-                </p>
-                <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-                  {b.sumber} · {b.tanggal} · {b.sentimen}
-                </p>
-              </div>
-              <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" aria-hidden="true" />
-            </a>
-          ))}
+          {beritaDitampilkan.slice(0, 20).map((b, i) => {
+            const bAny = b as any
+            const sentimenTampil = bAny.sentimen_kurasi || b.sentimen
+            const framing = bAny.framing_kinerja as string | undefined
+            const dupStatus = bAny.status_duplikasi as string | undefined
+            const sentimenColor =
+              sentimenTampil === 'Positif' ? 'text-emerald-600' :
+              sentimenTampil === 'Negatif' ? 'text-red-500' :
+              sentimenTampil === 'Potensi Negatif' ? 'text-amber-500' :
+              'text-slate-400'
+            return (
+              <a
+                key={`${b.url}-${i}`}
+                href={b.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 rounded-lg border border-slate-100 p-3 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/60"
+              >
+                <div className="min-w-0 flex-1">
+                  <p className="line-clamp-2 text-sm font-medium text-slate-800 hover:underline dark:text-slate-100">
+                    {b.judul}
+                  </p>
+                  <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                    <span className="text-xs text-slate-500 dark:text-slate-400">
+                      {b.sumber} · {b.tanggal}
+                    </span>
+                    <span className={`text-xs font-medium ${sentimenColor}`}>
+                      {sentimenTampil}
+                    </span>
+                    {framing && (
+                      <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] text-slate-500 dark:bg-slate-800 dark:text-slate-400">
+                        {framing}
+                      </span>
+                    )}
+                    {dupStatus && dupStatus !== 'Unik' && (
+                      <span className="rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-medium text-amber-600 dark:bg-amber-900/30 dark:text-amber-400">
+                        {dupStatus}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <ExternalLink className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" aria-hidden="true" />
+              </a>
+            )
+          })}
         </CardContent>
       </Card>
 
