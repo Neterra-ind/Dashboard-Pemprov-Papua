@@ -49,6 +49,17 @@ import {
 } from '@/lib/chartTheme'
 import ilustrasiPapua from '@/assets/ilustrasi-papua.jpeg'
 
+const FRAMING_COLOR_MAP: Record<string, string> = {
+  'Respons': '#3b82f6',
+  'Sosialisasi': '#14b8a6',
+  'Seremoni': '#8b5cf6',
+  'Klarifikasi': '#f59e0b',
+  'Program/Kinerja': '#10b981',
+  'Isu Terhubung': '#f97316',
+  'Hal Terhubung': '#94a3b8',
+  'Seremoni Pasif': '#a855f7',
+}
+
 const waktuSekarang = new Date().toLocaleString('id-ID', {
   dateStyle: 'full',
   timeStyle: 'short',
@@ -241,6 +252,39 @@ export function Dashboard() {
         .map((r) => ({ name: r.opd.replace('Dinas ', ''), value: r.jumlahNegatif })),
     [],
   )
+
+  // ── Kurasi AI ────────────────────────────────────────────────────────────
+  const adaKurasi = useMemo(
+    () => beritaFiltered.some((b) => !!(b as any).framing_kinerja),
+    [beritaFiltered],
+  )
+
+  const distribusiFraming = useMemo(() => {
+    if (!adaKurasi) return []
+    const map = new Map<string, number>()
+    for (const b of beritaFiltered) {
+      const f = (b as any).framing_kinerja as string | undefined
+      if (f) map.set(f, (map.get(f) ?? 0) + 1)
+    }
+    return Array.from(map.entries())
+      .map(([name, value]) => ({ name, value, fill: FRAMING_COLOR_MAP[name] ?? '#94a3b8' }))
+      .sort((a, b) => b.value - a.value)
+  }, [beritaFiltered, adaKurasi])
+
+  const distribusiSentimenKurasi = useMemo(() => {
+    if (!adaKurasi) return []
+    const map = new Map<string, number>()
+    for (const b of beritaFiltered) {
+      const s = (b as any).sentimen_kurasi as string | undefined
+      if (s) map.set(s, (map.get(s) ?? 0) + 1)
+    }
+    return Array.from(map.entries()).map(([name, value]) => ({ name, value }))
+  }, [beritaFiltered, adaKurasi])
+
+  const jumlahDuplikat = useMemo(() => {
+    if (!adaKurasi) return 0
+    return beritaFiltered.filter((b) => (b as any).status_duplikasi && (b as any).status_duplikasi !== 'Unik').length
+  }, [beritaFiltered, adaKurasi])
 
   // ── Engagement dari data Socmed ─────────────────────────────────────────
   const beritaSocmed = useMemo(
@@ -568,6 +612,88 @@ export function Dashboard() {
               </ResponsiveContainer>
             </CardContent>
           </Card>
+        </section>
+      )}
+
+      {/* 6c — Analitik Kurasi AI (hanya tampil jika data sudah dikurasi) */}
+      {adaKurasi && (
+        <section>
+          <SectionLabel hint="dari kolom kurasi AI pipeline">Analitik Kurasi AI</SectionLabel>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            {/* Distribusi Framing Kinerja */}
+            <Card>
+              <CardHeader
+                title="Distribusi Framing Kinerja"
+                subtitle={`${distribusiFraming.reduce((s, d) => s + d.value, 0)} berita terkurasi`}
+              />
+              <CardContent>
+                <ResponsiveContainer width="100%" height={Math.max(180, distribusiFraming.length * 40)}>
+                  <BarChart data={distribusiFraming} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                    <CartesianGrid {...gridProps} horizontal={false} />
+                    <XAxis type="number" {...axisProps} allowDecimals={false} />
+                    <YAxis type="category" dataKey="name" {...axisProps} width={140} />
+                    <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                    <Bar dataKey="value" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                      {distribusiFraming.map((entry) => (
+                        <Cell key={entry.name} fill={entry.fill} />
+                      ))}
+                      <LabelList dataKey="value" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+
+            {/* Sentimen Kurasi + ringkasan duplikasi */}
+            <div className="flex flex-col gap-4">
+              <Card>
+                <CardHeader
+                  title="Sentimen Kurasi AI"
+                  subtitle="Sentimen hasil verifikasi / override AI"
+                />
+                <CardContent>
+                  <div className="relative">
+                    <ResponsiveContainer width="100%" height={200}>
+                      <PieChart>
+                        <Pie
+                          data={distribusiSentimenKurasi}
+                          dataKey="value"
+                          nameKey="name"
+                          innerRadius={54}
+                          outerRadius={80}
+                          paddingAngle={2}
+                          stroke="none"
+                        >
+                          {distribusiSentimenKurasi.map((entry) => (
+                            <Cell key={entry.name} fill={SENTIMEN_COLOR[entry.name] ?? '#94a3b8'} />
+                          ))}
+                        </Pie>
+                        <Tooltip content={<ChartTooltip />} />
+                        <Legend content={<ChartLegend />} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Duplikasi ringkasan */}
+              {jumlahDuplikat > 0 && (
+                <div className="flex items-center gap-4 rounded-2xl border border-orange-200 bg-orange-50 p-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-orange-100 text-orange-600">
+                    <AlertTriangle className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-800">
+                      {jumlahDuplikat} berita terdeteksi duplikat atau pengulangan
+                    </p>
+                    <p className="text-xs text-slate-500 mt-0.5">
+                      Filter di halaman Data Sumber → Status Duplikasi
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </section>
       )}
 
