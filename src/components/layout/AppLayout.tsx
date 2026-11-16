@@ -1,18 +1,23 @@
+import { useState } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
 import { cn } from '@/lib/utils'
 import { useRole } from '@/lib/role'
 import {
   Building2,
+  ChevronDown,
   ClipboardCheck,
   LayoutDashboard,
   MapPin,
   Newspaper,
   ShieldAlert,
+  Upload,
   UserRound,
 } from 'lucide-react'
 import type { Role } from '@/types'
 import logoNeterra from '@/assets/logo-neterra.png'
 import logoPapua from '@/assets/logo-papua.png'
+
+const ALL_ROLES: Role[] = ['Eksekutif', 'Admin OPD', 'Super Admin']
 
 const NAV_ITEMS: { to: string; label: string; icon: typeof LayoutDashboard; end?: boolean; roles: Role[] }[] = [
   { to: '/', label: 'Executive Summary', icon: LayoutDashboard, end: true, roles: ['Eksekutif', 'Admin OPD', 'Super Admin'] },
@@ -22,8 +27,7 @@ const NAV_ITEMS: { to: string; label: string; icon: typeof LayoutDashboard; end?
   { to: '/early-warning', label: 'Isu Negatif', icon: ShieldAlert, roles: ['Eksekutif', 'Super Admin'] },
   { to: '/tindak-lanjut', label: 'Tindak Lanjut', icon: ClipboardCheck, roles: ['Admin OPD', 'Super Admin'] },
   { to: '/data-sumber', label: 'Data Sumber', icon: Newspaper, roles: ['Eksekutif', 'Super Admin'] },
-  // Upload Data tidak muncul di nav publik — akses langsung via URL /upload-data, diproteksi PIN gate
-  // { to: '/upload-data', label: 'Upload Data Excel', icon: Upload, roles: ['Eksekutif', 'Admin OPD', 'Super Admin'] },
+  { to: '/upload-data', label: 'Upload Data Excel', icon: Upload, roles: ['Super Admin'] },
 ]
 
 function BrandMark() {
@@ -49,15 +53,46 @@ function navLinkClass({ isActive }: { isActive: boolean }) {
 }
 
 function UserProfile() {
+  const { role, setRole } = useRole()
+  const [open, setOpen] = useState(false)
+
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-[var(--color-border)] bg-white px-3 py-2.5">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
-        A
-      </div>
-      <div className="min-w-0">
-        <p className="truncate text-sm font-semibold text-slate-800">admin</p>
-        <p className="truncate text-xs text-slate-400">Eksekutif</p>
-      </div>
+    <div className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center gap-3 rounded-xl border border-[var(--color-border)] bg-white px-3 py-2.5 text-left transition hover:bg-slate-50"
+      >
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+          {role === 'Super Admin' ? 'SA' : role === 'Admin OPD' ? 'OPD' : 'EK'}
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-sm font-semibold text-slate-800">admin</p>
+          <p className="truncate text-xs text-slate-400">{role}</p>
+        </div>
+        <ChevronDown className={cn('h-4 w-4 shrink-0 text-slate-400 transition-transform', open && 'rotate-180')} />
+      </button>
+
+      {open && (
+        <div className="absolute bottom-full left-0 right-0 mb-1 overflow-hidden rounded-xl border border-[var(--color-border)] bg-white shadow-lg">
+          <p className="px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-slate-400">Ganti Role</p>
+          {ALL_ROLES.map((r) => (
+            <button
+              key={r}
+              type="button"
+              onClick={() => { setRole(r); setOpen(false) }}
+              className={cn(
+                'flex w-full items-center gap-2 px-3 py-2.5 text-sm transition hover:bg-slate-50',
+                r === role ? 'font-semibold text-accent-pressed' : 'text-slate-600',
+              )}
+            >
+              {r === role && <span className="h-1.5 w-1.5 rounded-full bg-accent" />}
+              {r !== role && <span className="h-1.5 w-1.5" />}
+              {r}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
