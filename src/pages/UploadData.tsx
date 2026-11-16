@@ -522,7 +522,6 @@ export function UploadData() {
                       </>
                     )
                   })()}
-                  </tbody>
                 </table>
                 {hasil.rows.length > 10 && (
                   <p className="px-3 py-2 text-center text-xs text-slate-400 border-t border-slate-200">
