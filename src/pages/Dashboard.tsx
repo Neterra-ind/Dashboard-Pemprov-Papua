@@ -165,7 +165,10 @@ export function Dashboard() {
     [beritaFiltered],
   )
   const totalBeritaOpd = useMemo(
-    () => beritaFiltered.filter((b) => b.kategori === 'Tata Kelola Pemerintahan').length,
+    () =>
+      beritaFiltered.filter(
+        (b) => !b.entitasTerkait || (b.entitasTerkait !== 'Gubernur' && b.entitasTerkait !== 'Wakil Gubernur'),
+      ).length,
     [beritaFiltered],
   )
   const totalBeritaNegatif = useMemo(
@@ -406,7 +409,7 @@ export function Dashboard() {
             value={totalBeritaOpd}
             icon={Building2}
             tone="warning"
-            caption="tata kelola pemerintahan"
+            caption="pemberitaan OPD & layanan publik"
           />
           <StatCard
             label="Total Berita Negatif"
