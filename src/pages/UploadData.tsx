@@ -99,6 +99,7 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
     if (teks.includes('wakil gubernur') || teks.includes('wagub')) entitasTerkait = 'Wakil Gubernur'
 
     // Kolom kurasi AI (opsional — hanya ada jika file sudah dikurasi)
+    const subjekQuery = r['subjekquery'] ?? r['subjek_query'] ?? r['subjek'] ?? ''
     const sentimenKurasi = r['sentimenkurasi'] ?? r['sentimen_kurasi'] ?? r['kurasisentimen'] ?? ''
     const framingKinerja = r['framingkinerja'] ?? r['framing_kinerja'] ?? r['framing'] ?? ''
     const statusDuplikasi = r['statusduplikasi'] ?? r['status_duplikasi'] ?? r['duplikasi'] ?? ''
@@ -116,6 +117,7 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
       entitasTerkait,
       tipe: 'gubernur',
       // Kurasi AI — disertakan hanya jika ada isinya
+      ...(subjekQuery && { subjek_query: subjekQuery }),
       ...(sentimenKurasi && { sentimen_kurasi: sentimenKurasi }),
       ...(framingKinerja && { framing_kinerja: framingKinerja as import('@/types').FramingKinerja }),
       ...(statusDuplikasi && { status_duplikasi: statusDuplikasi as import('@/types').StatusDuplikasi }),

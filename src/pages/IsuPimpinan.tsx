@@ -59,14 +59,23 @@ export function IsuPimpinan() {
   const reputasi = reputasiByEntitas(tab)
   const beritaTerkait = useMemo(() => {
     setSelectedJudul(null)
-    return beritaPapua.filter(
-      (b) =>
-        b.entitasTerkait === tab &&
+    return beritaPapua.filter((b) => {
+      const bAny = b as any
+      // Jika data punya kolom subjek_query dari kurasi AI → pakai itu (presisi tinggi)
+      // Fallback ke entitasTerkait untuk data lama / data tanpa kurasi AI
+      const subjekQuery = bAny.subjek_query as string | undefined
+      const cocokTab = subjekQuery
+        ? subjekQuery === tab
+        : b.entitasTerkait === tab
+
+      return (
+        cocokTab &&
         (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
         (!dariTanggal || b.tanggal >= dariTanggal) &&
         (!sampaiTanggal || b.tanggal <= sampaiTanggal) &&
-        (!duplikasiFilter || ((b as any).status_duplikasi ?? 'Unik') === duplikasiFilter),
-    )
+        (!duplikasiFilter || ((bAny.status_duplikasi) ?? 'Unik') === duplikasiFilter)
+      )
+    })
   }, [tab, jenisSumber, dariTanggal, sampaiTanggal, duplikasiFilter])
 
   const beritaDitampilkan = selectedJudul
