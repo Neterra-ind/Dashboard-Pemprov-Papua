@@ -194,43 +194,41 @@ export function PemberitaanOpd() {
         </Card>
       </div>
 
-      <Card>
-        <CardHeader title="Ekspos Media" />
-        <CardContent>
-          <ResponsiveContainer width="100%" height={Math.max(200, eksposMediaOpd.length * 36)}>
-            <BarChart data={eksposMediaOpd} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
-              <CartesianGrid {...gridProps} horizontal={false} />
-              <XAxis type="number" {...axisProps} allowDecimals={false} />
-              <YAxis type="category" dataKey="name" {...axisProps} width={150} />
-              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        {topNarasumberOpd.length > 0 && (
+          <Card>
+            <CardHeader title="Narasumber" />
+            <CardContent>
+              <ResponsiveContainer width="100%" height={Math.max(160, topNarasumberOpd.length * 52)}>
+                <BarChart data={topNarasumberOpd} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                  <CartesianGrid {...gridProps} horizontal={false} />
+                  <XAxis type="number" {...axisProps} allowDecimals={false} />
+                  <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                  <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
+                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        )}
 
-      {topNarasumberOpd.length > 0 && (
         <Card>
-          <CardHeader title="Narasumber" />
+          <CardHeader title="Ekspos Media" />
           <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(160, topNarasumberOpd.length * 52)}>
-              <BarChart data={topNarasumberOpd} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+            <ResponsiveContainer width="100%" height={Math.max(200, eksposMediaOpd.length * 36)}>
+              <BarChart data={eksposMediaOpd} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={150} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
-                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                </Bar>
+                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
-      )}
-
-      <Card className="p-5">
-        <DataTable data={daftarRankingOpd} columns={rankingColumns} searchPlaceholder="Cari OPD..." />
-      </Card>
+      </div>
 
       <Card className="p-5">
         <div className="mb-4">
