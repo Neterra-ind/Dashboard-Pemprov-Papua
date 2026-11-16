@@ -16,7 +16,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { AlertTriangle, ArrowRight, Building2, Download, Newspaper, UserRound } from 'lucide-react'
+import { AlertTriangle, ArrowRight, Building2, Download, Newspaper, UserRound, ThumbsUp, MessageCircle, Share2, Eye } from 'lucide-react'
 import { StatCard } from '@/components/StatCard'
 import { downloadXlsx } from '@/lib/exportXlsx'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
@@ -238,6 +238,37 @@ export function Dashboard() {
         .map((r) => ({ name: r.opd.replace('Dinas ', ''), value: r.jumlahNegatif })),
     [],
   )
+
+  // ── Engagement dari data Socmed ─────────────────────────────────────────
+  const beritaSocmed = useMemo(
+    () => beritaFiltered.filter((b) => b.engagement && b.tipe === 'socmed'),
+    [beritaFiltered],
+  )
+
+  const adaEngagement = beritaSocmed.length > 0
+
+  const topEngagement = useMemo(() => {
+    return [...beritaSocmed]
+      .map((b) => ({
+        name: b.judul.length > 48 ? b.judul.slice(0, 48) + '…' : b.judul,
+        judul: b.judul,
+        platform: b.platform ?? b.sumber,
+        total: (b.engagement?.like ?? 0) + (b.engagement?.comment ?? 0) + (b.engagement?.share ?? 0) + (b.engagement?.view ?? 0),
+        like: b.engagement?.like ?? 0,
+        comment: b.engagement?.comment ?? 0,
+        share: b.engagement?.share ?? 0,
+        view: b.engagement?.view ?? 0,
+      }))
+      .sort((a, b) => b.total - a.total)
+      .slice(0, 8)
+  }, [beritaSocmed])
+
+  const totalEngagement = useMemo(() => ({
+    like: beritaSocmed.reduce((s, b) => s + (b.engagement?.like ?? 0), 0),
+    comment: beritaSocmed.reduce((s, b) => s + (b.engagement?.comment ?? 0), 0),
+    share: beritaSocmed.reduce((s, b) => s + (b.engagement?.share ?? 0), 0),
+    view: beritaSocmed.reduce((s, b) => s + (b.engagement?.view ?? 0), 0),
+  }), [beritaSocmed])
 
   function handleExport() {
     const rows = beritaFiltered.map((b) => [
@@ -475,6 +506,67 @@ export function Dashboard() {
           </CardContent>
         </Card>
       </section>
+
+      {/* 6b — Engagement Sosial Media (hanya tampil jika ada data socmed) */}
+      {adaEngagement && (
+        <section>
+          <SectionLabel hint="dari data IMD Sosmed">Engagement Media Sosial</SectionLabel>
+          {/* KPI engagement */}
+          <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { label: 'Total Like', value: totalEngagement.like, icon: ThumbsUp, color: 'text-blue-600 bg-blue-50' },
+              { label: 'Total Komentar', value: totalEngagement.comment, icon: MessageCircle, color: 'text-emerald-600 bg-emerald-50' },
+              { label: 'Total Share', value: totalEngagement.share, icon: Share2, color: 'text-amber-600 bg-amber-50' },
+              { label: 'Total View', value: totalEngagement.view, icon: Eye, color: 'text-purple-600 bg-purple-50' },
+            ].map(({ label, value, icon: Icon, color }) => (
+              <div key={label} className="flex items-center gap-3 rounded-2xl border border-[var(--color-border)] bg-white p-4 shadow-[var(--shadow-card)]">
+                <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${color}`}>
+                  <Icon className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-medium text-slate-500">{label}</p>
+                  <p className="kpi-number text-xl">{value.toLocaleString('id-ID')}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Chart top postingan by engagement */}
+          <Card>
+            <CardHeader
+              title="Top Postingan Sosmed by Engagement"
+              subtitle={`${beritaSocmed.length} postingan · total engagement tertinggi`}
+            />
+            <CardContent>
+              <ResponsiveContainer width="100%" height={Math.max(200, topEngagement.length * 48)}>
+                <BarChart data={topEngagement} layout="vertical" margin={{ left: 8, right: 64, top: 0, bottom: 0 }}>
+                  <CartesianGrid {...gridProps} horizontal={false} />
+                  <XAxis type="number" {...axisProps} allowDecimals={false} />
+                  <YAxis type="category" dataKey="name" {...axisProps} width={180} tick={<WrapTick />} />
+                  <Tooltip
+                    content={
+                      <ChartTooltip
+                        labelOverride={(p) => (
+                          <span className="font-semibold text-slate-700">
+                            {(p as { platform?: string })?.platform ?? ''}
+                          </span>
+                        )}
+                      />
+                    }
+                    cursor={cursorFill}
+                  />
+                  <Legend content={<ChartLegend />} />
+                  <Bar dataKey="like" name="Like" stackId="a" fill="#3b82f6" maxBarSize={22} />
+                  <Bar dataKey="comment" name="Komentar" stackId="a" fill="#10b981" maxBarSize={22} />
+                  <Bar dataKey="share" name="Share" stackId="a" fill="#f59e0b" maxBarSize={22} />
+                  <Bar dataKey="view" name="View" stackId="a" fill="#8b5cf6" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                    <LabelList dataKey="total" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </section>
+      )}
 
       <section className="space-y-4">
         <SectionLabel>Analitik Sekunder</SectionLabel>
