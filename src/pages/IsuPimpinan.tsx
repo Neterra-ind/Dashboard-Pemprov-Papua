@@ -25,10 +25,7 @@ import { hitungPerHariRange } from '@/lib/aggregations'
 import { cn } from '@/lib/utils'
 import { daftarIsuGubernur, daftarIsuWakilGubernur, daftarJenisSumber, daftarNarasumber, reputasiByEntitas } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
-import beritaPapuaRaw from '@/data/beritaPapua.json'
-
-type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
-const beritaPapua = beritaPapuaRaw as BeritaRaw[]
+import { useBerita } from '@/lib/beritaStore'
 import type { EntitasPimpinan } from '@/types'
 import fotoGubernur from '@/assets/gubernur-papua.jpg'
 import fotoWakilGubernur from '@/assets/wakil-gubernur-papua.jpg'
@@ -46,6 +43,7 @@ const FOTO_PIMPINAN: Record<EntitasPimpinan, string> = {
 }
 
 export function IsuPimpinan() {
+  const { berita: beritaPapua } = useBerita()
   const [tab, setTab] = useState<EntitasPimpinan>('Gubernur')
   const [jenisSumber, setJenisSumber] = useState('')
   const [dariTanggal, setDariTanggal] = useState('')

@@ -8,6 +8,7 @@ import { EarlyWarning } from '@/pages/EarlyWarning'
 import { DetailIsu } from '@/pages/DetailIsu'
 import { TindakLanjut } from '@/pages/TindakLanjut'
 import { DataSumber } from '@/pages/DataSumber'
+import { UploadData } from '@/pages/UploadData'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/isu/:id" element={<DetailIsu />} />
         <Route path="/tindak-lanjut" element={<TindakLanjut />} />
         <Route path="/data-sumber" element={<DataSumber />} />
+        <Route path="/upload-data" element={<UploadData />} />
       </Route>
     </Routes>
   )

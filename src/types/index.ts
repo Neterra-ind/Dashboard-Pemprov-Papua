@@ -23,18 +23,41 @@ export type Opd =
   | 'Pemerintah Kabupaten/Kota'
 
 export type KategoriIsu =
-  | 'Pelayanan Publik'
+  // 21 sektor Neterra — definisi lengkap di Kategori_Berita-Report_Evaluasi.docx
+  | 'Ekonomi, Keuangan & Industri'
   | 'Infrastruktur'
-  | 'Pendidikan'
+  | 'Administrasi & Pemerintahan'
+  | 'Politik & Kebijakan'
   | 'Kesehatan'
-  | 'Ekonomi & Ketahanan Pangan'
-  | 'Pariwisata'
-  | 'Lingkungan & Bencana'
-  | 'Sosial & Kemiskinan'
-  | 'Keamanan & Ketertiban'
-  | 'Tata Kelola Pemerintahan'
+  | 'Kebencanaan'
+  | 'Hukum & HAM'
+  | 'Koperasi & UMKM'
+  | 'Sosial, Budaya & Pariwisata'
+  | 'Energi, SDA & Lingkungan'
+  | 'Pendidikan & IPTEK'
+  | 'Agro-Maritim'
+  | 'Pemuda & Olahraga'
+  | 'Ketenagakerjaan'
+  | 'Pertahanan & Ideologi'
+  | 'Perhubungan'
+  | 'Pemilu & Politik Praktis'
+  | 'Agraria dan Tata Ruang'
+  | 'Kependudukan'
+  | 'Pemberdayaan Perempuan & Perlindungan Anak'
+  | 'Pembangunan Desa'
 
 export type JenisSumber = 'Media Online' | 'Media Sosial'
+
+export type Platform = 'Facebook' | 'Twitter' | 'YouTube' | 'Instagram' | 'TikTok' | 'Telegram'
+
+/** Metrik engagement dari platform media sosial (IMD Socmed). */
+export interface Engagement {
+  like: number
+  comment: number
+  share: number
+  quote: number
+  view: number
+}
 
 export type Sentimen = 'Positif' | 'Netral' | 'Negatif'
 
@@ -98,6 +121,31 @@ export interface Berita {
   confidenceScore: number
   ringkasanAI: string
   url: string
+  // Kolom tambahan untuk Media Sosial (dari IMD Socmed)
+  platform?: Platform
+  engagement?: Engagement
+  username?: string
+  isi?: string
+}
+
+/**
+ * Shape JSON mentah dari beritaPapua.json dan hasil upload Excel.
+ * Digunakan di semua page yang membaca file JSON langsung.
+ */
+export interface BeritaRaw {
+  tanggal: string
+  judul: string
+  sumber: string
+  sentimen: string
+  url: string
+  kategori: string
+  isi?: string
+  entitasTerkait?: string
+  tipe?: string
+  // Kolom tambahan Media Sosial
+  platform?: string
+  username?: string
+  engagement?: Engagement
 }
 
 // Reputasi/Share of Voice Gubernur & Wakil Gubernur (Module A)

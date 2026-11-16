@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.tsx'
 import { RoleProvider } from './lib/role.tsx'
 import { DisposisiProvider } from './lib/store.tsx'
+import { BeritaStoreProvider } from './lib/beritaStore.tsx'
 
 // Hosted single-file exports (e.g. Artifacts) have no server to rewrite deep links,
 // so they use hash-based routing; the normal dev/build app keeps BrowserRouter.
@@ -14,11 +15,13 @@ const basename = import.meta.env.VITE_HASH_ROUTER === 'true' ? undefined : impor
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Router basename={basename}>
-      <RoleProvider>
-        <DisposisiProvider>
-          <App />
-        </DisposisiProvider>
-      </RoleProvider>
+      <BeritaStoreProvider>
+        <RoleProvider>
+          <DisposisiProvider>
+            <App />
+          </DisposisiProvider>
+        </RoleProvider>
+      </BeritaStoreProvider>
     </Router>
   </StrictMode>,
 )

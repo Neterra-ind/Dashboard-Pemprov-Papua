@@ -76,16 +76,27 @@ export const daftarOpd: Opd[] = [
 ]
 
 export const daftarKategoriIsu: KategoriIsu[] = [
-  'Pelayanan Publik',
+  'Ekonomi, Keuangan & Industri',
   'Infrastruktur',
-  'Pendidikan',
+  'Administrasi & Pemerintahan',
+  'Politik & Kebijakan',
   'Kesehatan',
-  'Ekonomi & Ketahanan Pangan',
-  'Pariwisata',
-  'Lingkungan & Bencana',
-  'Sosial & Kemiskinan',
-  'Keamanan & Ketertiban',
-  'Tata Kelola Pemerintahan',
+  'Kebencanaan',
+  'Hukum & HAM',
+  'Koperasi & UMKM',
+  'Sosial, Budaya & Pariwisata',
+  'Energi, SDA & Lingkungan',
+  'Pendidikan & IPTEK',
+  'Agro-Maritim',
+  'Pemuda & Olahraga',
+  'Ketenagakerjaan',
+  'Pertahanan & Ideologi',
+  'Perhubungan',
+  'Pemilu & Politik Praktis',
+  'Agraria dan Tata Ruang',
+  'Kependudukan',
+  'Pemberdayaan Perempuan & Perlindungan Anak',
+  'Pembangunan Desa',
 ]
 
 export const daftarJenisSumber: JenisSumber[] = ['Media Online', 'Media Sosial']
@@ -132,16 +143,27 @@ function ringkasanUntuk(judul: string, sentimen: Sentimen) {
 
 function penyebabUntuk(kategori: KategoriIsu) {
   const map: Record<KategoriIsu, string> = {
-    'Pelayanan Publik': 'Kapasitas layanan tidak sebanding dengan volume permintaan masyarakat.',
+    'Ekonomi, Keuangan & Industri': 'Fluktuasi harga dan ketimpangan arus logistik antarwilayah.',
     Infrastruktur: 'Keterbatasan anggaran pemeliharaan dan koordinasi lintas OPD.',
-    Pendidikan: 'Ketimpangan fasilitas dan distribusi tenaga pendidik antarwilayah.',
+    'Administrasi & Pemerintahan': 'Proses birokrasi dinilai belum sepenuhnya transparan bagi publik.',
+    'Politik & Kebijakan': 'Kebijakan yang belum tersosialisasi memicu respons publik beragam.',
     Kesehatan: 'Keterbatasan tenaga dan fasilitas kesehatan di sejumlah wilayah.',
-    'Ekonomi & Ketahanan Pangan': 'Fluktuasi harga dan ketimpangan arus logistik antarwilayah.',
-    Pariwisata: 'Infrastruktur pendukung wisata belum sebanding dengan lonjakan kunjungan.',
-    'Lingkungan & Bencana': 'Kepadatan permukiman dan minimnya mitigasi dini di kawasan rawan.',
-    'Sosial & Kemiskinan': 'Penyaluran bantuan belum sepenuhnya berbasis data mutakhir.',
-    'Keamanan & Ketertiban': 'Kepadatan penduduk dan mobilitas tinggi memicu gesekan sosial.',
-    'Tata Kelola Pemerintahan': 'Proses birokrasi dinilai belum sepenuhnya transparan bagi publik.',
+    Kebencanaan: 'Kepadatan permukiman dan minimnya mitigasi dini di kawasan rawan.',
+    'Hukum & HAM': 'Proses penegakan hukum belum menjawab harapan masyarakat.',
+    'Koperasi & UMKM': 'Akses permodalan dan pasar produk lokal masih terbatas.',
+    'Sosial, Budaya & Pariwisata': 'Penyaluran bantuan dan pengembangan wisata belum optimal.',
+    'Energi, SDA & Lingkungan': 'Pengelolaan SDA dan isu pencemaran menjadi sorotan publik.',
+    'Pendidikan & IPTEK': 'Ketimpangan fasilitas dan distribusi tenaga pendidik antarwilayah.',
+    'Agro-Maritim': 'Produksi pertanian dan perikanan terhambat oleh keterbatasan infrastruktur.',
+    'Pemuda & Olahraga': 'Fasilitas dan program pemberdayaan pemuda belum merata.',
+    Ketenagakerjaan: 'Ketimpangan serapan tenaga kerja lokal di sektor industri.',
+    'Pertahanan & Ideologi': 'Situasi keamanan memerlukan pendekatan komprehensif lintas sektor.',
+    Perhubungan: 'Konektivitas transportasi antarpulau dan antardistrik masih terbatas.',
+    'Pemilu & Politik Praktis': 'Tahapan pemilu memerlukan pengawasan dan koordinasi ketat.',
+    'Agraria dan Tata Ruang': 'Sengketa lahan dan tata ruang memerlukan kepastian hukum.',
+    Kependudukan: 'Data kependudukan yang belum mutakhir menghambat perencanaan layanan.',
+    'Pemberdayaan Perempuan & Perlindungan Anak': 'Kasus kekerasan dan ketimpangan gender masih menjadi isu strategis.',
+    'Pembangunan Desa': 'Penyaluran dana desa dan pengawasan pembangunan kampung perlu diperkuat.',
   }
   return map[kategori]
 }
@@ -167,16 +189,27 @@ const REKOMENDASI_POOL = [
 ]
 
 const KATEGORI_OPD_MAP: Record<KategoriIsu, Opd> = {
-  'Pelayanan Publik': 'Dinas Komunikasi dan Informatika',
+  'Ekonomi, Keuangan & Industri': 'Dinas Perindustrian dan Energi',
   Infrastruktur: 'Dinas Pekerjaan Umum',
-  Pendidikan: 'Dinas Pendidikan',
+  'Administrasi & Pemerintahan': 'Sekretariat Daerah Provinsi Papua',
+  'Politik & Kebijakan': 'Sekretariat Daerah Provinsi Papua',
   Kesehatan: 'Dinas Kesehatan',
-  'Ekonomi & Ketahanan Pangan': 'Dinas Ketahanan Pangan, Kelautan dan Pertanian',
-  Pariwisata: 'Dinas Pariwisata dan Ekonomi Kreatif',
-  'Lingkungan & Bencana': 'Dinas Lingkungan Hidup',
-  'Sosial & Kemiskinan': 'Dinas Sosial',
-  'Keamanan & Ketertiban': 'Satuan Polisi Pamong Praja',
-  'Tata Kelola Pemerintahan': 'Sekretariat Daerah Provinsi Papua',
+  Kebencanaan: 'Dinas Pekerjaan Umum',
+  'Hukum & HAM': 'Sekretariat Daerah Provinsi Papua',
+  'Koperasi & UMKM': 'Dinas Perindustrian dan Energi',
+  'Sosial, Budaya & Pariwisata': 'Dinas Pariwisata dan Ekonomi Kreatif',
+  'Energi, SDA & Lingkungan': 'Dinas Lingkungan Hidup',
+  'Pendidikan & IPTEK': 'Dinas Pendidikan',
+  'Agro-Maritim': 'Dinas Ketahanan Pangan, Kelautan dan Pertanian',
+  'Pemuda & Olahraga': 'Dinas Sosial',
+  Ketenagakerjaan: 'Dinas Perindustrian dan Energi',
+  'Pertahanan & Ideologi': 'Satuan Polisi Pamong Praja',
+  Perhubungan: 'Dinas Perhubungan',
+  'Pemilu & Politik Praktis': 'Sekretariat Daerah Provinsi Papua',
+  'Agraria dan Tata Ruang': 'Dinas Pekerjaan Umum',
+  Kependudukan: 'Dinas Komunikasi dan Informatika',
+  'Pemberdayaan Perempuan & Perlindungan Anak': 'Dinas Sosial',
+  'Pembangunan Desa': 'Pemerintah Kabupaten/Kota',
 }
 
 // Kalimat aktif ringkas (maks. 6-8 kata) per klaster kategori×entitas, ditulis berdasarkan
@@ -189,16 +222,27 @@ const SUBSTANSI_SPESIFIK_MAP: Record<string, string> = {}
 // Kerangka kalimat aktif ringkas per kategori — cadangan bila klaster kategori×entitas belum
 // memiliki kalimat spesifik di SUBSTANSI_SPESIFIK_MAP di atas.
 const SOROTAN_AKTIF_MAP: Record<KategoriIsu, string> = {
-  'Pelayanan Publik': 'Masyarakat menyoroti pelayanan publik',
+  'Ekonomi, Keuangan & Industri': 'Publik menyoroti ekonomi dan keuangan daerah',
   Infrastruktur: 'Publik menyoroti kondisi infrastruktur',
-  Pendidikan: 'Publik menyoroti isu pendidikan',
+  'Administrasi & Pemerintahan': 'Publik menyoroti tata kelola pemerintahan',
+  'Politik & Kebijakan': 'Publik menyoroti kebijakan pemerintah',
   Kesehatan: 'Publik menyoroti isu kesehatan',
-  'Ekonomi & Ketahanan Pangan': 'Publik menyoroti ekonomi dan ketahanan pangan',
-  Pariwisata: 'Publik menyoroti pengelolaan pariwisata',
-  'Lingkungan & Bencana': 'Publik menyoroti lingkungan dan kebencanaan',
-  'Sosial & Kemiskinan': 'Publik menyoroti penanganan sosial-kemiskinan',
-  'Keamanan & Ketertiban': 'Publik menyoroti keamanan dan ketertiban',
-  'Tata Kelola Pemerintahan': 'Publik menyoroti tata kelola pemerintahan',
+  Kebencanaan: 'Publik menyoroti penanganan bencana',
+  'Hukum & HAM': 'Publik menyoroti penegakan hukum dan HAM',
+  'Koperasi & UMKM': 'Publik menyoroti pengembangan UMKM',
+  'Sosial, Budaya & Pariwisata': 'Publik menyoroti isu sosial, budaya dan pariwisata',
+  'Energi, SDA & Lingkungan': 'Publik menyoroti pengelolaan SDA dan lingkungan',
+  'Pendidikan & IPTEK': 'Publik menyoroti isu pendidikan dan iptek',
+  'Agro-Maritim': 'Publik menyoroti sektor pertanian dan kelautan',
+  'Pemuda & Olahraga': 'Publik menyoroti pemberdayaan pemuda dan olahraga',
+  Ketenagakerjaan: 'Publik menyoroti isu ketenagakerjaan',
+  'Pertahanan & Ideologi': 'Publik menyoroti situasi pertahanan dan ideologi',
+  Perhubungan: 'Publik menyoroti transportasi dan perhubungan',
+  'Pemilu & Politik Praktis': 'Publik menyoroti penyelenggaraan pemilu',
+  'Agraria dan Tata Ruang': 'Publik menyoroti agraria dan tata ruang',
+  Kependudukan: 'Publik menyoroti isu kependudukan',
+  'Pemberdayaan Perempuan & Perlindungan Anak': 'Publik menyoroti isu perempuan dan anak',
+  'Pembangunan Desa': 'Publik menyoroti pembangunan desa dan kampung',
 }
 
 function substansiMasalahDari(kategori: KategoriIsu, entitasTerkait: EntitasPimpinan | undefined): string {

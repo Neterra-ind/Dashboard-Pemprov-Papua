@@ -35,10 +35,7 @@ import {
   substansiMasalahUntuk,
 } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
-import beritaPapuaRaw from '@/data/beritaPapua.json'
-
-type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
-const beritaPapua = beritaPapuaRaw as BeritaRaw[]
+import { useBerita } from '@/lib/beritaStore'
 import { hitungPerHariRange, levelKeAngka } from '@/lib/aggregations'
 import {
   AreaGradient,
@@ -147,6 +144,7 @@ function AdminOpdSummary() {
 export function Dashboard() {
   const { role } = useRole()
   const { statusUntukIsu } = useDisposisi()
+  const { berita: beritaPapua } = useBerita()
   const [jenisSumber, setJenisSumber] = useState('')
   const [dariTanggal, setDariTanggal] = useState('')
   const [sampaiTanggal, setSampaiTanggal] = useState('')

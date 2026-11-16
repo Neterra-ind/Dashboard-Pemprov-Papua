@@ -11,15 +11,14 @@ import { PageHeader } from '@/components/ui/PageHeader'
 import { useRole } from '@/lib/role'
 import { getJenisSumber } from '@/lib/utils'
 import { daftarJenisSumber, daftarKategoriIsu } from '@/data/mockData'
-import beritaPapuaRaw from '@/data/beritaPapua.json'
-
-type BeritaRaw = { tanggal: string; judul: string; sumber: string; sentimen: string; url: string; kategori: string; entitasTerkait?: string }
-const beritaPapua = beritaPapuaRaw as BeritaRaw[]
+import type { BeritaRaw } from '@/types'
+import { useBerita } from '@/lib/beritaStore'
 
 const SUMBER_AKTIF = [{ nama: 'Media Online (RSS/API)', tipe: 'Otomatis', interval: '15 menit', icon: Rss }]
 
 export function DataSumber() {
   const { role } = useRole()
+  const { berita: beritaPapua } = useBerita()
   const [jenisSumber, setJenisSumber] = useState('')
   const [kategori, setKategori] = useState('')
   const [dariTanggal, setDariTanggal] = useState('')
