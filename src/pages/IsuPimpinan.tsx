@@ -48,7 +48,13 @@ export function IsuPimpinan() {
   const [jenisSumber, setJenisSumber] = useState('')
   const [dariTanggal, setDariTanggal] = useState('')
   const [sampaiTanggal, setSampaiTanggal] = useState('')
+  const [duplikasiFilter, setDuplikasiFilter] = useState('')
   const [selectedJudul, setSelectedJudul] = useState<string | null>(null)
+
+  const adaKurasi = useMemo(
+    () => beritaPapua.some((b) => !!(b as any).framing_kinerja),
+    [beritaPapua],
+  )
 
   const reputasi = reputasiByEntitas(tab)
   const beritaTerkait = useMemo(() => {
@@ -58,9 +64,10 @@ export function IsuPimpinan() {
         b.entitasTerkait === tab &&
         (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
         (!dariTanggal || b.tanggal >= dariTanggal) &&
-        (!sampaiTanggal || b.tanggal <= sampaiTanggal),
+        (!sampaiTanggal || b.tanggal <= sampaiTanggal) &&
+        (!duplikasiFilter || ((b as any).status_duplikasi ?? 'Unik') === duplikasiFilter),
     )
-  }, [tab, jenisSumber, dariTanggal, sampaiTanggal])
+  }, [tab, jenisSumber, dariTanggal, sampaiTanggal, duplikasiFilter])
 
   const beritaDitampilkan = selectedJudul
     ? beritaTerkait.filter((b) => b.judul === selectedJudul)
@@ -226,6 +233,14 @@ export function IsuPimpinan() {
       <Card className="p-4">
         <div className="flex flex-wrap items-end gap-3">
           <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
+          {adaKurasi && (
+            <FilterSelect
+              label="Status Duplikasi"
+              value={duplikasiFilter}
+              options={['Unik', 'Pengulangan Berita', 'Potensi Duplikat']}
+              onChange={setDuplikasiFilter}
+            />
+          )}
           <DateRangeFilter
             dari={dariTanggal}
             sampai={sampaiTanggal}
