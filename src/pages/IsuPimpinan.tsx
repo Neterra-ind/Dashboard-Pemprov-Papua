@@ -97,6 +97,8 @@ export function IsuPimpinan() {
     const daftarIsuTab = tab === 'Gubernur' ? daftarIsuGubernur : daftarIsuWakilGubernur
     return daftarIsuTab
       .filter(isu => (isu.tipe ?? 'gubernur') !== 'personal' && isu.jumlahBerita > 1)
+      .sort((a, b) => b.jumlahBerita - a.jumlahBerita)
+      .slice(0, 10)
       .map(isu => ({
         name: isu.namaIsu,
         judul: isu.namaIsu,
