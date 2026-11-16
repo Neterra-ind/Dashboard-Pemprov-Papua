@@ -38,6 +38,7 @@ interface BeritaStoreCtx {
   subjekQuery: string
   setBerita: (data: BeritaRaw[], subjek?: string) => void
   resetKeDefault: () => void
+  hapusSemuaData: () => void
 }
 
 const BeritaStoreContext = createContext<BeritaStoreCtx | null>(null)
@@ -71,8 +72,16 @@ export function BeritaStoreProvider({ children }: { children: ReactNode }) {
     setSubjekQuery(DEFAULT_SUBJEK)
   }
 
+  function hapusSemuaData() {
+    localStorage.removeItem(LS_KEY)
+    localStorage.removeItem(LS_SUBJEK_KEY)
+    setBeritaState([])
+    setIsCustom(false)
+    setSubjekQuery(DEFAULT_SUBJEK)
+  }
+
   return (
-    <BeritaStoreContext.Provider value={{ berita, isCustom, subjekQuery, setBerita, resetKeDefault }}>
+    <BeritaStoreContext.Provider value={{ berita, isCustom, subjekQuery, setBerita, resetKeDefault, hapusSemuaData }}>
       {children}
     </BeritaStoreContext.Provider>
   )

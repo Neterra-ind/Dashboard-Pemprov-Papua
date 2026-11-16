@@ -249,7 +249,7 @@ function FormatBadge({ format }: { format: FormatExcel }) {
 // ── Halaman Utama ─────────────────────────────────────────────────────────
 
 export function UploadData() {
-  const { berita: beritaAktif, isCustom, setBerita, resetKeDefault } = useBerita()
+  const { berita: beritaAktif, isCustom, setBerita, resetKeDefault, hapusSemuaData } = useBerita()
 
   const [isDragging, setIsDragging] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -304,6 +304,15 @@ export function UploadData() {
     }
   }
 
+  const handleHapusSemua = () => {
+    if (confirm('Hapus semua data? Dashboard akan kosong sampai Anda upload file baru.')) {
+      hapusSemuaData()
+      setHasil(null)
+      setNamaFile('')
+      setSubjekInput('')
+    }
+  }
+
   function handleLogout() {
     if (confirm('Keluar dari sesi upload? Anda harus memasukkan PIN lagi untuk kembali.')) {
       logoutUpload()
@@ -348,15 +357,24 @@ export function UploadData() {
                 </p>
               </div>
             </div>
-            {isCustom && (
+            <div className="flex items-center gap-2">
+              {isCustom && (
+                <button
+                  onClick={handleReset}
+                  className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-50 transition-colors"
+                >
+                  <RefreshCw className="h-3.5 w-3.5" />
+                  Reset ke Data Default
+                </button>
+              )}
               <button
-                onClick={handleReset}
+                onClick={handleHapusSemua}
                 className="flex items-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-100 transition-colors"
               >
                 <Trash2 className="h-3.5 w-3.5" />
-                Reset ke Data Default
+                Hapus Semua Data
               </button>
-            )}
+            </div>
           </div>
         </CardContent>
       </Card>
