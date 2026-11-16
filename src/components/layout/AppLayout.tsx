@@ -8,7 +8,6 @@ import {
   MapPin,
   Newspaper,
   ShieldAlert,
-  Upload,
   UserRound,
 } from 'lucide-react'
 import type { Role } from '@/types'
@@ -23,7 +22,8 @@ const NAV_ITEMS: { to: string; label: string; icon: typeof LayoutDashboard; end?
   { to: '/early-warning', label: 'Isu Negatif', icon: ShieldAlert, roles: ['Eksekutif', 'Super Admin'] },
   { to: '/tindak-lanjut', label: 'Tindak Lanjut', icon: ClipboardCheck, roles: ['Admin OPD', 'Super Admin'] },
   { to: '/data-sumber', label: 'Data Sumber', icon: Newspaper, roles: ['Eksekutif', 'Super Admin'] },
-  { to: '/upload-data', label: 'Upload Data Excel', icon: Upload, roles: ['Eksekutif', 'Admin OPD', 'Super Admin'] },
+  // Upload Data tidak muncul di nav publik — akses langsung via URL /upload-data, diproteksi PIN gate
+  // { to: '/upload-data', label: 'Upload Data Excel', icon: Upload, roles: ['Eksekutif', 'Admin OPD', 'Super Admin'] },
 ]
 
 function BrandMark() {

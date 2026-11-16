@@ -13,12 +13,14 @@
  */
 import { useCallback, useRef, useState } from 'react'
 import * as XLSX from 'xlsx'
-import { CheckCircle2, FileSpreadsheet, RefreshCw, Trash2, Upload, AlertCircle, Info } from 'lucide-react'
+import { CheckCircle2, FileSpreadsheet, RefreshCw, Trash2, Upload, AlertCircle, Info, LogOut } from 'lucide-react'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
 import type { BeritaRaw, Engagement } from '@/types'
 import { klasifikasiKategori, mapSentimen, mapPlatform } from '@/lib/klasifikasiKategori'
 import { useBerita } from '@/lib/beritaStore'
+import { PinGate } from '@/components/ui/PinGate'
+import { logoutUpload } from '@/lib/uploadAuth'
 
 // ── Tipe helper internal ──────────────────────────────────────────────────
 
@@ -283,12 +285,30 @@ export function UploadData() {
     }
   }
 
+  function handleLogout() {
+    if (confirm('Keluar dari sesi upload? Anda harus memasukkan PIN lagi untuk kembali.')) {
+      logoutUpload()
+      window.location.reload()
+    }
+  }
+
   return (
+    <PinGate>
     <div className="space-y-6">
-      <PageHeader
-        title="Upload Data Excel"
-        subtitle="Upload file Excel IMD untuk memperbarui data di seluruh halaman dashboard"
-      />
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <PageHeader
+          title="Upload Data Excel"
+          subtitle="Upload file Excel IMD untuk memperbarui data di seluruh halaman dashboard"
+        />
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-500 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+          title="Keluar dari sesi upload admin"
+        >
+          <LogOut className="h-3.5 w-3.5" />
+          Keluar Sesi
+        </button>
+      </div>
 
       {/* Status data aktif */}
       <Card>
@@ -515,5 +535,6 @@ export function UploadData() {
         </CardContent>
       </Card>
     </div>
+    </PinGate>
   )
 }
