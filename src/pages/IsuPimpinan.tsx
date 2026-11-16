@@ -186,7 +186,6 @@ export function IsuPimpinan() {
     <div className="space-y-6">
       <PageHeader
         title="Isu Gubernur & Wakil Gubernur"
-        subtitle="Pemantauan persepsi publik, citra media, dan narasi yang melekat pada entitas pimpinan daerah — Media Share of Voice (SoV) & sentimen netizen/media."
       />
 
       <Card className="p-4">
@@ -277,7 +276,7 @@ export function IsuPimpinan() {
         </Card>
 
         <Card>
-          <CardHeader title="Sentimen Netizen/Media" subtitle="Rasio positif vs negatif" />
+          <CardHeader title="Sentimen Netizen/Media" />
           <CardContent>
             <ResponsiveContainer width="100%" height={216}>
               <PieChart>
@@ -331,60 +330,60 @@ export function IsuPimpinan() {
           </Card>
         )}
 
-        {isuPersonal.length > 0 && (
-          <Card>
-            <CardContent>
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Isu Personal</p>
-              <ResponsiveContainer width="100%" height={Math.max(200, isuPersonal.length * 44)}>
-                <BarChart
-                  data={isuPersonal}
-                  layout="vertical"
-                  margin={{ left: 8, right: 40, top: 0, bottom: 0 }}
-                  style={{ cursor: 'pointer' }}
-                  onClick={(d) => {
-                    const judul = d?.activePayload?.[0]?.payload?.judul
-                    if (judul) setSelectedJudul((prev) => prev === judul ? null : judul)
-                  }}
-                >
-                  <CartesianGrid {...gridProps} horizontal={false} />
-                  <XAxis type="number" {...axisProps} allowDecimals={false} />
-                  <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
-                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                  <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
-                    {isuPersonal.map((entry, i) => (
-                      <Cell
-                        key={i}
-                        fill={entry.fill}
-                        opacity={selectedJudul && selectedJudul !== entry.judul ? 0.3 : 1}
-                      />
-                    ))}
-                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        )}
+        <Card>
+          <CardHeader title="Ekspos Media" />
+          <CardContent>
+            <ResponsiveContainer width="100%" height={Math.max(200, eksposMedia.length * 36)}>
+              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={120} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
       </div>
 
-      <Card>
-        <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
-        <CardContent>
-          <ResponsiveContainer width="100%" height={Math.max(200, eksposMedia.length * 36)}>
-            <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
-              <CartesianGrid {...gridProps} horizontal={false} />
-              <XAxis type="number" {...axisProps} allowDecimals={false} />
-              <YAxis type="category" dataKey="name" {...axisProps} width={120} />
-              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
-            </BarChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
+      {isuPersonal.length > 0 && (
+        <Card>
+          <CardContent>
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Isu Personal</p>
+            <ResponsiveContainer width="100%" height={Math.max(200, isuPersonal.length * 44)}>
+              <BarChart
+                data={isuPersonal}
+                layout="vertical"
+                margin={{ left: 8, right: 40, top: 0, bottom: 0 }}
+                style={{ cursor: 'pointer' }}
+                onClick={(d) => {
+                  const judul = d?.activePayload?.[0]?.payload?.judul
+                  if (judul) setSelectedJudul((prev) => prev === judul ? null : judul)
+                }}
+              >
+                <CartesianGrid {...gridProps} horizontal={false} />
+                <XAxis type="number" {...axisProps} allowDecimals={false} />
+                <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
+                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                  {isuPersonal.map((entry, i) => (
+                    <Cell
+                      key={i}
+                      fill={entry.fill}
+                      opacity={selectedJudul && selectedJudul !== entry.judul ? 0.3 : 1}
+                    />
+                  ))}
+                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+      )}
 
       {topNarasumber.length > 0 && (
         <Card>
-          <CardHeader title="Narasumber" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita" />
+          <CardHeader title="Narasumber" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(160, topNarasumber.length * 52)}>
               <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>

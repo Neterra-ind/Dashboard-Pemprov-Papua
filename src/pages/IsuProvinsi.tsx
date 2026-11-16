@@ -285,7 +285,7 @@ export function IsuProvinsi() {
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
-          <CardHeader title="Isu Dominan" subtitle="Top 10 judul berita terbanyak (merah = dominan negatif)" />
+          <CardHeader title="Isu Dominan" subtitle="Berdasarkan kesamaan judul" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(260, puncakPemberitaan.length * 44)}>
               <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
@@ -320,7 +320,7 @@ export function IsuProvinsi() {
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
-          <CardHeader title="Ekspos Media" subtitle="Top 10 media yang paling banyak memberitakan (sesuai filter kategori)" />
+          <CardHeader title="Ekspos Media" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(160, eksposMedia.length * 44)}>
               <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 24, top: 0, bottom: 0 }}>
@@ -336,7 +336,7 @@ export function IsuProvinsi() {
 
         {topNarasumber.length > 0 && (
           <Card>
-            <CardHeader title="Narasumber" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita provinsi" />
+            <CardHeader title="Narasumber" />
             <CardContent>
               <ResponsiveContainer width="100%" height={Math.max(160, topNarasumber.length * 52)}>
                 <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>

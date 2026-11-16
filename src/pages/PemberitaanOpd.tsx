@@ -174,7 +174,7 @@ export function PemberitaanOpd() {
         </Card>
 
         <Card>
-          <CardHeader title="OPD Paling Banyak Diberitakan Negatif" subtitle="Isu Negatif + Potensi Negatif" />
+          <CardHeader title="OPD Paling Banyak Diberitakan Negatif" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(160, topNegatif.length * 44)}>
               <BarChart data={topNegatif} layout="vertical" margin={{ left: 8, right: 16, top: 0, bottom: 0 }}>
@@ -191,7 +191,7 @@ export function PemberitaanOpd() {
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
-          <CardHeader title="Isu Dominan" subtitle="Isu/judul berita yang paling banyak diliput" />
+          <CardHeader title="Isu Dominan" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaanOpd.length * 48)}>
               <BarChart data={puncakPemberitaanOpd} layout="vertical" margin={{ left: 8, right: 40, top: 0, bottom: 0 }}>
@@ -211,7 +211,7 @@ export function PemberitaanOpd() {
         </Card>
 
         <Card>
-          <CardHeader title="Ekspos Media" subtitle="Jumlah pemberitaan per nama media" />
+          <CardHeader title="Ekspos Media" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(200, eksposMediaOpd.length * 36)}>
               <BarChart data={eksposMediaOpd} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
@@ -228,7 +228,7 @@ export function PemberitaanOpd() {
 
       {topNarasumberOpd.length > 0 && (
         <Card>
-          <CardHeader title="Narasumber" subtitle="Tokoh/pejabat yang paling banyak disebut dalam berita OPD" />
+          <CardHeader title="Narasumber" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(160, topNarasumberOpd.length * 52)}>
               <BarChart data={topNarasumberOpd} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>

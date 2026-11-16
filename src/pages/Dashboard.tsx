@@ -389,7 +389,6 @@ export function Dashboard() {
             value={totalBeritaNegatif}
             icon={AlertTriangle}
             tone="negative"
-            caption="perlu perhatian OPD"
           />
         </div>
       </section>
@@ -459,7 +458,7 @@ export function Dashboard() {
       {/* 5 — Secondary Analytics */}
       {/* 6 — Isu Dominan */}
       <section>
-        <SectionLabel hint="10 judul dengan berita terbanyak · merah = dominan negatif">Isu Dominan</SectionLabel>
+        <SectionLabel>Isu Dominan</SectionLabel>
         <Card>
           <CardHeader
             title="Isu Dominan"
@@ -489,7 +488,7 @@ export function Dashboard() {
 
         <Card>
           <CardHeader
-            title="Issues Negatif"
+            title="Isu Negatif"
             subtitle="Berita negatif atau berpotensi negatif yang perlu direspons OPD"
             action={
               <Link
@@ -520,7 +519,7 @@ export function Dashboard() {
         </Card>
 
         <Card>
-          <CardHeader title="Publikasi Kinerja OPD" subtitle="OPD dengan isu negatif terbanyak" />
+          <CardHeader title="Publikasi Kinerja OPD" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(160, rankingOpdTeratas.length * 44)}>
               <BarChart data={rankingOpdTeratas} layout="vertical" margin={{ left: 8, right: 16, top: 0, bottom: 0 }}>

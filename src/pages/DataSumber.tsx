@@ -87,7 +87,6 @@ export function DataSumber() {
     <div className="space-y-6">
       <PageHeader
         title="Data Sumber"
-        subtitle="Berita dan postingan mentah hasil klasifikasi AI (sentimen, kategori) — bukti pendukung di balik setiap isu."
       />
 
       {role === 'Super Admin' && (
