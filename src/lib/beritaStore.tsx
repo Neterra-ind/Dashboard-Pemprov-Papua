@@ -5,12 +5,18 @@
  * Saat user upload Excel, data di-replace di localStorage + context ini.
  * Semua halaman yang sebelumnya baca beritaPapua.json langsung
  * seharusnya pakai hook useBerita() dari sini agar data upload masuk.
+ *
+ * subjekQuery: nama subjek yang di-query di IMD (mis. "Gubernur Papua",
+ * "Bupati Mimika") — dipakai sebagai label KPI di Dashboard agar
+ * fleksibel untuk 10+ daerah.
  */
 import { createContext, useContext, useState, type ReactNode } from 'react'
 import type { BeritaRaw } from '@/types'
 import defaultData from '@/data/beritaPapua.json'
 
 const LS_KEY = 'neterra_berita_aktif'
+const LS_SUBJEK_KEY = 'neterra_subjek_query'
+const DEFAULT_SUBJEK = 'Gubernur & Pemprov Papua'
 
 function loadFromStorage(): BeritaRaw[] | null {
   try {
@@ -22,10 +28,15 @@ function loadFromStorage(): BeritaRaw[] | null {
   }
 }
 
+function loadSubjekFromStorage(): string {
+  return localStorage.getItem(LS_SUBJEK_KEY) ?? DEFAULT_SUBJEK
+}
+
 interface BeritaStoreCtx {
   berita: BeritaRaw[]
   isCustom: boolean
-  setBerita: (data: BeritaRaw[]) => void
+  subjekQuery: string
+  setBerita: (data: BeritaRaw[], subjek?: string) => void
   resetKeDefault: () => void
 }
 
@@ -36,25 +47,32 @@ export function BeritaStoreProvider({ children }: { children: ReactNode }) {
     return loadFromStorage() ?? (defaultData as BeritaRaw[])
   })
   const [isCustom, setIsCustom] = useState(() => !!loadFromStorage())
+  const [subjekQuery, setSubjekQuery] = useState<string>(() => loadSubjekFromStorage())
 
-  function setBerita(data: BeritaRaw[]) {
+  function setBerita(data: BeritaRaw[], subjek?: string) {
     try {
       localStorage.setItem(LS_KEY, JSON.stringify(data))
+      if (subjek) {
+        localStorage.setItem(LS_SUBJEK_KEY, subjek)
+      }
     } catch {
       // localStorage mungkin penuh — tetap update state
     }
     setBeritaState(data)
     setIsCustom(true)
+    if (subjek) setSubjekQuery(subjek)
   }
 
   function resetKeDefault() {
     localStorage.removeItem(LS_KEY)
+    localStorage.removeItem(LS_SUBJEK_KEY)
     setBeritaState(defaultData as BeritaRaw[])
     setIsCustom(false)
+    setSubjekQuery(DEFAULT_SUBJEK)
   }
 
   return (
-    <BeritaStoreContext.Provider value={{ berita, isCustom, setBerita, resetKeDefault }}>
+    <BeritaStoreContext.Provider value={{ berita, isCustom, subjekQuery, setBerita, resetKeDefault }}>
       {children}
     </BeritaStoreContext.Provider>
   )

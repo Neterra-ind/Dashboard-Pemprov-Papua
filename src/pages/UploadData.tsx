@@ -146,6 +146,7 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
       username,
       platform: platform as string | undefined,
       engagement,
+      tipe: 'socmed',
     }
   }
 
@@ -239,6 +240,7 @@ export function UploadData() {
   const [isLoading, setIsLoading] = useState(false)
   const [hasil, setHasil] = useState<HasilParse | null>(null)
   const [namaFile, setNamaFile] = useState('')
+  const [subjekInput, setSubjekInput] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const prosesFile = useCallback(async (file: File) => {
@@ -272,9 +274,11 @@ export function UploadData() {
 
   const handleTerapkan = () => {
     if (!hasil?.rows.length) return
-    setBerita(hasil.rows)
+    const subjek = subjekInput.trim() || undefined
+    setBerita(hasil.rows, subjek)
     setHasil(null)
     setNamaFile('')
+    setSubjekInput('')
   }
 
   const handleReset = () => {
@@ -396,13 +400,27 @@ export function UploadData() {
               </div>
             </div>
             {hasil.rows.length > 0 && (
-              <button
-                onClick={handleTerapkan}
-                className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-pressed transition-colors"
-              >
-                <CheckCircle2 className="h-4 w-4" />
-                Terapkan ke Dashboard
-              </button>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="flex flex-col gap-1">
+                  <label className="text-xs font-medium text-slate-500">
+                    Nama subjek query <span className="text-slate-400">(opsional)</span>
+                  </label>
+                  <input
+                    type="text"
+                    value={subjekInput}
+                    onChange={(e) => setSubjekInput(e.target.value)}
+                    placeholder="cth: Gubernur Papua, Bupati Mimika"
+                    className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 placeholder-slate-400 outline-none focus:border-accent focus:bg-white focus:ring-1 focus:ring-accent/30 w-64"
+                  />
+                </div>
+                <button
+                  onClick={handleTerapkan}
+                  className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-white hover:bg-accent-pressed transition-colors self-end"
+                >
+                  <CheckCircle2 className="h-4 w-4" />
+                  Terapkan ke Dashboard
+                </button>
+              </div>
             )}
           </div>
 

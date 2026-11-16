@@ -144,7 +144,7 @@ function AdminOpdSummary() {
 export function Dashboard() {
   const { role } = useRole()
   const { statusUntukIsu } = useDisposisi()
-  const { berita: beritaPapua } = useBerita()
+  const { berita: beritaPapua, subjekQuery } = useBerita()
   const [jenisSumber, setJenisSumber] = useState('')
   const [dariTanggal, setDariTanggal] = useState('')
   const [sampaiTanggal, setSampaiTanggal] = useState('')
@@ -389,14 +389,14 @@ export function Dashboard() {
         <SectionLabel hint="periode data aktif">Ringkasan Pemberitaan</SectionLabel>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <StatCard
-            label="Total Berita Pemprov Papua"
+            label={`Total Berita ${subjekQuery}`}
             value={totalBeritaPemprov}
             icon={Newspaper}
             tone="accent"
             caption="seluruh pemberitaan terpantau"
           />
           <StatCard
-            label="Total Berita Gubernur"
+            label={`Berita ${subjekQuery} — Pimpinan`}
             value={totalBeritaGubernur}
             icon={UserRound}
             caption="entitas pimpinan daerah"
