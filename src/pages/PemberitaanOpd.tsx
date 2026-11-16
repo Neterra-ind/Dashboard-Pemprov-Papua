@@ -159,38 +159,6 @@ export function PemberitaanOpd() {
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Card>
-          <CardHeader title="OPD Terpopuler" subtitle="Berdasarkan total berita/postingan" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(160, topPopuler.length * 44)}>
-              <BarChart data={topPopuler} layout="vertical" margin={{ left: 8, right: 16, top: 0, bottom: 0 }}>
-                <CartesianGrid {...gridProps} horizontal={false} />
-                <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={150} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22} />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader title="OPD Paling Banyak Diberitakan Negatif" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(160, topNegatif.length * 44)}>
-              <BarChart data={topNegatif} layout="vertical" margin={{ left: 8, right: 16, top: 0, bottom: 0 }}>
-                <CartesianGrid {...gridProps} horizontal={false} />
-                <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={150} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="value" name="Isu negatif" fill={chart.negative} radius={[0, 6, 6, 0]} maxBarSize={22} />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Card>
           <CardHeader title="Isu Dominan" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(200, puncakPemberitaanOpd.length * 48)}>
@@ -211,20 +179,35 @@ export function PemberitaanOpd() {
         </Card>
 
         <Card>
-          <CardHeader title="Ekspos Media" />
+          <CardHeader title="OPD Terpopuler" subtitle="Berdasarkan total berita/postingan" />
           <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(200, eksposMediaOpd.length * 36)}>
-              <BarChart data={eksposMediaOpd} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
+            <ResponsiveContainer width="100%" height={Math.max(160, topPopuler.length * 44)}>
+              <BarChart data={topPopuler} layout="vertical" margin={{ left: 8, right: 16, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
                 <YAxis type="category" dataKey="name" {...axisProps} width={150} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
+                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
+
+      <Card>
+        <CardHeader title="Ekspos Media" />
+        <CardContent>
+          <ResponsiveContainer width="100%" height={Math.max(200, eksposMediaOpd.length * 36)}>
+            <BarChart data={eksposMediaOpd} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
+              <CartesianGrid {...gridProps} horizontal={false} />
+              <XAxis type="number" {...axisProps} allowDecimals={false} />
+              <YAxis type="category" dataKey="name" {...axisProps} width={150} />
+              <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+              <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
       {topNarasumberOpd.length > 0 && (
         <Card>
