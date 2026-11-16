@@ -35,7 +35,7 @@ import {
   substansiMasalahUntuk,
 } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
-import { useBerita } from '@/lib/beritaStore'
+import { useBerita, isRelevan, isPimpinan, isProvinsi } from '@/lib/beritaStore'
 import { hitungPerHariRange, levelKeAngka } from '@/lib/aggregations'
 import {
   AreaGradient,
@@ -163,6 +163,7 @@ export function Dashboard() {
   const beritaFiltered = useMemo(
     () => beritaPapua.filter(
       (b) =>
+        isRelevan(b) &&
         (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
         (!dariTanggal || b.tanggal >= dariTanggal) &&
         (!sampaiTanggal || b.tanggal <= sampaiTanggal),
@@ -172,14 +173,11 @@ export function Dashboard() {
 
   const totalBeritaPemprov = beritaFiltered.length
   const totalBeritaGubernur = useMemo(
-    () => beritaFiltered.filter((b) => b.entitasTerkait === 'Gubernur').length,
+    () => beritaFiltered.filter((b) => isPimpinan(b)).length,
     [beritaFiltered],
   )
   const totalBeritaOpd = useMemo(
-    () =>
-      beritaFiltered.filter(
-        (b) => !b.entitasTerkait || (b.entitasTerkait !== 'Gubernur' && b.entitasTerkait !== 'Wakil Gubernur'),
-      ).length,
+    () => beritaFiltered.filter((b) => isProvinsi(b)).length,
     [beritaFiltered],
   )
   const totalBeritaNegatif = useMemo(

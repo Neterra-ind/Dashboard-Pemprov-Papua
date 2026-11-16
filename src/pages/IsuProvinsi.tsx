@@ -34,7 +34,7 @@ import {
 } from '@/lib/chartTheme'
 import { daftarJenisSumber, daftarKategoriIsu, daftarNarasumber } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
-import { useBerita } from '@/lib/beritaStore'
+import { useBerita, isProvinsi } from '@/lib/beritaStore'
 import type { BeritaRaw, FramingKinerja, StatusDuplikasi } from '@/types'
 
 const FRAMING_COLOR: Record<string, string> = {
@@ -142,7 +142,7 @@ export function IsuProvinsi() {
 
   // Berita tingkat provinsi (bukan entitas pimpinan)
   const beritaProvinsi = useMemo(
-    () => semuaBerita.filter((b) => !b.entitasTerkait || (b.entitasTerkait !== 'Gubernur' && b.entitasTerkait !== 'Wakil Gubernur')),
+    () => semuaBerita.filter((b) => isProvinsi(b)),
     [semuaBerita],
   )
 

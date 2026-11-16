@@ -83,3 +83,28 @@ export function useBerita(): BeritaStoreCtx {
   if (!ctx) throw new Error('useBerita must be used within BeritaStoreProvider')
   return ctx
 }
+
+// ── Helper: filter berdasarkan subjek_query kurasi AI ──────────────────────
+
+/** Apakah berita ini relevan (bukan Tidak Relevan)? */
+export function isRelevan(b: BeritaRaw): boolean {
+  const sq = (b as any).subjek_query as string | undefined
+  if (!sq) return true // data lama tanpa kurasi → anggap relevan
+  return sq !== 'Tidak Relevan'
+}
+
+/** Apakah berita ini termasuk Gubernur atau Wakil Gubernur (untuk Isu Pimpinan)? */
+export function isPimpinan(b: BeritaRaw): boolean {
+  const sq = (b as any).subjek_query as string | undefined
+  if (sq) return sq === 'Gubernur' || sq === 'Wakil Gubernur'
+  return b.entitasTerkait === 'Gubernur' || b.entitasTerkait === 'Wakil Gubernur'
+}
+
+/** Filter untuk halaman Isu Provinsi & Pemberitaan OPD: relevan dan bukan pimpinan spesifik */
+export function isProvinsi(b: BeritaRaw): boolean {
+  if (!isRelevan(b)) return false
+  const sq = (b as any).subjek_query as string | undefined
+  if (sq) return sq !== 'Gubernur' && sq !== 'Wakil Gubernur' && sq !== 'Tidak Relevan'
+  // fallback data lama
+  return !b.entitasTerkait || (b.entitasTerkait !== 'Gubernur' && b.entitasTerkait !== 'Wakil Gubernur')
+}

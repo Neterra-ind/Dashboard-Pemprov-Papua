@@ -12,7 +12,7 @@ import { useRole } from '@/lib/role'
 import { getJenisSumber } from '@/lib/utils'
 import { daftarJenisSumber, daftarKategoriIsu } from '@/data/mockData'
 import type { BeritaRaw } from '@/types'
-import { useBerita } from '@/lib/beritaStore'
+import { useBerita, isRelevan } from '@/lib/beritaStore'
 
 const SUMBER_AKTIF = [{ nama: 'Media Online (RSS/API)', tipe: 'Otomatis', interval: '15 menit', icon: Rss }]
 
@@ -53,6 +53,7 @@ export function DataSumber() {
   const filtered = useMemo(() => {
     return beritaPapua.filter(
       (b) =>
+        isRelevan(b) &&
         (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
         (!kategori || b.kategori === kategori) &&
         (!duplikasiFilter || (b as any).status_duplikasi === duplikasiFilter) &&
