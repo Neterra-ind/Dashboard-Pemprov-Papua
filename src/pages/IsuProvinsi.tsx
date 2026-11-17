@@ -378,7 +378,7 @@ export function IsuProvinsi() {
                   radius={[0, 4, 4, 0]}
                   maxBarSize={22}
                   style={{ cursor: 'pointer' }}
-                  onClick={(data) => setIsuDominanDipilih((prev) => (prev === data.name ? null : data.name))}
+                  onClick={(data) => setIsuDominanDipilih((prev) => (prev === data.name ? null : (data.name ?? null)))}
                 >
                   {puncakPemberitaan.map((entry, i) => (
                     <Cell

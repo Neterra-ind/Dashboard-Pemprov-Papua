@@ -167,7 +167,7 @@ const beritaOpdColumns: ColumnDef<BeritaRaw, any>[] = [
 ]
 
 // ── Daftar pilihan filter status duplikasi ──────────────────────────────────
-const DUPLIKASI_OPTIONS: StatusDuplikasi[] = ['Unik', 'Pengulangan Berita', 'Potensi Duplikat']
+const DUPLIKASI_OPTIONS: StatusDuplikasi[] = ['Unik', 'Potensi Duplikat']
 
 // ── Komponen utama ──────────────────────────────────────────────────────────
 
