@@ -69,12 +69,23 @@ export function IsuPimpinan() {
     setSelectedJudul(null)
     return beritaPapua.filter((b) => {
       const bAny = b as any
-      // Jika data punya kolom subjek_query dari kurasi AI → pakai itu (presisi tinggi)
-      // Fallback ke entitasTerkait untuk data lama / data tanpa kurasi AI
       const subjekQuery = bAny.subjek_query as string | undefined
-      const cocokTab = subjekQuery
-        ? subjekQuery === tab
-        : b.entitasTerkait === tab
+      let cocokTab: boolean
+      if (subjekQuery) {
+        // Data kurasi AI: exact match
+        cocokTab = subjekQuery === tab
+      } else {
+        // Fallback text search pada judul+isi — lebih luas dari entitasTerkait:
+        // Tab Gubernur    → semua artikel yang menyebut "gubernur" (termasuk yang
+        //                   membahas Wakil Gubernur tapi juga menyebut Gubernur)
+        // Tab Wakil Gubernur → artikel yang menyebut "wakil gubernur" atau "wagub"
+        const teks = (b.judul + ' ' + ((b as any).isi ?? '')).toLowerCase()
+        if (tab === 'Gubernur') {
+          cocokTab = teks.includes('gubernur')
+        } else {
+          cocokTab = teks.includes('wakil gubernur') || teks.includes('wagub') || b.entitasTerkait === 'Wakil Gubernur'
+        }
+      }
 
       return (
         cocokTab &&
