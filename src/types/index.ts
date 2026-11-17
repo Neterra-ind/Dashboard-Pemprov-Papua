@@ -136,11 +136,10 @@ export type FramingKinerja =
   | 'Klarifikasi'
   | 'Program/Kinerja'
   | 'Isu Terhubung'
-  | 'Hal Terhubung'
   | 'Seremoni Pasif'
 
 /** Status duplikasi artikel hasil kurasi AI. */
-export type StatusDuplikasi = 'Unik' | 'Pengulangan Berita' | 'Potensi Duplikat'
+export type StatusDuplikasi = 'Unik' | 'Potensi Duplikat'
 
 /**
  * Shape JSON mentah dari beritaPapua.json dan hasil upload Excel.

@@ -188,7 +188,7 @@ const REKOMENDASI_POOL = [
   'Verifikasi kebenaran informasi sebelum merespons publik',
 ]
 
-const KATEGORI_OPD_MAP: Record<KategoriIsu, Opd> = {
+export const KATEGORI_OPD_MAP: Record<KategoriIsu, Opd> = {
   'Ekonomi, Keuangan & Industri': 'Dinas Perindustrian dan Energi',
   Infrastruktur: 'Dinas Pekerjaan Umum',
   'Administrasi & Pemerintahan': 'Sekretariat Daerah Provinsi Papua',

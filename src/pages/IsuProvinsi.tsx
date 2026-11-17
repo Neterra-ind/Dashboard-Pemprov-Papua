@@ -32,10 +32,10 @@ import {
   gridProps,
   SENTIMEN_COLOR,
 } from '@/lib/chartTheme'
-import { daftarJenisSumber, daftarKategoriIsu, daftarNarasumber } from '@/data/mockData'
+import { daftarJenisSumber, daftarKategoriIsu, daftarNarasumber, daftarOpd, KATEGORI_OPD_MAP } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
 import { useBerita, isProvinsi } from '@/lib/beritaStore'
-import type { BeritaRaw, FramingKinerja, StatusDuplikasi } from '@/types'
+import type { BeritaRaw, FramingKinerja, KategoriIsu } from '@/types'
 
 const FRAMING_COLOR: Record<string, string> = {
   'Respons': 'bg-blue-50 text-blue-700',
@@ -44,7 +44,6 @@ const FRAMING_COLOR: Record<string, string> = {
   'Klarifikasi': 'bg-amber-50 text-amber-700',
   'Program/Kinerja': 'bg-emerald-50 text-emerald-700',
   'Isu Terhubung': 'bg-orange-50 text-orange-700',
-  'Hal Terhubung': 'bg-slate-100 text-slate-600',
   'Seremoni Pasif': 'bg-violet-50 text-violet-700',
 }
 
@@ -65,7 +64,7 @@ const columns: ColumnDef<BeritaRaw, any>[] = [
     accessorKey: 'judul',
     header: 'Judul',
     cell: (info) => {
-      const b = info.row.original as BeritaRaw & { framing_kinerja?: FramingKinerja; status_duplikasi?: StatusDuplikasi; sentimen_kurasi?: string }
+      const b = info.row.original as BeritaRaw & { framing_kinerja?: FramingKinerja; sentimen_kurasi?: string }
       return (
         <div className="max-w-xs space-y-1">
           <p className="font-medium text-slate-800 text-sm leading-snug">{info.getValue<string>()}</p>
@@ -79,11 +78,6 @@ const columns: ColumnDef<BeritaRaw, any>[] = [
             {b.framing_kinerja && (
               <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${FRAMING_COLOR[b.framing_kinerja] ?? 'bg-slate-100 text-slate-600'}`}>
                 {b.framing_kinerja}
-              </span>
-            )}
-            {b.status_duplikasi && b.status_duplikasi !== 'Unik' && (
-              <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-medium text-amber-700">
-                {b.status_duplikasi}
               </span>
             )}
           </div>
@@ -130,13 +124,12 @@ const columns: ColumnDef<BeritaRaw, any>[] = [
   },
 ]
 
-const DUPLIKASI_OPTIONS: StatusDuplikasi[] = ['Unik', 'Pengulangan Berita', 'Potensi Duplikat']
-
 export function IsuProvinsi() {
   const { berita: semuaBerita } = useBerita()
   const [kategori, setKategori] = useState('')
   const [jenisSumber, setJenisSumber] = useState('')
-  const [duplikasiFilter, setDuplikasiFilter] = useState('')
+  const [opdFilter, setOpdFilter] = useState('')
+  const [isuDominanDipilih, setIsuDominanDipilih] = useState<string | null>(null)
   const [dariTanggal, setDariTanggal] = useState('')
   const [sampaiTanggal, setSampaiTanggal] = useState('')
 
@@ -164,15 +157,15 @@ export function IsuProvinsi() {
     [beritaProvinsi, kategori, jenisSumber, dariTanggal, sampaiTanggal],
   )
 
-  // Tabel drill-down — tambah filter duplikasi
+  // Daftar berita drill-down: filter tambahan dari klik Isu Dominan + OPD
   const beritaDrilldown = useMemo(
     () =>
       beritaTerfilter.filter((b) => {
-        if (!duplikasiFilter) return true
-        const dup = (b as any).status_duplikasi as string | undefined
-        return (dup ?? 'Unik') === duplikasiFilter
+        if (isuDominanDipilih && b.judul !== isuDominanDipilih) return false
+        if (opdFilter && KATEGORI_OPD_MAP[b.kategori as KategoriIsu] !== opdFilter) return false
+        return true
       }),
-    [beritaTerfilter, duplikasiFilter],
+    [beritaTerfilter, isuDominanDipilih, opdFilter],
   )
 
   const rentangTanggalData = useMemo(() => {
@@ -300,14 +293,7 @@ export function IsuProvinsi() {
         <div className="flex flex-wrap items-end gap-3">
           <FilterSelect label="Kategori Isu" value={kategori} options={daftarKategoriIsu} onChange={setKategori} />
           <FilterSelect label="Jenis Sumber" value={jenisSumber} options={daftarJenisSumber} onChange={setJenisSumber} />
-          {adaKurasi && (
-            <FilterSelect
-              label="Status Duplikasi"
-              value={duplikasiFilter}
-              options={DUPLIKASI_OPTIONS}
-              onChange={setDuplikasiFilter}
-            />
-          )}
+          <FilterSelect label="OPD" value={opdFilter} options={daftarOpd} onChange={setOpdFilter} />
           <DateRangeFilter
             dari={dariTanggal}
             sampai={sampaiTanggal}
@@ -372,7 +358,10 @@ export function IsuProvinsi() {
 
       <div>
         <Card>
-          <CardHeader title="Isu Dominan" subtitle="Berdasarkan kesamaan judul" />
+          <CardHeader
+            title="Isu Dominan"
+            subtitle={isuDominanDipilih ? 'Klik bar lain untuk ganti filter, klik lagi untuk reset' : 'Klik isu untuk lihat berita terkait di bawah'}
+          />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(260, puncakPemberitaan.length * 44)}>
               <BarChart data={puncakPemberitaan} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
@@ -380,8 +369,26 @@ export function IsuProvinsi() {
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
                 <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
-                  {puncakPemberitaan.map((entry, i) => <Cell key={i} fill={entry.fill} />)}
+                <Bar
+                  dataKey="jumlah"
+                  name="Berita"
+                  radius={[0, 4, 4, 0]}
+                  maxBarSize={22}
+                  style={{ cursor: 'pointer' }}
+                  onClick={(data) => setIsuDominanDipilih((prev) => (prev === data.name ? null : data.name))}
+                >
+                  {puncakPemberitaan.map((entry, i) => (
+                    <Cell
+                      key={i}
+                      fill={
+                        isuDominanDipilih === null
+                          ? entry.fill
+                          : isuDominanDipilih === entry.name
+                            ? entry.fill
+                            : '#cbd5e1'
+                      }
+                    />
+                  ))}
                   <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
                 </Bar>
               </BarChart>
@@ -453,6 +460,19 @@ export function IsuProvinsi() {
       {/* Tabel daftar berita aktual */}
       <div>
         <SectionLabel>Daftar Berita ({beritaDrilldown.length})</SectionLabel>
+        {isuDominanDipilih && (
+          <div className="mb-3 flex items-center gap-2 rounded-lg border border-primary/20 bg-primary-soft px-3 py-2">
+            <span className="text-xs text-slate-500 dark:text-slate-400">Filter isu:</span>
+            <span className="flex-1 truncate text-xs font-medium text-primary">{isuDominanDipilih}</span>
+            <button
+              type="button"
+              onClick={() => setIsuDominanDipilih(null)}
+              className="shrink-0 rounded px-1.5 py-0.5 text-xs text-slate-400 hover:bg-slate-200 hover:text-slate-700 dark:hover:bg-slate-700 dark:hover:text-slate-200"
+            >
+              ✕ Reset
+            </button>
+          </div>
+        )}
         <Card className="p-5">
           <DataTable data={beritaDrilldown} columns={columns} searchPlaceholder="Cari judul berita, media..." />
         </Card>
