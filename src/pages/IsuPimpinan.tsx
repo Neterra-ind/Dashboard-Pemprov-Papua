@@ -188,6 +188,43 @@ export function IsuPimpinan() {
     ]
   }, [beritaTerkait])
 
+  // Tokoh Disebut — scan judul artikel untuk sebutan jabatan/peran
+  // Mencakup pejabat pemerintah, pengamat, akademisi, dll.
+  const JABATAN_SCAN = [
+    'Wakil Gubernur Papua', 'Gubernur Papua',
+    'Wakil Gubernur', 'Gubernur',
+    'Pengamat Politik', 'Pengamat Ekonomi', 'Pengamat Kebijakan', 'Pengamat',
+    'Akademisi', 'Pakar', 'Peneliti', 'Profesor',
+    'Ketua DPRD Papua', 'Wakil Ketua DPRD', 'Ketua DPRD', 'Anggota DPRD',
+    'Kepala Dinas', 'Sekretaris Daerah', 'Sekda',
+    'Kapolda', 'Kapolres', 'Dandim', 'Danrem', 'Pangdam',
+    'Bupati', 'Wali Kota', 'Walikota',
+    'Direktur', 'Ketua',
+  ]
+  const tokohDisebut = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of beritaTerkait) {
+      const judul = b.judul.toLowerCase()
+      const matched = new Set<string>()
+      for (const kw of JABATAN_SCAN) {
+        const kwLower = kw.toLowerCase()
+        if (!judul.includes(kwLower)) continue
+        // Lewati jika keyword yang lebih spesifik sudah tercatat
+        const covered = [...matched].some(
+          (m) => m.toLowerCase().includes(kwLower) || kwLower.includes(m.toLowerCase()),
+        )
+        if (!covered) matched.add(kw)
+      }
+      for (const kw of matched) {
+        map.set(kw, (map.get(kw) ?? 0) + 1)
+      }
+    }
+    return Array.from(map.entries())
+      .map(([jabatan, jumlah]) => ({ jabatan, jumlah }))
+      .sort((a, b) => b.jumlah - a.jumlah)
+      .slice(0, 10)
+  }, [beritaTerkait])
+
   // Narasumber dari kurasi AI
   // Format bisa: "Jabatan Papua" (jabatan saja) ATAU "Jabatan, Instansi, Nama" (lengkap)
   // Beberapa entri dipisah titik koma ";"
@@ -415,7 +452,7 @@ export function IsuPimpinan() {
             <Card>
               <CardHeader
                 title="Narasumber & Jabatan"
-                subtitle="Diekstrak dari isi berita oleh AI — format: Jabatan, Instansi"
+                subtitle="Dikutip langsung dalam berita — hasil kurasi AI"
               />
               <CardContent>
                 <ResponsiveContainer width="100%" height={Math.max(160, narasumberKurasi.length * 52)}>
@@ -432,6 +469,31 @@ export function IsuPimpinan() {
               </CardContent>
             </Card>
           )}
+        </div>
+      )}
+
+      {/* Tokoh Disebut — scan judul, tampil selalu */}
+      {tokohDisebut.length > 0 && (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <Card>
+            <CardHeader
+              title="Tokoh Disebut"
+              subtitle="Jabatan/peran yang disebut dalam judul berita (pemerintah, pengamat, akademisi, dll)"
+            />
+            <CardContent>
+              <ResponsiveContainer width="100%" height={Math.max(180, tokohDisebut.length * 36)}>
+                <BarChart data={tokohDisebut} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                  <CartesianGrid {...gridProps} horizontal={false} />
+                  <XAxis type="number" {...axisProps} allowDecimals={false} />
+                  <YAxis type="category" dataKey="jabatan" {...axisProps} width={160} />
+                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                  <Bar dataKey="jumlah" name="Berita" fill={chart.gold} radius={[0, 6, 6, 0]} maxBarSize={22}>
+                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
         </div>
       )}
 
