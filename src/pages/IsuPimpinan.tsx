@@ -32,6 +32,14 @@ import fotoWakilGubernur from '@/assets/wakil-gubernur-papua.jpg'
 
 const SENTIMEN_COLOR = { Positif: chart.positive, Negatif: chart.negative }
 
+const FRAMING_SKIP = new Set(['Hal Terhubung'])
+const FRAMING_ALIAS: Record<string, string> = { Sosialisasi: 'Program/Kinerja' }
+function normFraming(f: string | undefined): string | null {
+  if (!f) return null
+  const v = FRAMING_ALIAS[f.trim()] ?? f.trim()
+  return FRAMING_SKIP.has(v) ? null : v
+}
+
 const TABS: { key: EntitasPimpinan; label: string }[] = [
   { key: 'Gubernur', label: 'Isu Gubernur Papua' },
   { key: 'Wakil Gubernur', label: 'Isu Wakil Gubernur Papua' },
@@ -147,14 +155,33 @@ export function IsuPimpinan() {
   const framingKinerja = useMemo(() => {
     const map = new Map<string, number>()
     for (const b of beritaTerkait) {
-      const f = (b as any).framing_kinerja as string | undefined
-      if (f && f.trim()) {
-        map.set(f.trim(), (map.get(f.trim()) ?? 0) + 1)
-      }
+      const f = normFraming((b as any).framing_kinerja as string | undefined)
+      if (f) map.set(f, (map.get(f) ?? 0) + 1)
     }
     return Array.from(map.entries())
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
+  }, [beritaTerkait])
+
+  const topKategori = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of beritaTerkait) {
+      if (b.kategori) map.set(b.kategori, (map.get(b.kategori) ?? 0) + 1)
+    }
+    return Array.from(map.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([k]) => k)
+  }, [beritaTerkait])
+
+  const sentimenPie = useMemo(() => {
+    const positif = beritaTerkait.filter((b) => b.sentimen === 'Positif').length
+    const negatif = beritaTerkait.filter((b) => b.sentimen === 'Negatif').length
+    const total = beritaTerkait.length || 1
+    return [
+      { name: 'Positif', value: Math.round((positif / total) * 100) },
+      { name: 'Negatif', value: Math.round((negatif / total) * 100) },
+    ]
   }, [beritaTerkait])
 
   // Narasumber dari kurasi AI — format "Jabatan, Instansi, Nama"
@@ -228,11 +255,6 @@ export function IsuPimpinan() {
 
   if (!reputasi) return null
 
-  const sentimenPie = [
-    { name: 'Positif', value: reputasi.positiveRatio },
-    { name: 'Negatif', value: reputasi.negativeRatio },
-  ]
-
   return (
     <div className="space-y-6">
       <PageHeader
@@ -246,7 +268,7 @@ export function IsuPimpinan() {
             <FilterSelect
               label="Status Duplikasi"
               value={duplikasiFilter}
-              options={['Unik', 'Pengulangan Berita', 'Potensi Duplikat']}
+              options={['Unik', 'Potensi Duplikat']}
               onChange={setDuplikasiFilter}
             />
           )}
@@ -322,7 +344,7 @@ export function IsuPimpinan() {
             </div>
 
             <div className="flex flex-wrap gap-1.5">
-              {reputasi.topIsu.map((t) => (
+              {topKategori.map((t) => (
                 <span
                   key={t}
                   className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600"
@@ -404,7 +426,7 @@ export function IsuPimpinan() {
         {isuGubernur.length > 0 && (
           <Card>
             <CardContent>
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Isu Gubernur</p>
+              <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Isu {tab}</p>
               <ResponsiveContainer width="100%" height={Math.max(200, isuGubernur.length * 44)}>
                 <BarChart data={isuGubernur} layout="vertical" margin={{ left: 8, right: 40, top: 0, bottom: 0 }}>
                   <CartesianGrid {...gridProps} horizontal={false} />
@@ -547,9 +569,9 @@ export function IsuPimpinan() {
                     <span className={`text-xs font-medium ${sentimenColor}`}>
                       {sentimenTampil}
                     </span>
-                    {framing && (
+                    {normFraming(framing) && (
                       <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] text-slate-500 dark:bg-slate-800 dark:text-slate-400">
-                        {framing}
+                        {normFraming(framing)}
                       </span>
                     )}
                     {dupStatus && dupStatus !== 'Unik' && (

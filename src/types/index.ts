@@ -131,7 +131,6 @@ export interface Berita {
 /** Framing kinerja pemda/pimpinan — taksonomi Neterra. */
 export type FramingKinerja =
   | 'Respons'
-  | 'Sosialisasi'
   | 'Seremoni'
   | 'Klarifikasi'
   | 'Program/Kinerja'

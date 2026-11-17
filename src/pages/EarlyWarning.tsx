@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { KlasifikasiBadge } from '@/components/ui/Badge'
 import { useDisposisi } from '@/lib/store'
-import { daftarEarlyWarning, semuaKlasifikasi, substansiMasalahUntuk } from '@/data/mockData'
+import { daftarEarlyWarning, semuaKlasifikasi } from '@/data/mockData'
 import type { Isu } from '@/types'
 
 export function EarlyWarning() {
@@ -59,7 +59,7 @@ export function EarlyWarning() {
               <CardContent className="space-y-3.5">
                 <div className="flex items-start justify-between gap-2">
                   <Link to={`/isu/${isu.id}`} className="hover:underline">
-                    <p className="font-semibold text-slate-800">{substansiMasalahUntuk(isu)}</p>
+                    <p className="font-semibold text-slate-800">{isu.namaIsu}</p>
                   </Link>
                   <KlasifikasiBadge value={isu.klasifikasi} />
                 </div>

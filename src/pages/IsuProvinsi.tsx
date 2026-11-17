@@ -37,9 +37,16 @@ import { getJenisSumber } from '@/lib/utils'
 import { useBerita, isProvinsi } from '@/lib/beritaStore'
 import type { BeritaRaw, FramingKinerja, KategoriIsu } from '@/types'
 
+const FRAMING_SKIP = new Set(['Hal Terhubung'])
+const FRAMING_ALIAS: Record<string, string> = { Sosialisasi: 'Program/Kinerja' }
+function normFraming(f: string | undefined): string | null {
+  if (!f) return null
+  const v = FRAMING_ALIAS[f.trim()] ?? f.trim()
+  return FRAMING_SKIP.has(v) ? null : v
+}
+
 const FRAMING_COLOR: Record<string, string> = {
   'Respons': 'bg-blue-50 text-blue-700',
-  'Sosialisasi': 'bg-teal-50 text-teal-700',
   'Seremoni': 'bg-purple-50 text-purple-700',
   'Klarifikasi': 'bg-amber-50 text-amber-700',
   'Program/Kinerja': 'bg-emerald-50 text-emerald-700',
@@ -75,11 +82,7 @@ const columns: ColumnDef<BeritaRaw, any>[] = [
                 {b.sentimen_kurasi}
               </span>
             )}
-            {b.framing_kinerja && (
-              <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${FRAMING_COLOR[b.framing_kinerja] ?? 'bg-slate-100 text-slate-600'}`}>
-                {b.framing_kinerja}
-              </span>
-            )}
+            {(() => { const f = normFraming(b.framing_kinerja); return f ? <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${FRAMING_COLOR[f] ?? 'bg-slate-100 text-slate-600'}`}>{f}</span> : null })()}
           </div>
         </div>
       )
@@ -104,7 +107,7 @@ const columns: ColumnDef<BeritaRaw, any>[] = [
     accessorFn: (row) => (row as any).framing_kinerja ?? '',
     header: 'Framing Kinerja',
     cell: (info) => {
-      const val = info.getValue<string>()
+      const val = normFraming(info.getValue<string>())
       if (!val) return <span className="text-xs text-slate-300">—</span>
       return (
         <span className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${FRAMING_COLOR[val] ?? 'bg-slate-100 text-slate-600'}`}>
@@ -235,8 +238,8 @@ export function IsuProvinsi() {
   const framingKinerja = useMemo(() => {
     const map = new Map<string, number>()
     for (const b of beritaTerfilter) {
-      const f = (b as any).framing_kinerja as string | undefined
-      if (f && f.trim()) map.set(f.trim(), (map.get(f.trim()) ?? 0) + 1)
+      const f = normFraming((b as any).framing_kinerja as string | undefined)
+      if (f) map.set(f, (map.get(f) ?? 0) + 1)
     }
     return Array.from(map.entries())
       .map(([name, value]) => ({ name, value }))
