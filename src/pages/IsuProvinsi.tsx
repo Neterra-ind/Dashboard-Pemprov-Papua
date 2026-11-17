@@ -34,7 +34,7 @@ import {
 } from '@/lib/chartTheme'
 import { daftarJenisSumber, daftarKategoriIsu, daftarNarasumber, daftarOpd, KATEGORI_OPD_MAP } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
-import { useBerita, isProvinsi, isKontenIrelevan } from '@/lib/beritaStore'
+import { useBerita, isProvinsi } from '@/lib/beritaStore'
 import type { BeritaRaw, FramingKinerja, KategoriIsu } from '@/types'
 
 const FRAMING_SKIP = new Set(['Hal Terhubung'])
@@ -138,7 +138,7 @@ export function IsuProvinsi() {
 
   // Berita tingkat provinsi (bukan entitas pimpinan)
   const beritaProvinsi = useMemo(
-    () => semuaBerita.filter((b) => isProvinsi(b) && !isKontenIrelevan(b.judul)),
+    () => semuaBerita.filter((b) => isProvinsi(b)),
     [semuaBerita],
   )
 

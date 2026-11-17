@@ -93,33 +93,51 @@ export function useBerita(): BeritaStoreCtx {
   return ctx
 }
 
-// ── Helper: filter berdasarkan subjek_query kurasi AI ──────────────────────
+// ── Helper: filter relevansi pemerintahan ────────────────────────────────
 
-// Keyword konten yang WAJIB tidak relevan meski menyebut Papua sebagai lokasi:
-// promo komersial, prakiraan cuaca multi-kota, hiburan, dsb.
-const KATA_KUNCI_IRELEVAN = [
-  // Konten komersial / iklan
-  'promo', 'diskon', 'alfamart', 'indomaret', 'minimarket', 'jsm ',
-  'flash sale', 'harbolnas', 'beli 2 gratis', 'beli 1 gratis',
-  'spesial harga', 'harga hemat', 'cicilan 0%',
-  // Prakiraan cuaca bukan bencana pemerintah
-  'info cuaca', 'prakiraan cuaca', 'cuaca akhir pekan', 'hujan petir intai',
-  'cek cuaca', 'perkiraan cuaca', 'cuaca besok', 'bmkg prakiraan',
-  // Konten hiburan / lifestyle
-  'resep ', 'tips masak', 'gaya hidup', 'viral tiktok', 'kuis ',
+// Whitelist kata kunci urusan pemerintahan.
+// Dipakai saat artikel tidak memiliki subjek_query dari kurasi AI.
+// Artikel wajib mengandung minimal satu kata kunci ini agar masuk dashboard.
+const KATA_KUNCI_PEMERINTAH = [
+  // Jabatan daerah
+  'gubernur', 'wagub', 'wakil gubernur',
+  'bupati', 'wabup', 'wakil bupati',
+  'wali kota', 'walikota', 'wakil walikota',
+  'sekda', 'sekretaris daerah',
+  // Lembaga pemerintah
+  'pemerintah', 'pemprov', 'pemkab', 'pemkot',
+  // OPD/Instansi
+  'dinas ', 'bappeda', 'bpbd', 'rsud', 'satpol',
+  // Legislatif
+  'dprd', 'dpd ',
+  // TNI/Polri (terkait keamanan/governance)
+  'polda', 'polres', 'kapolda', 'kapolres',
+  'pangdam', 'kodam', 'korem', 'kodim',
+  // Kementerian
+  'kementerian', 'kemendagri', 'mendagri',
+  // Proses pemerintahan
+  'apbd', 'apbn', 'perda', 'pergub', 'perbup',
+  'musrenbang', 'rapat paripurna',
+  // Pengawasan & hukum
+  'kpk', 'kejaksaan', 'bpkp', 'tipikor', 'korupsi',
+  // Pemilu/Pilkada
+  'pilkada', 'pilgub', 'kpu',
+  // Papua governance
+  'otsus', 'otonomi khusus', 'mrp',
 ]
 
-/** True jika judul menunjukkan konten komersial/cuaca/hiburan yang bukan pemerintahan. */
-export function isKontenIrelevan(judul: string): boolean {
-  const j = judul.toLowerCase()
-  return KATA_KUNCI_IRELEVAN.some((k) => j.includes(k))
-}
-
-/** Apakah berita ini relevan (bukan Tidak Relevan)? */
+/**
+ * Apakah berita ini relevan dengan urusan pemerintahan?
+ *
+ * - Jika kurasi AI sudah menilai (subjek_query ada): percayai hasilnya.
+ * - Jika tidak ada kurasi AI: wajib ada kata kunci pemerintahan di judul/isi.
+ */
 export function isRelevan(b: BeritaRaw): boolean {
   const sq = (b as any).subjek_query as string | undefined
-  if (!sq) return true // data lama tanpa kurasi → anggap relevan
-  return sq !== 'Tidak Relevan'
+  if (sq) return sq !== 'Tidak Relevan'
+  // Tanpa kurasi AI → cek whitelist pemerintahan di judul + isi
+  const teks = (b.judul + ' ' + ((b as any).isi ?? '')).toLowerCase()
+  return KATA_KUNCI_PEMERINTAH.some((k) => teks.includes(k))
 }
 
 /** Apakah berita ini termasuk Gubernur atau Wakil Gubernur (untuk Isu Pimpinan)? */

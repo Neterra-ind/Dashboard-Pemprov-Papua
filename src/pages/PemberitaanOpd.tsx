@@ -17,7 +17,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader, SectionLabel } from '@/components/ui/PageHeader'
 import { axisProps, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
 import { daftarNarasumber, daftarOpd } from '@/data/mockData'
-import { useBerita, isProvinsi, isKontenIrelevan } from '@/lib/beritaStore'
+import { useBerita, isProvinsi } from '@/lib/beritaStore'
 import type { BeritaRaw, FramingKinerja, StatusDuplikasi } from '@/types'
 
 // ── Komponen tick kustom ────────────────────────────────────────────────────
@@ -178,7 +178,7 @@ export function PemberitaanOpd() {
 
   // ── Berita yang bukan milik pimpinan (OPD scope) ─────────────────────────
   const beritaOpd = useMemo(
-    () => semuaBerita.filter((b) => isProvinsi(b) && !isKontenIrelevan(b.judul)),
+    () => semuaBerita.filter((b) => isProvinsi(b)),
     [semuaBerita],
   )
 

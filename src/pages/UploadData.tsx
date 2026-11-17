@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
 import type { BeritaRaw, Engagement } from '@/types'
 import { klasifikasiKategori, mapSentimen, mapPlatform } from '@/lib/klasifikasiKategori'
-import { useBerita, isKontenIrelevan } from '@/lib/beritaStore'
+import { useBerita, isRelevan } from '@/lib/beritaStore'
 import { PinGate } from '@/components/ui/PinGate'
 import { logoutUpload } from '@/lib/uploadAuth'
 
@@ -291,11 +291,7 @@ export function UploadData() {
     if (!hasil?.rows.length) return
     const subjek = subjekInput.trim() || undefined
     // Buang artikel tidak relevan sebelum masuk store (gerbang data quality)
-    const filtered = hasil.rows.filter((r) => {
-      if ((r as any).subjek_query === 'Tidak Relevan') return false
-      if (isKontenIrelevan(r.judul)) return false
-      return true
-    })
+    const filtered = hasil.rows.filter((r) => isRelevan(r))
     setBerita(filtered, subjek)
     setHasil(null)
     setNamaFile('')
