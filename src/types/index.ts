@@ -162,7 +162,7 @@ export interface BeritaRaw {
   engagement?: Engagement
   // Kolom kurasi AI (dari file _KURASI.xlsx)
   subjek_query?: string           // Gubernur | Wakil Gubernur | Pemprov | Papua | Tidak Relevan
-  sentimen_kurasi?: string        // Positif | Negatif | Potensi Negatif | Netral
+  sentimen_kurasi?: string        // Positif | Negatif | Netral | Campuran (Campuran → Netral di dashboard)
   klasifikasi?: Klasifikasi       // 3 label (tanpa Netral)
   framing_kinerja?: FramingKinerja
   narasumber_jabatan?: string     // "Jabatan, Instansi, Nama; ..."

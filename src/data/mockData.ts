@@ -280,9 +280,10 @@ function levelDariRatio(negatifRatio: number, total: number): LevelRisiko {
 }
 
 // ── Data Sumber (berita/postingan mentah) ──────────────────────────────────
-// PLACEHOLDER — lihat src/data/beritaPapua.json (data contoh, bukan berita riil).
-// Kategori & entitas terkait nantinya diklasifikasikan otomatis berbasis kata kunci
-// pada judul+konten berita riil Papua.
+// Format JSON diisi dari hasil kurasi AI (skill kurasi-ai-imd).
+// Kolom kurasi (sentimen_kurasi, subjek_query) digunakan sebagai override
+// bila ada — sehingga data IMD mentah yang belum dikurasi tetap bisa dibaca,
+// tapi data terkurasi langsung menggunakan nilai yang sudah dikoreksi AI.
 interface BeritaMentah {
   tanggal: string
   judul: string
@@ -292,17 +293,46 @@ interface BeritaMentah {
   url: string
   kategori: KategoriIsu
   entitasTerkait?: EntitasPimpinan
+  // Kolom opsional hasil kurasi AI (dari skill kurasi-ai-imd)
+  sentimen_kurasi?: string   // override sentimen — Positif|Negatif|Netral|Campuran
+  subjek_query?: string      // override entitasTerkait — Gubernur|Wakil Gubernur|Pemprov|Papua|Tidak Relevan
 }
 
-// Filter hanya berita yang relevan Papua: harus menyebut "papua" di judul/isi,
-// atau memiliki entitasTerkait (Gubernur/Wagub) — ini membuang ~2.378 artikel
-// nasional/tidak relevan (promo, cuaca, dll.) yang salah masuk ke feed monitoring.
-const beritaMentah = (beritaPapuaMentah as BeritaMentah[]).filter(
-  (b) =>
-    b.entitasTerkait != null ||
-    /papua/i.test(b.judul) ||
-    (b.isi != null && /papua/i.test(b.isi)),
-)
+function normalisasiBerita(b: BeritaMentah): BeritaMentah {
+  // Gunakan sentimen_kurasi (berbasis citra pemerintah) sebagai override sentimen
+  // otomatis IMD (berbasis tone topik) bila kolom kurasi tersedia.
+  const sentimenFinal: Sentimen =
+    b.sentimen_kurasi === 'Positif' || b.sentimen_kurasi === 'Negatif' || b.sentimen_kurasi === 'Netral'
+      ? b.sentimen_kurasi
+      : b.sentimen_kurasi === 'Campuran'
+        ? 'Netral'
+        : b.sentimen
+
+  // Gunakan subjek_query dari kurasi untuk menentukan entitasTerkait bila field
+  // entitasTerkait belum di-set (backward compat dengan JSON lama).
+  let entitasFinal = b.entitasTerkait
+  if (entitasFinal == null && b.subjek_query) {
+    if (b.subjek_query === 'Gubernur') entitasFinal = 'Gubernur'
+    else if (b.subjek_query === 'Wakil Gubernur') entitasFinal = 'Wakil Gubernur'
+  }
+
+  return { ...b, sentimen: sentimenFinal, entitasTerkait: entitasFinal }
+}
+
+// Filter hanya berita yang relevan Papua: buang baris "Tidak Relevan" dari kurasi,
+// atau (bila belum dikurasi) buang artikel yang tidak menyebut Papua sama sekali.
+// Ini membuang ~2.378 artikel nasional/tidak relevan (promo, cuaca, dll.) yang
+// masuk ke feed monitoring tanpa melalui proses kurasi.
+const beritaMentah = (beritaPapuaMentah as BeritaMentah[])
+  .filter(
+    (b) =>
+      b.subjek_query !== 'Tidak Relevan' &&
+      (b.entitasTerkait != null ||
+        b.subjek_query != null ||
+        /papua/i.test(b.judul) ||
+        (b.isi != null && /papua/i.test(b.isi))),
+  )
+  .map(normalisasiBerita)
 
 // ── Isu — diklasterkan dari kemiripan judul+isi berita riil (unit analisis =
 // topik/event, bukan kategori×entitas) ────────────────────────────────────
