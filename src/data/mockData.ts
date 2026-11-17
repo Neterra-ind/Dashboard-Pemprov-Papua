@@ -262,7 +262,8 @@ export function substansiMasalahUntuk(isu: Isu): string {
 
 function scopeUntukEntitas(entitasTerkait?: EntitasPimpinan): ScopeIsu {
   if (entitasTerkait === 'Gubernur') return 'Gubernur'
-  if (entitasTerkait === 'Wakil Gubernur') return 'Wakil Gubernur'
+  // Wakil Gubernur diperlakukan sebagai Provinsi agar beritanya muncul di
+  // Isu Papua (Provinsi), bukan hanya di tab Isu Pimpinan Wagub.
   return 'Provinsi'
 }
 
@@ -293,7 +294,15 @@ interface BeritaMentah {
   entitasTerkait?: EntitasPimpinan
 }
 
-const beritaMentah = beritaPapuaMentah as BeritaMentah[]
+// Filter hanya berita yang relevan Papua: harus menyebut "papua" di judul/isi,
+// atau memiliki entitasTerkait (Gubernur/Wagub) — ini membuang ~2.378 artikel
+// nasional/tidak relevan (promo, cuaca, dll.) yang salah masuk ke feed monitoring.
+const beritaMentah = (beritaPapuaMentah as BeritaMentah[]).filter(
+  (b) =>
+    b.entitasTerkait != null ||
+    /papua/i.test(b.judul) ||
+    (b.isi != null && /papua/i.test(b.isi)),
+)
 
 // ── Isu — diklasterkan dari kemiripan judul+isi berita riil (unit analisis =
 // topik/event, bukan kategori×entitas) ────────────────────────────────────
