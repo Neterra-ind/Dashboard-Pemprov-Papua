@@ -5,7 +5,7 @@ import { FilterSelect } from '@/components/FilterSelect'
 import { Card } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { KATEGORI_OPD_MAP, daftarJenisSumber } from '@/data/mockData'
-import { useBerita } from '@/lib/beritaStore'
+import { useBerita, isRelevan, isKontenIrelevan } from '@/lib/beritaStore'
 import { getJenisSumber } from '@/lib/utils'
 import type { KategoriIsu } from '@/types'
 
@@ -21,7 +21,14 @@ export function EarlyWarning() {
   const beritaNegatif = useMemo(
     () =>
       berita
-        .filter((b) => b.klasifikasi === 'Negatif' || b.klasifikasi === 'Potensi Negatif')
+        .filter((b) => {
+          // Buang artikel tidak relevan atau konten komersial/cuaca
+          if (!isRelevan(b)) return false
+          if (isKontenIrelevan(b.judul)) return false
+          // Gunakan sentimen_kurasi (AI-verified) jika ada, fallback ke sentimen IMD
+          const sentimenEfektif = (b as any).sentimen_kurasi || b.sentimen
+          return sentimenEfektif === 'Negatif'
+        })
         .sort((a, b) => b.tanggal.localeCompare(a.tanggal)),
     [berita],
   )

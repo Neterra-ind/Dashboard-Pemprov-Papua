@@ -95,6 +95,26 @@ export function useBerita(): BeritaStoreCtx {
 
 // ── Helper: filter berdasarkan subjek_query kurasi AI ──────────────────────
 
+// Keyword konten yang WAJIB tidak relevan meski menyebut Papua sebagai lokasi:
+// promo komersial, prakiraan cuaca multi-kota, hiburan, dsb.
+const KATA_KUNCI_IRELEVAN = [
+  // Konten komersial / iklan
+  'promo', 'diskon', 'alfamart', 'indomaret', 'minimarket', 'jsm ',
+  'flash sale', 'harbolnas', 'beli 2 gratis', 'beli 1 gratis',
+  'spesial harga', 'harga hemat', 'cicilan 0%',
+  // Prakiraan cuaca bukan bencana pemerintah
+  'info cuaca', 'prakiraan cuaca', 'cuaca akhir pekan', 'hujan petir intai',
+  'cek cuaca', 'perkiraan cuaca', 'cuaca besok', 'bmkg prakiraan',
+  // Konten hiburan / lifestyle
+  'resep ', 'tips masak', 'gaya hidup', 'viral tiktok', 'kuis ',
+]
+
+/** True jika judul menunjukkan konten komersial/cuaca/hiburan yang bukan pemerintahan. */
+export function isKontenIrelevan(judul: string): boolean {
+  const j = judul.toLowerCase()
+  return KATA_KUNCI_IRELEVAN.some((k) => j.includes(k))
+}
+
 /** Apakah berita ini relevan (bukan Tidak Relevan)? */
 export function isRelevan(b: BeritaRaw): boolean {
   const sq = (b as any).subjek_query as string | undefined

@@ -25,7 +25,7 @@ import { hitungPerHariRange } from '@/lib/aggregations'
 import { cn } from '@/lib/utils'
 import { daftarIsuGubernur, daftarIsuWakilGubernur, daftarJenisSumber, reputasiByEntitas } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
-import { useBerita } from '@/lib/beritaStore'
+import { useBerita, isKontenIrelevan } from '@/lib/beritaStore'
 import type { EntitasPimpinan } from '@/types'
 import fotoGubernur from '@/assets/gubernur-papua.jpg'
 import fotoWakilGubernur from '@/assets/wakil-gubernur-papua.jpg'
@@ -92,6 +92,7 @@ export function IsuPimpinan() {
 
       return (
         cocokTab &&
+        !isKontenIrelevan(b.judul) &&
         (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
         (!dariTanggal || b.tanggal >= dariTanggal) &&
         (!sampaiTanggal || b.tanggal <= sampaiTanggal) &&
