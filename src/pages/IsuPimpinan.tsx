@@ -33,7 +33,10 @@ import fotoWakilGubernur from '@/assets/wakil-gubernur-papua.jpg'
 const SENTIMEN_COLOR = { Positif: chart.positive, Negatif: chart.negative }
 
 const FRAMING_SKIP = new Set(['Hal Terhubung'])
-const FRAMING_ALIAS: Record<string, string> = { Sosialisasi: 'Program/Kinerja' }
+const FRAMING_ALIAS: Record<string, string> = {
+  Sosialisasi: 'Program/Kinerja',
+  'Isu Terhubung': 'Program/Kinerja',
+}
 function normFraming(f: string | undefined): string | null {
   if (!f) return null
   const v = FRAMING_ALIAS[f.trim()] ?? f.trim()
@@ -185,18 +188,25 @@ export function IsuPimpinan() {
     ]
   }, [beritaTerkait])
 
-  // Narasumber dari kurasi AI — format "Jabatan, Instansi, Nama"
+  // Narasumber dari kurasi AI
+  // Format bisa: "Jabatan Papua" (jabatan saja) ATAU "Jabatan, Instansi, Nama" (lengkap)
+  // Beberapa entri dipisah titik koma ";"
   const narasumberKurasi = useMemo(() => {
     const map = new Map<string, number>()
     for (const b of beritaTerkait) {
       const nj = (b as any).narasumber_jabatan as string | undefined
       if (!nj) continue
       for (const entri of nj.split(';')) {
-        const bagian = entri.trim().split(',').map(s => s.trim())
+        const e = entri.trim()
+        if (!e || e === '-') continue
+        const bagian = e.split(',').map(s => s.trim()).filter(Boolean)
         const jabatan = bagian[0] ?? ''
+        // Format lengkap: bagian[2] = nama, bagian[1] = instansi
+        // Format singkat: hanya jabatan (tidak ada koma)
         const nama = bagian[2] ?? bagian[1] ?? ''
-        if (!nama || nama === '-') continue
-        const label = `${nama}||${jabatan}`
+        const key = nama || jabatan
+        if (!key || key === '-') continue
+        const label = nama ? `${nama}||${jabatan}` : `${jabatan}||`
         map.set(label, (map.get(label) ?? 0) + 1)
       }
     }
