@@ -14,6 +14,13 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Restore path after GitHub Pages 404 redirect
+      (function() {
+        var r = sessionStorage.getItem('spa-redirect')
+        if (r) { sessionStorage.removeItem('spa-redirect'); window.history.replaceState(null, '', r) }
+      })()
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

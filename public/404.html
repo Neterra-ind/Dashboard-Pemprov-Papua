@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script>
+  // GitHub Pages SPA fallback: redirect ke index.html, simpan path asli di sessionStorage
+  var seg = window.location.pathname.split('/').filter(Boolean)
+  var base = '/' + seg[0] + '/'
+  sessionStorage.setItem('spa-redirect', window.location.pathname + window.location.search + window.location.hash)
+  window.location.replace(base)
+</script>
+</head>
+</html>
