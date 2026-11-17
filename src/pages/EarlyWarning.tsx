@@ -21,16 +21,7 @@ export function EarlyWarning() {
   const beritaNegatif = useMemo(
     () =>
       berita
-        .filter((b) => {
-          const sentEfektif =
-            b.sentimen_kurasi === 'Negatif' ||
-            b.sentimen_kurasi === 'Positif' ||
-            b.sentimen_kurasi === 'Netral' ||
-            b.sentimen_kurasi === 'Campuran'
-              ? b.sentimen_kurasi
-              : b.sentimen
-          return sentEfektif === 'Negatif'
-        })
+        .filter((b) => b.klasifikasi === 'Negatif' || b.klasifikasi === 'Potensi Negatif')
         .sort((a, b) => b.tanggal.localeCompare(a.tanggal)),
     [berita],
   )
