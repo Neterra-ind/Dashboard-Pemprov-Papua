@@ -32,7 +32,7 @@ import {
   gridProps,
   SENTIMEN_COLOR,
 } from '@/lib/chartTheme'
-import { daftarJenisSumber, daftarKategoriIsu, daftarNarasumber, daftarOpd, KATEGORI_OPD_MAP } from '@/data/mockData'
+import { daftarJenisSumber, daftarKategoriIsu, daftarOpd, KATEGORI_OPD_MAP } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
 import { useBerita, isProvinsi } from '@/lib/beritaStore'
 import type { BeritaRaw, FramingKinerja, KategoriIsu } from '@/types'
@@ -222,17 +222,53 @@ export function IsuProvinsi() {
       .slice(0, 10)
   }, [beritaTerfilter])
 
-  const topNarasumber = useMemo(
-    () =>
-      daftarNarasumber
-        .map(({ nama, jabatan, kunci }) => ({
-          label: `${nama}||${jabatan}`,
-          jumlah: beritaTerfilter.filter((b) => kunci.some((k) => b.judul.includes(k))).length,
-        }))
-        .filter((n) => n.jumlah > 0)
-        .sort((a, b) => b.jumlah - a.jumlah),
-    [beritaTerfilter],
-  )
+  const JABATAN_SCAN = [
+    'Wakil Gubernur Papua', 'Gubernur Papua',
+    'Wakil Gubernur', 'Gubernur',
+    'Kepala Dinas', 'Sekretaris Daerah', 'Sekda',
+    'Pengamat Politik', 'Pengamat Ekonomi', 'Pengamat Kebijakan', 'Pengamat',
+    'Akademisi', 'Pakar', 'Peneliti',
+    'Ketua DPRD Papua', 'Ketua DPRD', 'Anggota DPRD',
+    'Kapolda', 'Kapolres', 'Dandim', 'Danrem', 'Pangdam',
+    'Bupati', 'Wali Kota', 'Walikota',
+    'Direktur', 'Ketua',
+  ]
+
+  const topNarasumber = useMemo(() => {
+    const hasKurasi = beritaTerfilter.some((b) => !!(b as any).narasumber_jabatan)
+    if (hasKurasi) {
+      const map = new Map<string, number>()
+      for (const b of beritaTerfilter) {
+        const jabatan = ((b as any).narasumber_jabatan as string | undefined)?.trim()
+        if (jabatan) map.set(jabatan, (map.get(jabatan) ?? 0) + 1)
+      }
+      return Array.from(map.entries())
+        .map(([jabatan, jumlah]) => ({ label: `${jabatan}||`, jumlah }))
+        .sort((a, b) => b.jumlah - a.jumlah)
+        .slice(0, 10)
+    }
+    // Fallback: scan judul dengan JABATAN_SCAN
+    const map = new Map<string, number>()
+    for (const b of beritaTerfilter) {
+      const judul = b.judul.toLowerCase()
+      const matched = new Set<string>()
+      for (const kw of JABATAN_SCAN) {
+        const kwLower = kw.toLowerCase()
+        if (!judul.includes(kwLower)) continue
+        const covered = [...matched].some(
+          (m) => m.toLowerCase().includes(kwLower) || kwLower.includes(m.toLowerCase()),
+        )
+        if (!covered) matched.add(kw)
+      }
+      for (const kw of matched) {
+        map.set(kw, (map.get(kw) ?? 0) + 1)
+      }
+    }
+    return Array.from(map.entries())
+      .map(([jabatan, jumlah]) => ({ label: `${jabatan}||`, jumlah }))
+      .sort((a, b) => b.jumlah - a.jumlah)
+      .slice(0, 10)
+  }, [beritaTerfilter])
 
   // Framing Kinerja (hanya jika ada kurasi AI)
   const framingKinerja = useMemo(() => {
