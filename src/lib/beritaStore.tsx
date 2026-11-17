@@ -130,14 +130,17 @@ const KATA_KUNCI_PEMERINTAH = [
  * Apakah berita ini relevan dengan urusan pemerintahan?
  *
  * - Jika kurasi AI sudah menilai (subjek_query ada): percayai hasilnya.
- * - Jika tidak ada kurasi AI: wajib ada kata kunci pemerintahan di judul/isi.
+ * - Jika tidak ada kurasi AI: kata kunci pemerintahan wajib ada di JUDUL.
+ *   Isi/body sengaja tidak dicek karena artikel non-pemerintahan (cuaca,
+ *   promo, hiburan) kerap menyebut "pemerintah" secara sampingan di body,
+ *   sedangkan topik utama selalu tercermin di judul.
  */
 export function isRelevan(b: BeritaRaw): boolean {
   const sq = (b as any).subjek_query as string | undefined
   if (sq) return sq !== 'Tidak Relevan'
-  // Tanpa kurasi AI → cek whitelist pemerintahan di judul + isi
-  const teks = (b.judul + ' ' + ((b as any).isi ?? '')).toLowerCase()
-  return KATA_KUNCI_PEMERINTAH.some((k) => teks.includes(k))
+  // Tanpa kurasi AI → topik pemerintahan harus muncul di judul
+  const judul = b.judul.toLowerCase()
+  return KATA_KUNCI_PEMERINTAH.some((k) => judul.includes(k))
 }
 
 /** Apakah berita ini termasuk Gubernur atau Wakil Gubernur (untuk Isu Pimpinan)? */
