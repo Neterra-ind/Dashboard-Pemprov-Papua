@@ -210,12 +210,13 @@ export function IsuPimpinan() {
       for (const entri of nj.split(';')) {
         const e = entri.trim()
         if (!e || e === '-') continue
+        // Format: "Nama, Jabatan" atau "Jabatan" saja
         const bagian = e.split(',').map(s => s.trim()).filter(Boolean)
-        const jabatan = bagian[0] ?? ''
-        const nama = bagian[2] ?? bagian[1] ?? ''
-        const key = nama || jabatan
+        const nama = bagian[0] ?? ''
+        const jabatan = bagian[1] ?? ''
+        const key = nama
         if (!key || key === '-') continue
-        const label = nama ? `${nama}||${jabatan}` : `${jabatan}||`
+        const label = jabatan ? `${nama}||${jabatan}` : `${nama}||`
         kurasiMap.set(label, (kurasiMap.get(label) ?? 0) + 1)
       }
     }

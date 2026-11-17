@@ -239,13 +239,26 @@ export function IsuProvinsi() {
     if (hasKurasi) {
       const map = new Map<string, number>()
       for (const b of beritaTerfilter) {
-        const jabatan = ((b as any).narasumber_jabatan as string | undefined)?.trim()
-        if (jabatan) map.set(jabatan, (map.get(jabatan) ?? 0) + 1)
+        const nj = ((b as any).narasumber_jabatan as string | undefined)?.trim()
+        if (!nj) continue
+        for (const entri of nj.split(';')) {
+          const e = entri.trim()
+          if (!e || e === '-') continue
+          // Format: "Nama, Jabatan" atau "Jabatan" saja
+          const bagian = e.split(',').map(s => s.trim()).filter(Boolean)
+          const nama = bagian[0] ?? ''
+          const jabatan = bagian[1] ?? ''
+          if (!nama || nama === '-') continue
+          const label = jabatan ? `${nama}||${jabatan}` : `${nama}||`
+          map.set(label, (map.get(label) ?? 0) + 1)
+        }
       }
-      return Array.from(map.entries())
-        .map(([jabatan, jumlah]) => ({ label: `${jabatan}||`, jumlah }))
-        .sort((a, b) => b.jumlah - a.jumlah)
-        .slice(0, 10)
+      if (map.size > 0) {
+        return Array.from(map.entries())
+          .map(([label, jumlah]) => ({ label, jumlah }))
+          .sort((a, b) => b.jumlah - a.jumlah)
+          .slice(0, 10)
+      }
     }
     // Fallback: scan judul dengan JABATAN_SCAN
     const map = new Map<string, number>()
