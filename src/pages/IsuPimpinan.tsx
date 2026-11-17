@@ -23,7 +23,7 @@ import { PageHeader } from '@/components/ui/PageHeader'
 import { AreaGradient, axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
 import { hitungPerHariRange } from '@/lib/aggregations'
 import { cn } from '@/lib/utils'
-import { daftarIsuGubernur, daftarIsuWakilGubernur, daftarJenisSumber, daftarNarasumber, reputasiByEntitas } from '@/data/mockData'
+import { daftarIsuGubernur, daftarIsuWakilGubernur, daftarJenisSumber, reputasiByEntitas } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
 import { useBerita } from '@/lib/beritaStore'
 import type { EntitasPimpinan } from '@/types'
@@ -60,7 +60,7 @@ export function IsuPimpinan() {
   const [selectedJudul, setSelectedJudul] = useState<string | null>(null)
 
   const adaKurasi = useMemo(
-    () => beritaPapua.some((b) => !!(b as any).framing_kinerja),
+    () => beritaPapua.some((b) => !!(b as any).framing_kinerja || !!(b as any).narasumber_jabatan),
     [beritaPapua],
   )
 
@@ -151,16 +151,6 @@ export function IsuPimpinan() {
         fill: isu.klasifikasi === 'Negatif' ? '#ef4444' : '#1e293b',
       }))
   }, [tab])
-
-  const topNarasumber = useMemo(() =>
-    daftarNarasumber
-      .map(({ nama, jabatan, kunci }) => ({
-        label: `${nama}||${jabatan}`,
-        jumlah: beritaTerkait.filter(b => kunci.some(k => b.judul.includes(k))).length,
-      }))
-      .filter(n => n.jumlah > 0)
-      .sort((a, b) => b.jumlah - a.jumlah)
-  , [beritaTerkait])
 
   // Framing Kinerja — dari kolom kurasi AI
   const framingKinerja = useMemo(() => {
@@ -386,28 +376,30 @@ export function IsuPimpinan() {
 
       </div>
 
-      {/* Framing Kinerja — hanya tampil jika data kurasi AI tersedia */}
-      {framingKinerja.length > 0 && (
+      {/* Framing Kinerja & Narasumber — hanya tampil jika data kurasi AI tersedia */}
+      {(framingKinerja.length > 0 || narasumberKurasi.length > 0) && (
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card>
-            <CardHeader
-              title="Framing Kinerja"
-              subtitle="Bagaimana pimpinan diposisikan dalam pemberitaan — hasil kurasi AI"
-            />
-            <CardContent>
-              <ResponsiveContainer width="100%" height={Math.max(180, framingKinerja.length * 36)}>
-                <BarChart data={framingKinerja} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
-                  <CartesianGrid {...gridProps} horizontal={false} />
-                  <XAxis type="number" {...axisProps} allowDecimals={false} />
-                  <YAxis type="category" dataKey="name" {...axisProps} width={130} />
-                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                  <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22}>
-                    <LabelList dataKey="value" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
+          {framingKinerja.length > 0 && (
+            <Card>
+              <CardHeader
+                title="Framing Kinerja"
+                subtitle="Bagaimana pimpinan diposisikan dalam pemberitaan — hasil kurasi AI"
+              />
+              <CardContent>
+                <ResponsiveContainer width="100%" height={Math.max(180, framingKinerja.length * 36)}>
+                  <BarChart data={framingKinerja} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                    <CartesianGrid {...gridProps} horizontal={false} />
+                    <XAxis type="number" {...axisProps} allowDecimals={false} />
+                    <YAxis type="category" dataKey="name" {...axisProps} width={130} />
+                    <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                    <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22}>
+                      <LabelList dataKey="value" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          )}
 
           {narasumberKurasi.length > 0 && (
             <Card>
@@ -507,24 +499,6 @@ export function IsuPimpinan() {
         </Card>
       )}
 
-      {topNarasumber.length > 0 && (
-        <Card>
-          <CardHeader title="Narasumber" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(160, topNarasumber.length * 52)}>
-              <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
-                <CartesianGrid {...gridProps} horizontal={false} />
-                <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="jumlah" name="Sebutan" fill={chart.accent} radius={[0, 4, 4, 0]} maxBarSize={22}>
-                  <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-      )}
 
       <Card>
         <CardHeader
