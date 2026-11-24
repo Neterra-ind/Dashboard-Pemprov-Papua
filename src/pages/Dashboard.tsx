@@ -66,7 +66,7 @@ const waktuSekarang = new Date().toLocaleString('id-ID', {
 
 function HeroBanner() {
   return (
-    <div className="relative z-10 h-44 w-full overflow-hidden rounded-[20px] border border-[var(--color-border)] shadow-[var(--shadow-card)] sm:h-auto sm:min-h-36 lg:min-h-28 sm:aspect-[4/1] md:sticky md:top-4">
+    <div className="relative z-10 h-44 w-full overflow-hidden rounded-[20px] border border-[var(--color-border)] shadow-[var(--shadow-card)] sm:h-auto sm:min-h-36 lg:min-h-28 sm:aspect-[2560/448] md:sticky md:top-4">
       <img
         src={ilustrasiPapua}
         alt="Ilustrasi Provinsi Papua"
