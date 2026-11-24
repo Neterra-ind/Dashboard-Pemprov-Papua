@@ -46,7 +46,7 @@ import {
   gridProps,
   SENTIMEN_COLOR,
 } from '@/lib/chartTheme'
-import ilustrasiPapua from '@/assets/ilustrasi-papua.jpeg'
+import ilustrasiPapua from '@/assets/Papua_Panorama_diperkecil.png'
 
 const FRAMING_COLOR_MAP: Record<string, string> = {
   'Respons': '#3b82f6',
