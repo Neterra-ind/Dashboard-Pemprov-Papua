@@ -441,10 +441,11 @@ export function IsuPimpinan() {
 
       </div>
 
-      {/* Framing Kinerja + Ekspos Media */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      {/* Framing Kinerja + Isu Dominan ({tab}) — sejajar */}
+      {(adaKurasi && framingKinerja.length > 0) || isuGubernur.length > 0 ? (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {adaKurasi && framingKinerja.length > 0 && (
-            <Card>
+            <Card className={!(isuGubernur.length > 0) ? 'lg:col-span-2' : undefined}>
               <CardHeader
                 title="Framing Kinerja"
                 subtitle="Bagaimana pimpinan diposisikan dalam pemberitaan — hasil kurasi AI"
@@ -465,55 +466,8 @@ export function IsuPimpinan() {
             </Card>
           )}
 
-          <Card className={!(adaKurasi && framingKinerja.length > 0) ? 'lg:col-span-2' : undefined}>
-            <CardHeader title="Ekspos Media" />
-            <CardContent>
-              <ResponsiveContainer width="100%" height={Math.max(200, eksposMedia.length * 36)}>
-                <BarChart data={eksposMedia} layout="vertical" margin={{ left: 16, right: 12, top: 0, bottom: 0 }}>
-                  <CartesianGrid {...gridProps} horizontal={false} />
-                  <XAxis type="number" {...axisProps} allowDecimals={false} />
-                  <YAxis
-                    type="category"
-                    dataKey="name"
-                    {...axisProps}
-                    width={190}
-                    tickFormatter={(v: string) => truncateLabel(v, 26)}
-                  />
-                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                  <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-      </div>
-
-      {/* Narasumber + Isu Gubernur/Wakil Gubernur — sejajar */}
-      {(topNarasumber.length > 0 || isuGubernur.length > 0) && (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          {topNarasumber.length > 0 && (
-            <Card className={!(isuGubernur.length > 0) ? 'lg:col-span-2' : undefined}>
-              <CardHeader
-                title="Narasumber"
-                subtitle="Jabatan narasumber yang dikutip dalam berita Gubernur & Wakil Gubernur"
-              />
-              <CardContent>
-                <ResponsiveContainer width="100%" height={Math.max(180, topNarasumber.length * 40)}>
-                  <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
-                    <CartesianGrid {...gridProps} horizontal={false} />
-                    <XAxis type="number" {...axisProps} allowDecimals={false} />
-                    <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
-                    <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                    <Bar dataKey="jumlah" name="Berita" fill={chart.gold} radius={[0, 6, 6, 0]} maxBarSize={22}>
-                      <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-          )}
-
           {isuGubernur.length > 0 && (
-            <Card className={!(topNarasumber.length > 0) ? 'lg:col-span-2' : undefined}>
+            <Card className={!(adaKurasi && framingKinerja.length > 0) ? 'lg:col-span-2' : undefined}>
               <CardContent>
                 <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400">Isu {tab}</p>
                 <ResponsiveContainer width="100%" height={Math.max(200, isuGubernur.length * 44)}>
@@ -534,7 +488,53 @@ export function IsuPimpinan() {
             </Card>
           )}
         </div>
-      )}
+      ) : null}
+
+      {/* Narasumber + Ekspos Media — sejajar */}
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {topNarasumber.length > 0 && (
+            <Card>
+              <CardHeader
+                title="Narasumber"
+                subtitle="Jabatan narasumber yang dikutip dalam berita Gubernur & Wakil Gubernur"
+              />
+              <CardContent>
+                <ResponsiveContainer width="100%" height={Math.max(180, topNarasumber.length * 40)}>
+                  <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                    <CartesianGrid {...gridProps} horizontal={false} />
+                    <XAxis type="number" {...axisProps} allowDecimals={false} />
+                    <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                    <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                    <Bar dataKey="jumlah" name="Berita" fill={chart.gold} radius={[0, 6, 6, 0]} maxBarSize={22}>
+                      <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          )}
+
+          <Card className={!(topNarasumber.length > 0) ? 'lg:col-span-2' : undefined}>
+            <CardHeader title="Ekspos Media" />
+            <CardContent>
+              <ResponsiveContainer width="100%" height={Math.max(200, eksposMedia.length * 36)}>
+                <BarChart data={eksposMedia} layout="vertical" margin={{ left: 16, right: 12, top: 0, bottom: 0 }}>
+                  <CartesianGrid {...gridProps} horizontal={false} />
+                  <XAxis type="number" {...axisProps} allowDecimals={false} />
+                  <YAxis
+                    type="category"
+                    dataKey="name"
+                    {...axisProps}
+                    width={190}
+                    tickFormatter={(v: string) => truncateLabel(v, 26)}
+                  />
+                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                  <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+      </div>
 
       {isuPersonal.length > 0 && (
         <Card>
