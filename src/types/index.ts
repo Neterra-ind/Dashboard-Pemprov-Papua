@@ -128,17 +128,19 @@ export interface Berita {
   isi?: string
 }
 
-/** Framing kinerja pemda/pimpinan — taksonomi Neterra. */
+/** Framing kinerja pemda/pimpinan — taksonomi Neterra (lihat scripts/kurasi_ai.py FRAMING_OPTIONS). */
 export type FramingKinerja =
   | 'Respons'
+  | 'Sosialisasi'
   | 'Seremoni'
   | 'Klarifikasi'
   | 'Program/Kinerja'
   | 'Isu Terhubung'
+  | 'Hal Terhubung'
   | 'Seremoni Pasif'
 
-/** Status duplikasi artikel hasil kurasi AI. */
-export type StatusDuplikasi = 'Unik' | 'Potensi Duplikat'
+/** Status duplikasi artikel hasil kurasi AI (lihat scripts/kurasi_ai.py). */
+export type StatusDuplikasi = 'Unik' | 'Pengulangan Berita' | 'Potensi Duplikat'
 
 /**
  * Shape JSON mentah dari beritaPapua.json dan hasil upload Excel.
@@ -160,12 +162,13 @@ export interface BeritaRaw {
   engagement?: Engagement
   // Kolom kurasi AI (dari file _KURASI.xlsx)
   subjek_query?: string           // Gubernur | Wakil Gubernur | Pemprov | Papua | Tidak Relevan
-  sentimen_kurasi?: string        // Positif | Negatif | Netral | Campuran (Campuran → Netral di dashboard)
+  sentimen_kurasi?: string        // Positif | Negatif | Potensi Negatif | Netral | Campuran (Campuran → Netral di dashboard)
   klasifikasi?: Klasifikasi       // 3 label (tanpa Netral)
   framing_kinerja?: FramingKinerja
   narasumber_jabatan?: string     // "Jabatan, Instansi, Nama; ..."
   status_duplikasi?: StatusDuplikasi
   alasan_kurasi?: string
+  opd?: string                    // Nama OPD/instansi hasil kurasi manual (kolom opsional "OPD" di Excel)
 }
 
 // Reputasi/Share of Voice Gubernur & Wakil Gubernur (Module A)

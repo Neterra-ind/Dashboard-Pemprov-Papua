@@ -20,12 +20,13 @@ import { DateRangeFilter } from '@/components/DateRangeFilter'
 import { FilterSelect } from '@/components/FilterSelect'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
-import { AreaGradient, axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
+import { AreaGradient, axisProps, ChartLegend, ChartTooltip, chart, cursorFill, gridProps, truncateLabel } from '@/lib/chartTheme'
 import { hitungPerHariRange } from '@/lib/aggregations'
 import { cn } from '@/lib/utils'
-import { daftarIsuGubernur, daftarIsuWakilGubernur, daftarJenisSumber, reputasiByEntitas } from '@/data/mockData'
+import { daftarJenisSumber, reputasiByEntitas } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
 import { useBerita, isRelevan } from '@/lib/beritaStore'
+import { ambilIsuUntukTampilan, ringkasKlasterIsu } from '@/lib/klasterIsu'
 import type { EntitasPimpinan } from '@/types'
 import fotoGubernur from '@/assets/gubernur-papua.jpg'
 import fotoWakilGubernur from '@/assets/wakil-gubernur-papua.jpg'
@@ -67,6 +68,10 @@ export function IsuPimpinan() {
     [beritaPapua],
   )
 
+  // Nama & foto pejabat statis (fakta publik, bukan hasil hitung data), tapi
+  // metrik engagement harus real — reputasiByEntitas() sebelumnya memberi
+  // engagementRate acak, diganti dengan hitungan nyata dari data engagement
+  // media sosial pada berita yang masuk scope tab ini (lihat engagementRateReal di bawah).
   const reputasi = reputasiByEntitas(tab)
   const beritaTerkait = useMemo(() => {
     setSelectedJudul(null)
@@ -105,6 +110,21 @@ export function IsuPimpinan() {
     ? beritaTerkait.filter((b) => b.judul === selectedJudul)
     : beritaTerkait
 
+  // Engagement rate dihitung dari data engagement media sosial nyata (like/comment/
+  // share/quote dibagi view) pada berita yang masuk scope tab ini — null bila tidak
+  // ada data media sosial sama sekali (dulu selalu diisi angka acak dari mock).
+  const engagementRateReal = useMemo(() => {
+    const denganEngagement = beritaTerkait.filter((b) => !!(b as any).engagement)
+    if (denganEngagement.length === 0) return null
+    const rasioList = denganEngagement.map((b) => {
+      const e = (b as any).engagement as { like?: number; comment?: number; share?: number; quote?: number; view?: number }
+      const interaksi = (e.like ?? 0) + (e.comment ?? 0) + (e.share ?? 0) + (e.quote ?? 0)
+      const basis = Math.max(e.view ?? 0, 1)
+      return (interaksi / basis) * 100
+    })
+    return Number((rasioList.reduce((a, b) => a + b, 0) / rasioList.length).toFixed(1))
+  }, [beritaTerkait])
+
   const timelineEkspos = useMemo(() => {
     if (beritaTerkait.length === 0) return []
     const tanggalList = beritaTerkait.map((b) => b.tanggal).sort()
@@ -126,35 +146,38 @@ export function IsuPimpinan() {
       .slice(0, 8)
   }, [beritaTerkait])
 
-  // Isu Dominan = isu pimpinan (unit analisis per-topik, hasil clustering
-  // judul+isi di mockData.ts). Isu Gubernur/Wakil Gubernur ditampilkan semua (tidak
+  // Isu Dominan = isu pimpinan (unit analisis per-topik), dihitung langsung dari
+  // DATA REAL yang aktif (beritaTerkait — hasil upload atau data default), bukan
+  // dari data contoh bawaan. Isu Gubernur/Wakil Gubernur ditampilkan semua (tidak
   // dibatasi top-N seperti Isu Provinsi), supaya setiap isu yang pernah diberitakan
   // tetap terlihat untuk kebutuhan monitoring pimpinan.
   const isuGubernur = useMemo(() => {
-    const daftarIsuTab = tab === 'Gubernur' ? daftarIsuGubernur : daftarIsuWakilGubernur
-    return daftarIsuTab
-      .filter(isu => (isu.tipe ?? 'gubernur') !== 'personal' && isu.jumlahBerita > 1)
-      .sort((a, b) => b.jumlahBerita - a.jumlahBerita)
+    if (beritaTerkait.length === 0) return []
+    const klaster = ringkasKlasterIsu(beritaTerkait, 0.5)
+    const scope = tab === 'Gubernur' ? 'Gubernur' : 'Wakil Gubernur'
+    return ambilIsuUntukTampilan(klaster, scope)
+      .filter((k) => k.jumlahBerita > 1)
       .slice(0, 10)
-      .map(isu => ({
-        name: isu.namaIsu,
-        judul: isu.namaIsu,
-        jumlah: isu.jumlahBerita,
-        fill: isu.klasifikasi === 'Negatif' ? '#ef4444' : '#1e293b',
-      }))
-  }, [tab])
+      .map((k) => {
+        const negatif = k.anggota.filter(
+          (b) => ((b as any).sentimen_kurasi || b.sentimen) === 'Negatif',
+        ).length
+        const isNegatifDominan = k.jumlahBerita > 0 && negatif / k.jumlahBerita > 0.5
+        // Utamakan judul yang menyebut "papua" dari anggota terbaru sebagai nama isu.
+        const terbaruDulu = [...k.anggota].sort((a, b) => b.tanggal.localeCompare(a.tanggal))
+        const judulIsu = terbaruDulu.find((b) => /papua/i.test(b.judul))?.judul ?? terbaruDulu[0].judul
+        return {
+          name: judulIsu,
+          judul: judulIsu,
+          jumlah: k.jumlahBerita,
+          fill: isNegatifDominan ? '#ef4444' : '#1e293b',
+        }
+      })
+  }, [beritaTerkait, tab])
 
-  const isuPersonal = useMemo(() => {
-    const daftarIsuTab = tab === 'Gubernur' ? daftarIsuGubernur : daftarIsuWakilGubernur
-    return daftarIsuTab
-      .filter(isu => (isu.tipe ?? 'gubernur') === 'personal')
-      .map(isu => ({
-        name: isu.namaIsu,
-        judul: isu.namaIsu,
-        jumlah: isu.jumlahBerita,
-        fill: isu.klasifikasi === 'Negatif' ? '#ef4444' : '#1e293b',
-      }))
-  }, [tab])
+  // Belum ada sumber data real untuk klasifikasi "isu personal" pimpinan —
+  // dikosongkan daripada menampilkan data contoh yang tidak sinkron.
+  const isuPersonal: { name: string; judul: string; jumlah: number; fill: string }[] = []
 
   // Framing Kinerja — dari kolom kurasi AI
   const framingKinerja = useMemo(() => {
@@ -210,13 +233,14 @@ export function IsuPimpinan() {
       for (const entri of nj.split(';')) {
         const e = entri.trim()
         if (!e || e === '-') continue
-        // Format: "Nama, Jabatan" atau "Jabatan" saja
+        // Format resmi (lihat scripts/CARA_PAKAI_KURASI.md & kurasi_ai.py):
+        // "Jabatan, Instansi, Nama" atau "Jabatan, Nama" (nama selalu bagian terakhir)
         const bagian = e.split(',').map(s => s.trim()).filter(Boolean)
-        const nama = bagian[0] ?? ''
-        const jabatan = bagian[1] ?? ''
-        const key = nama
-        if (!key || key === '-') continue
-        const label = jabatan ? `${nama}||${jabatan}` : `${nama}||`
+        if (bagian.length === 0) continue
+        const nama = bagian[bagian.length - 1] ?? ''
+        const jabatan = bagian.length > 1 ? bagian[0] : ''
+        if (!nama || nama === '-') continue
+        const label = jabatan && jabatan !== nama ? `${nama}||${jabatan}` : `${nama}||`
         kurasiMap.set(label, (kurasiMap.get(label) ?? 0) + 1)
       }
     }
@@ -285,8 +309,8 @@ export function IsuPimpinan() {
 
   function NameJabatanTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
     const parts = (payload?.value ?? '||').split('||')
-    const nama = parts[0]
-    const jabatan = parts[1] ?? ''
+    const nama = truncateLabel(parts[0] ?? '', 22)
+    const jabatan = truncateLabel(parts[1] ?? '', 26)
     return (
       <g transform={`translate(${x},${y})`}>
         <text x={0} y={-4} textAnchor="end" fill="#1e293b" fontSize={11} fontWeight={600} className="dark:fill-slate-200">{nama}</text>
@@ -417,99 +441,105 @@ export function IsuPimpinan() {
 
       </div>
 
-      {/* Framing Kinerja — hanya jika ada data kurasi AI */}
-      {adaKurasi && framingKinerja.length > 0 && (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card>
-            <CardHeader
-              title="Framing Kinerja"
-              subtitle="Bagaimana pimpinan diposisikan dalam pemberitaan — hasil kurasi AI"
-            />
-            <CardContent>
-              <ResponsiveContainer width="100%" height={Math.max(180, framingKinerja.length * 36)}>
-                <BarChart data={framingKinerja} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
-                  <CartesianGrid {...gridProps} horizontal={false} />
-                  <XAxis type="number" {...axisProps} allowDecimals={false} />
-                  <YAxis type="category" dataKey="name" {...axisProps} width={130} />
-                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                  <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22}>
-                    <LabelList dataKey="value" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
-      {/* Narasumber — kurasi AI atau fallback scan judul */}
-      {topNarasumber.length > 0 && (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <Card>
-            <CardHeader
-              title="Narasumber"
-              subtitle="Jabatan narasumber yang dikutip dalam berita Gubernur & Wakil Gubernur"
-            />
-            <CardContent>
-              <ResponsiveContainer width="100%" height={Math.max(180, topNarasumber.length * 40)}>
-                <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
-                  <CartesianGrid {...gridProps} horizontal={false} />
-                  <XAxis type="number" {...axisProps} allowDecimals={false} />
-                  <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
-                  <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                  <Bar dataKey="jumlah" name="Berita" fill={chart.gold} radius={[0, 6, 6, 0]} maxBarSize={22}>
-                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
+      {/* Framing Kinerja + Ekspos Media */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        {isuGubernur.length > 0 && (
-          <Card>
+          {adaKurasi && framingKinerja.length > 0 && (
+            <Card>
+              <CardHeader
+                title="Framing Kinerja"
+                subtitle="Bagaimana pimpinan diposisikan dalam pemberitaan — hasil kurasi AI"
+              />
+              <CardContent>
+                <ResponsiveContainer width="100%" height={Math.max(180, framingKinerja.length * 36)}>
+                  <BarChart data={framingKinerja} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                    <CartesianGrid {...gridProps} horizontal={false} />
+                    <XAxis type="number" {...axisProps} allowDecimals={false} />
+                    <YAxis type="category" dataKey="name" {...axisProps} width={130} />
+                    <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                    <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22}>
+                      <LabelList dataKey="value" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          )}
+
+          <Card className={!(adaKurasi && framingKinerja.length > 0) ? 'lg:col-span-2' : undefined}>
+            <CardHeader title="Ekspos Media" />
             <CardContent>
-              <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Isu {tab}</p>
-              <ResponsiveContainer width="100%" height={Math.max(200, isuGubernur.length * 44)}>
-                <BarChart data={isuGubernur} layout="vertical" margin={{ left: 8, right: 40, top: 0, bottom: 0 }}>
+              <ResponsiveContainer width="100%" height={Math.max(200, eksposMedia.length * 36)}>
+                <BarChart data={eksposMedia} layout="vertical" margin={{ left: 16, right: 12, top: 0, bottom: 0 }}>
                   <CartesianGrid {...gridProps} horizontal={false} />
                   <XAxis type="number" {...axisProps} allowDecimals={false} />
-                  <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
+                  <YAxis
+                    type="category"
+                    dataKey="name"
+                    {...axisProps}
+                    width={190}
+                    tickFormatter={(v: string) => truncateLabel(v, 26)}
+                  />
                   <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                  <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
-                    {isuGubernur.map((entry, i) => (
-                      <Cell key={i} fill={entry.fill} />
-                    ))}
-                    <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
-                  </Bar>
+                  <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
                 </BarChart>
               </ResponsiveContainer>
             </CardContent>
           </Card>
-        )}
-
-        <Card>
-          <CardHeader title="Ekspos Media" />
-          <CardContent>
-            <ResponsiveContainer width="100%" height={Math.max(200, eksposMedia.length * 36)}>
-              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
-                <CartesianGrid {...gridProps} horizontal={false} />
-                <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={120} />
-                <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
-                <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
       </div>
+
+      {/* Narasumber + Isu Gubernur/Wakil Gubernur — sejajar */}
+      {(topNarasumber.length > 0 || isuGubernur.length > 0) && (
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {topNarasumber.length > 0 && (
+            <Card className={!(isuGubernur.length > 0) ? 'lg:col-span-2' : undefined}>
+              <CardHeader
+                title="Narasumber"
+                subtitle="Jabatan narasumber yang dikutip dalam berita Gubernur & Wakil Gubernur"
+              />
+              <CardContent>
+                <ResponsiveContainer width="100%" height={Math.max(180, topNarasumber.length * 40)}>
+                  <BarChart data={topNarasumber} layout="vertical" margin={{ left: 8, right: 48, top: 0, bottom: 0 }}>
+                    <CartesianGrid {...gridProps} horizontal={false} />
+                    <XAxis type="number" {...axisProps} allowDecimals={false} />
+                    <YAxis type="category" dataKey="label" {...axisProps} width={180} tick={<NameJabatanTick />} />
+                    <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                    <Bar dataKey="jumlah" name="Berita" fill={chart.gold} radius={[0, 6, 6, 0]} maxBarSize={22}>
+                      <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          )}
+
+          {isuGubernur.length > 0 && (
+            <Card className={!(topNarasumber.length > 0) ? 'lg:col-span-2' : undefined}>
+              <CardContent>
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400">Isu {tab}</p>
+                <ResponsiveContainer width="100%" height={Math.max(200, isuGubernur.length * 44)}>
+                  <BarChart data={isuGubernur} layout="vertical" margin={{ left: 8, right: 40, top: 0, bottom: 0 }}>
+                    <CartesianGrid {...gridProps} horizontal={false} />
+                    <XAxis type="number" {...axisProps} allowDecimals={false} />
+                    <YAxis type="category" dataKey="name" {...axisProps} width={160} tick={<WrapTick />} />
+                    <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
+                    <Bar dataKey="jumlah" name="Berita" radius={[0, 4, 4, 0]} maxBarSize={22}>
+                      {isuGubernur.map((entry, i) => (
+                        <Cell key={i} fill={entry.fill} />
+                      ))}
+                      <LabelList dataKey="jumlah" position="right" style={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }} />
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      )}
 
       {isuPersonal.length > 0 && (
         <Card>
           <CardContent>
-            <p className="mb-3 text-[10px] font-semibold uppercase tracking-widest text-slate-400">Isu Personal</p>
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-slate-400">Isu Personal</p>
             <ResponsiveContainer width="100%" height={Math.max(200, isuPersonal.length * 44)}>
               <BarChart
                 data={isuPersonal}
@@ -615,9 +645,11 @@ export function IsuPimpinan() {
         </CardContent>
       </Card>
 
-      <p className="flex items-center gap-1 text-xs text-slate-400 dark:text-slate-500">
-        <TrendingUp className="h-3 w-3" /> Engagement rate rata-rata: {reputasi.engagementRate}%
-      </p>
+      {engagementRateReal !== null && (
+        <p className="flex items-center gap-1 text-xs text-slate-400 dark:text-slate-500">
+          <TrendingUp className="h-3 w-3" /> Engagement rate rata-rata (media sosial): {engagementRateReal}%
+        </p>
+      )}
     </div>
   )
 }

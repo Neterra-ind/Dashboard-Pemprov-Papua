@@ -54,6 +54,15 @@ export const axisProps = {
 export const cursorFill = { fill: 'rgba(148, 163, 184, 0.10)' }
 export const cursorLine = { stroke: '#cbd5e1', strokeWidth: 1, strokeDasharray: '4 4' }
 
+/**
+ * Potong label panjang (nama media, nama narasumber, dll) dengan ellipsis
+ * agar tidak overflow/terpotong keluar area chart pada sumbu kategori.
+ */
+export function truncateLabel(text: string, maxChars: number): string {
+  if (!text) return text
+  return text.length > maxChars ? `${text.slice(0, Math.max(1, maxChars - 1)).trimEnd()}…` : text
+}
+
 /** Definisi gradient area — sisipkan di dalam <defs> lalu rujuk via url(#id). */
 export function AreaGradient({ id, color }: { id: string; color: string }) {
   return (

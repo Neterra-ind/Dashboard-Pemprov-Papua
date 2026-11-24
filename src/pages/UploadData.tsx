@@ -71,6 +71,16 @@ function parseTanggal(raw: unknown): string {
   return s.slice(0, 10)
 }
 
+// Deteksi entitas pimpinan (Gubernur/Wakil Gubernur) dari teks judul+isi.
+// Dipakai untuk news maupun socmed — menentukan apakah berita masuk scope
+// "Isu Pimpinan" atau "Isu Provinsi/OPD" (lihat isPimpinan/isProvinsi di beritaStore.tsx).
+function deteksiEntitas(teks: string): string | undefined {
+  const t = teks.toLowerCase()
+  if (t.includes('wakil gubernur') || t.includes('wagub')) return 'Wakil Gubernur'
+  if (t.includes('gubernur') || t.includes('gov')) return 'Gubernur'
+  return undefined
+}
+
 function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw | null {
   // Normalize keys
   const r: Record<string, string> = {}
@@ -93,10 +103,7 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
     const sentimen = mapSentimen(sentimenRaw)
 
     // Cek apakah ada tanda pimpinan di judul/isi
-    let entitasTerkait: string | undefined
-    const teks = (judul + ' ' + isi).toLowerCase()
-    if (teks.includes('gubernur') || teks.includes('gov')) entitasTerkait = 'Gubernur'
-    if (teks.includes('wakil gubernur') || teks.includes('wagub')) entitasTerkait = 'Wakil Gubernur'
+    const entitasTerkait = deteksiEntitas(`${judul} ${isi}`)
 
     // Kolom kurasi AI (opsional — hanya ada jika file sudah dikurasi)
     const subjekQuery = r['subjekquery'] ?? r['subjek_query'] ?? r['subjek'] ?? ''
@@ -105,6 +112,7 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
     const statusDuplikasi = r['statusduplikasi'] ?? r['status_duplikasi'] ?? r['duplikasi'] ?? ''
     const narasumberJabatan = r['narasumberjabatan'] ?? r['narasumber_jabatan'] ?? r['narasumber'] ?? ''
     const alasanKurasi = r['alasankurasi'] ?? r['alasan_kurasi'] ?? r['alasan'] ?? ''
+    const opdKurasi = r['opd'] ?? r['namaopd'] ?? r['nama_opd'] ?? r['instansi'] ?? ''
 
     return {
       tanggal,
@@ -123,6 +131,7 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
       ...(statusDuplikasi && { status_duplikasi: statusDuplikasi as import('@/types').StatusDuplikasi }),
       ...(narasumberJabatan && { narasumber_jabatan: narasumberJabatan }),
       ...(alasanKurasi && { alasan_kurasi: alasanKurasi }),
+      ...(opdKurasi && { opd: opdKurasi }),
     }
   }
 
@@ -141,6 +150,7 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
     const kategori = klasifikasiKategori(judul, isi)
     const sentimen = mapSentimen(sentimenRaw)
     const platform = mapPlatform(platformRaw)
+    const entitasTerkait = deteksiEntitas(isi)
 
     const engagement: Engagement = {
       like: parseInt(r['like'] ?? r['likes'] ?? '0') || 0,
@@ -161,6 +171,7 @@ function parseRow(format: FormatExcel, row: Record<string, unknown>): BeritaRaw 
       username,
       platform: platform as string | undefined,
       engagement,
+      entitasTerkait,
       tipe: 'socmed',
     }
   }
@@ -572,7 +583,7 @@ export function UploadData() {
                 ))}
               </div>
               <p className="mt-2 text-xs text-blue-500">
-                Kolom opsional: Narasumber, Sentimen_Kurasi, Framing_Kinerja, Status_Duplikasi, Alasan_Kurasi
+                Kolom opsional: Narasumber, Subjek_Query, Sentimen_Kurasi (termasuk nilai "Potensi Negatif"), Framing_Kinerja, Status_Duplikasi, OPD, Alasan_Kurasi
               </p>
             </div>
             <div className="rounded-lg border border-purple-100 bg-purple-50/50 p-4">

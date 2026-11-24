@@ -103,7 +103,7 @@ export const daftarJenisSumber: JenisSumber[] = ['Media Online', 'Media Sosial']
 
 const SENTIMEN: Sentimen[] = ['Positif', 'Netral', 'Negatif']
 
-function levelDariSentimen(sentimen: Sentimen): LevelRisiko {
+export function levelDariSentimen(sentimen: Sentimen): LevelRisiko {
   if (sentimen === 'Negatif') return pick(['Medium', 'High', 'Critical'])
   if (sentimen === 'Netral') return pick(['Low', 'Medium'])
   return 'Low'
@@ -120,7 +120,7 @@ function viralityScoreUntuk(level: LevelRisiko) {
   return randomInt(min, max)
 }
 
-function estimasiEskalasiUntuk(klasifikasi: Klasifikasi, level: LevelRisiko) {
+export function estimasiEskalasiUntuk(klasifikasi: Klasifikasi, level: LevelRisiko) {
   if (klasifikasi === 'Positif') return 'Tidak ada indikasi eskalasi negatif.'
   const map: Record<LevelRisiko, string> = {
     Low: 'Rendah — kemungkinan mereda dengan sendirinya dalam 3-5 hari.',
@@ -131,7 +131,7 @@ function estimasiEskalasiUntuk(klasifikasi: Klasifikasi, level: LevelRisiko) {
   return map[level]
 }
 
-function ringkasanUntuk(judul: string, sentimen: Sentimen) {
+export function ringkasanUntuk(judul: string, sentimen: Sentimen) {
   const dampak =
     sentimen === 'Negatif'
       ? 'berisiko menjadi sorotan publik lebih luas bila tidak segera ditindaklanjuti'
@@ -141,7 +141,7 @@ function ringkasanUntuk(judul: string, sentimen: Sentimen) {
   return `${judul}. Isu ini ${dampak}.`
 }
 
-function penyebabUntuk(kategori: KategoriIsu) {
+export function penyebabUntuk(kategori: KategoriIsu) {
   const map: Record<KategoriIsu, string> = {
     'Ekonomi, Keuangan & Industri': 'Fluktuasi harga dan ketimpangan arus logistik antarwilayah.',
     Infrastruktur: 'Keterbatasan anggaran pemeliharaan dan koordinasi lintas OPD.',
@@ -168,7 +168,7 @@ function penyebabUntuk(kategori: KategoriIsu) {
   return map[kategori]
 }
 
-function risikoUntuk(level: LevelRisiko) {
+export function risikoUntuk(level: LevelRisiko) {
   const map: Record<LevelRisiko, string> = {
     Low: 'Risiko rendah, dapat ditangani melalui mekanisme rutin OPD.',
     Medium: 'Risiko sedang, berpotensi menjadi perhatian media dalam waktu dekat.',
@@ -178,7 +178,7 @@ function risikoUntuk(level: LevelRisiko) {
   return map[level]
 }
 
-const REKOMENDASI_POOL = [
+export const REKOMENDASI_POOL = [
   'Instruksikan OPD terkait untuk klarifikasi publik dalam 1x24 jam',
   'Jadwalkan sidak/kunjungan langsung ke lokasi isu',
   'Siapkan siaran pers resmi melalui Biro Komunikasi Publik',

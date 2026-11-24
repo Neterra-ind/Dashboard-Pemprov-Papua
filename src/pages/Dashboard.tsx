@@ -27,16 +27,15 @@ import { FilterSelect } from '@/components/FilterSelect'
 import { useRole } from '@/lib/role'
 import { useDisposisi } from '@/lib/store'
 import {
-  daftarEarlyWarning,
-  daftarIsu,
   daftarJenisSumber,
   daftarOpd,
-  daftarRankingOpd,
-  substansiMasalahUntuk,
+  KATEGORI_OPD_MAP,
 } from '@/data/mockData'
+import { useIsuEngine } from '@/lib/isuEngine'
 import { getJenisSumber } from '@/lib/utils'
 import { useBerita, isRelevan, isPimpinan, isProvinsi } from '@/lib/beritaStore'
-import { hitungPerHariRange, levelKeAngka } from '@/lib/aggregations'
+import { hitungPerHariRange } from '@/lib/aggregations'
+import type { KategoriIsu } from '@/types'
 import {
   AreaGradient,
   axisProps,
@@ -92,10 +91,11 @@ function HeroBanner() {
 function AdminOpdSummary() {
   const { opdAktif, setOpdAktif } = useRole()
   const { statusUntukIsu } = useDisposisi()
+  const { daftarIsu } = useIsuEngine()
 
   const isuOpd = useMemo(
     () => daftarIsu.filter((isu) => isu.opd === opdAktif).slice(0, 12),
-    [opdAktif],
+    [daftarIsu, opdAktif],
   )
 
   return (
@@ -154,8 +154,7 @@ function AdminOpdSummary() {
 
 export function Dashboard() {
   const { role } = useRole()
-  const { statusUntukIsu } = useDisposisi()
-  const { berita: beritaPapua, subjekQuery } = useBerita()
+  const { berita: beritaPapua } = useBerita()
   const [jenisSumber, setJenisSumber] = useState('')
   const [dariTanggal, setDariTanggal] = useState('')
   const [sampaiTanggal, setSampaiTanggal] = useState('')
@@ -181,18 +180,22 @@ export function Dashboard() {
     [beritaFiltered],
   )
   const totalBeritaNegatif = useMemo(
-    () => beritaFiltered.filter((b) => b.sentimen === 'Negatif').length,
+    () => beritaFiltered.filter((b) => ((b as any).sentimen_kurasi || b.sentimen) === 'Negatif').length,
     [beritaFiltered],
   )
 
-  const belumDitindaklanjuti = useMemo(
+  // Isu Negatif/Potensi Negatif dari DATA REAL (hasil upload), bukan data contoh —
+  // sama persis dengan logika yang dipakai di halaman Early Warning, supaya
+  // alert di Executive Summary selalu sinkron dengan data yang sedang aktif.
+  const isuNegatifReal = useMemo(
     () =>
-      daftarEarlyWarning.filter(
-        (isu) =>
-          (isu.levelRisiko === 'Critical' || isu.levelRisiko === 'High') &&
-          statusUntukIsu(isu.id) === 'Belum Ditindaklanjuti',
-      ),
-    [statusUntukIsu],
+      beritaFiltered
+        .filter((b) => {
+          const sentimenEfektif = (b as any).sentimen_kurasi || b.sentimen
+          return sentimenEfektif === 'Negatif' || sentimenEfektif === 'Potensi Negatif'
+        })
+        .sort((a, b) => b.tanggal.localeCompare(a.tanggal)),
+    [beritaFiltered],
   )
 
   const trenBerita = useMemo(() => {
@@ -215,16 +218,6 @@ export function Dashboard() {
 
   const totalSentimen = distribusiSentimen.reduce((s, d) => s + d.value, 0)
 
-  const earlyWarningTeratas = useMemo(
-    () =>
-      [...daftarEarlyWarning]
-        .sort(
-          (a, b) => levelKeAngka(b.levelRisiko) - levelKeAngka(a.levelRisiko) || b.viralityScore - a.viralityScore,
-        )
-        .slice(0, 4),
-    [],
-  )
-
   const puncakPemberitaan = useMemo(() => {
     const map = new Map<string, { judul: string; jumlah: number; negatif: number }>()
     for (const b of beritaFiltered) {
@@ -242,14 +235,18 @@ export function Dashboard() {
       })
   }, [beritaFiltered])
 
-  const rankingOpdTeratas = useMemo(
-    () =>
-      daftarRankingOpd
-        .filter((r) => r.jumlahNegatif > 0)
-        .slice(0, 8)
-        .map((r) => ({ name: r.opd.replace('Dinas ', ''), value: r.jumlahNegatif })),
-    [],
-  )
+  // Ranking OPD berdasarkan isu negatif/potensi negatif dari DATA REAL (hasil upload).
+  const rankingOpdTeratas = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of isuNegatifReal) {
+      const opd = (b as any).opd || KATEGORI_OPD_MAP[b.kategori as KategoriIsu] || b.kategori
+      map.set(opd, (map.get(opd) ?? 0) + 1)
+    }
+    return Array.from(map.entries())
+      .map(([name, value]) => ({ name: name.replace('Dinas ', ''), value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 8)
+  }, [isuNegatifReal])
 
   // ── Kurasi AI ────────────────────────────────────────────────────────────
   const adaKurasi = useMemo(
@@ -386,7 +383,7 @@ export function Dashboard() {
       />
 
       {/* 2 — Critical Alert */}
-      {belumDitindaklanjuti.length > 0 && (
+      {isuNegatifReal.length > 0 && (
         <Link
           to="/early-warning"
           className="group flex items-center justify-between gap-4 rounded-[20px] border border-negative/20 bg-negative-soft px-5 py-4 transition-colors hover:bg-negative-soft/70"
@@ -396,8 +393,8 @@ export function Dashboard() {
               <AlertTriangle className="h-5 w-5" />
             </span>
             <span className="text-sm font-semibold text-slate-800">
-              {belumDitindaklanjuti.length} Isu Potensi Negatif/Negatif berisiko tinggi membutuhkan
-              perhatian segera
+              {isuNegatifReal.length} Isu Potensi Negatif/Negatif terpantau dari data real — perlu
+              direspons OPD terkait
             </span>
           </span>
           <span className="flex shrink-0 items-center gap-1 rounded-lg bg-white/80 px-3 py-1.5 text-xs font-semibold text-danger-text">
@@ -434,14 +431,14 @@ export function Dashboard() {
         <SectionLabel hint="periode data aktif">Ringkasan Pemberitaan</SectionLabel>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <StatCard
-            label={`Total Berita ${subjekQuery}`}
+            label="Total Berita Papua"
             value={totalBeritaPemprov}
             icon={Newspaper}
             tone="accent"
             caption="seluruh pemberitaan terpantau"
           />
           <StatCard
-            label={`Berita ${subjekQuery} — Pimpinan`}
+            label="Berita Pimpinan"
             value={totalBeritaGubernur}
             icon={UserRound}
             caption="entitas pimpinan daerah"
@@ -712,21 +709,24 @@ export function Dashboard() {
             }
           />
           <CardContent className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {earlyWarningTeratas.length === 0 && (
+            {isuNegatifReal.length === 0 && (
               <p className="text-sm text-slate-400">Tidak ada isu berisiko tinggi saat ini.</p>
             )}
-            {earlyWarningTeratas.map((isu) => (
-              <Link
-                key={isu.id}
-                to={`/isu/${isu.id}`}
-                className="rounded-xl border border-[var(--color-border)] p-4 transition-colors hover:border-primary/30 hover:bg-slate-50"
-              >
-                <p className="text-sm font-semibold text-slate-800">{substansiMasalahUntuk(isu)}</p>
-                <p className="mt-1.5 text-xs text-slate-500">
-                  {isu.jumlahBerita} ekspos berita · Kewenangan: {isu.opd}
-                </p>
-              </Link>
-            ))}
+            {isuNegatifReal.slice(0, 4).map((b, i) => {
+              const opd = (b as any).opd || KATEGORI_OPD_MAP[b.kategori as KategoriIsu] || b.kategori
+              return (
+                <Link
+                  key={`${b.judul}-${i}`}
+                  to="/early-warning"
+                  className="rounded-xl border border-[var(--color-border)] p-4 transition-colors hover:border-primary/30 hover:bg-slate-50"
+                >
+                  <p className="line-clamp-2 text-sm font-semibold text-slate-800">{b.judul}</p>
+                  <p className="mt-1.5 text-xs text-slate-500">
+                    {b.sumber} · {b.tanggal} · Kewenangan: {opd}
+                  </p>
+                </Link>
+              )
+            })}
           </CardContent>
         </Card>
 

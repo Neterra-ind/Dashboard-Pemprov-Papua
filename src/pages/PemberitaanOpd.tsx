@@ -15,7 +15,7 @@ import { DataTable } from '@/components/DataTable'
 import { FilterSelect } from '@/components/FilterSelect'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { PageHeader, SectionLabel } from '@/components/ui/PageHeader'
-import { axisProps, ChartTooltip, chart, cursorFill, gridProps } from '@/lib/chartTheme'
+import { axisProps, ChartTooltip, chart, cursorFill, gridProps, truncateLabel } from '@/lib/chartTheme'
 import { daftarOpd } from '@/data/mockData'
 import { useBerita, isProvinsi } from '@/lib/beritaStore'
 import type { BeritaRaw, FramingKinerja, StatusDuplikasi } from '@/types'
@@ -53,8 +53,8 @@ function WrapTick({ x, y, payload }: { x?: number; y?: number; payload?: { value
 
 function NameJabatanTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
   const parts = (payload?.value ?? '||').split('||')
-  const nama = parts[0]
-  const jabatan = parts[1] ?? ''
+  const nama = truncateLabel(parts[0] ?? '', 22)
+  const jabatan = truncateLabel(parts[1] ?? '', 26)
   return (
     <g transform={`translate(${x},${y})`}>
       <text x={0} y={-4} textAnchor="end" fill="#1e293b" fontSize={11} fontWeight={600}>{nama}</text>
@@ -188,113 +188,7 @@ export function PemberitaanOpd() {
     [beritaOpd],
   )
 
-  // ── Chart: Isu Dominan (top 10 judul terbanyak) ──────────────────────────
-  const puncakPemberitaan = useMemo(() => {
-    const map = new Map<string, { jumlah: number; negatif: number }>()
-    for (const b of beritaOpd) {
-      const e = map.get(b.judul) ?? { jumlah: 0, negatif: 0 }
-      e.jumlah++
-      if (b.sentimen === 'Negatif') e.negatif++
-      map.set(b.judul, e)
-    }
-    return Array.from(map.entries())
-      .map(([judul, { jumlah, negatif }]) => ({
-        name: judul,
-        jumlah,
-        fill: jumlah > 0 && negatif / jumlah > 0.5 ? '#ef4444' : '#1e293b',
-      }))
-      .sort((a, b) => b.jumlah - a.jumlah)
-      .slice(0, 10)
-  }, [beritaOpd])
-
-  // ── Chart: Ekspos Media (top 10 media/sumber) ────────────────────────────
-  const eksposMedia = useMemo(() => {
-    const map = new Map<string, number>()
-    for (const b of beritaOpd) {
-      map.set(b.sumber, (map.get(b.sumber) ?? 0) + 1)
-    }
-    return Array.from(map.entries())
-      .map(([name, value]) => ({ name, value }))
-      .sort((a, b) => b.value - a.value)
-      .slice(0, 10)
-  }, [beritaOpd])
-
-  // ── Chart: Narasumber ────────────────────────────────────────────────────
-  const JABATAN_SCAN = [
-    'Wakil Gubernur Papua', 'Gubernur Papua',
-    'Wakil Gubernur', 'Gubernur',
-    'Kepala Dinas', 'Sekretaris Daerah', 'Sekda',
-    'Pengamat Politik', 'Pengamat Ekonomi', 'Pengamat Kebijakan', 'Pengamat',
-    'Akademisi', 'Pakar', 'Peneliti',
-    'Ketua DPRD Papua', 'Ketua DPRD', 'Anggota DPRD',
-    'Kapolda', 'Kapolres', 'Dandim', 'Danrem', 'Pangdam',
-    'Bupati', 'Wali Kota', 'Walikota',
-    'Direktur', 'Ketua',
-  ]
-
-  const topNarasumber = useMemo(() => {
-    const hasKurasi = beritaOpd.some((b) => !!(b as any).narasumber_jabatan)
-    if (hasKurasi) {
-      const map = new Map<string, number>()
-      for (const b of beritaOpd) {
-        const nj = ((b as any).narasumber_jabatan as string | undefined)?.trim()
-        if (!nj) continue
-        for (const entri of nj.split(';')) {
-          const e = entri.trim()
-          if (!e || e === '-') continue
-          // Format: "Nama, Jabatan" atau "Jabatan" saja
-          const bagian = e.split(',').map(s => s.trim()).filter(Boolean)
-          const nama = bagian[0] ?? ''
-          const jabatan = bagian[1] ?? ''
-          if (!nama || nama === '-') continue
-          const label = jabatan ? `${nama}||${jabatan}` : `${nama}||`
-          map.set(label, (map.get(label) ?? 0) + 1)
-        }
-      }
-      if (map.size > 0) {
-        return Array.from(map.entries())
-          .map(([label, jumlah]) => ({ label, jumlah }))
-          .sort((a, b) => b.jumlah - a.jumlah)
-          .slice(0, 10)
-      }
-    }
-    // Fallback: scan judul dengan JABATAN_SCAN
-    const map = new Map<string, number>()
-    for (const b of beritaOpd) {
-      const judul = b.judul.toLowerCase()
-      const matched = new Set<string>()
-      for (const kw of JABATAN_SCAN) {
-        const kwLower = kw.toLowerCase()
-        if (!judul.includes(kwLower)) continue
-        const covered = [...matched].some(
-          (m) => m.toLowerCase().includes(kwLower) || kwLower.includes(m.toLowerCase()),
-        )
-        if (!covered) matched.add(kw)
-      }
-      for (const kw of matched) {
-        map.set(kw, (map.get(kw) ?? 0) + 1)
-      }
-    }
-    return Array.from(map.entries())
-      .map(([jabatan, jumlah]) => ({ label: `${jabatan}||`, jumlah }))
-      .sort((a, b) => b.jumlah - a.jumlah)
-      .slice(0, 10)
-  }, [beritaOpd])
-
-  // ── Chart: Framing Kinerja (hanya jika ada kurasi AI) ───────────────────
-  const framingKinerja = useMemo(() => {
-    const map = new Map<string, number>()
-    for (const b of beritaOpd) {
-      const f = (b as any).framing_kinerja as string | undefined
-      if (f && f.trim()) map.set(f.trim(), (map.get(f.trim()) ?? 0) + 1)
-    }
-    return Array.from(map.entries())
-      .map(([name, value]) => ({ name, value }))
-      .sort((a, b) => b.value - a.value)
-  }, [beritaOpd])
-
-  // ── Tabel Drill-down: berita difilter per OPD + duplikasi ────────────────
-  // Deteksi OPD dari field kategori (KATEGORI_OPD_MAP) atau keyword di judul
+  // Deteksi OPD: utamakan kolom hasil kurasi manual ("opd"), fallback ke mapping kategori
   const KATEGORI_OPD_MAP: Record<string, string> = {
     'Ekonomi, Keuangan & Industri': 'Dinas Perindustrian dan Energi',
     'Infrastruktur': 'Dinas Pekerjaan Umum',
@@ -318,15 +212,15 @@ export function PemberitaanOpd() {
     'Pemberdayaan Perempuan & Perlindungan Anak': 'Dinas Sosial',
     'Pembangunan Desa': 'Pemerintah Kabupaten/Kota',
   }
+  function opdDari(b: BeritaRaw): string | undefined {
+    return (b as any).opd || KATEGORI_OPD_MAP[b.kategori]
+  }
 
-  const beritaDrilldown = useMemo(() => {
+  // Semua chart di halaman ini mengikuti filter OPD & Status Duplikasi yang aktif,
+  // bukan hanya tabel daftar berita di bawah.
+  const beritaTerfilter = useMemo(() => {
     return beritaOpd.filter((b) => {
-      // Filter OPD berdasarkan mapping kategori
-      if (opdFilter) {
-        const opdDariKategori = KATEGORI_OPD_MAP[b.kategori]
-        if (opdDariKategori !== opdFilter) return false
-      }
-      // Filter status duplikasi
+      if (opdFilter && opdDari(b) !== opdFilter) return false
       if (duplikasiFilter) {
         const dup = (b as any).status_duplikasi as string | undefined
         if ((dup ?? 'Unik') !== duplikasiFilter) return false
@@ -335,18 +229,137 @@ export function PemberitaanOpd() {
     })
   }, [beritaOpd, opdFilter, duplikasiFilter])
 
-  // ── OPD terpopuler (dari mapping kategori) ───────────────────────────────
+  // ── Chart: Isu Dominan (top 10 judul terbanyak) ──────────────────────────
+  const puncakPemberitaan = useMemo(() => {
+    const map = new Map<string, { jumlah: number; negatif: number }>()
+    for (const b of beritaTerfilter) {
+      const e = map.get(b.judul) ?? { jumlah: 0, negatif: 0 }
+      e.jumlah++
+      const sentimenEfektif = (b as any).sentimen_kurasi || b.sentimen
+      if (sentimenEfektif === 'Negatif' || sentimenEfektif === 'Potensi Negatif') e.negatif++
+      map.set(b.judul, e)
+    }
+    return Array.from(map.entries())
+      .map(([judul, { jumlah, negatif }]) => ({
+        name: judul,
+        jumlah,
+        fill: jumlah > 0 && negatif / jumlah > 0.5 ? '#ef4444' : '#1e293b',
+      }))
+      .sort((a, b) => b.jumlah - a.jumlah)
+      .slice(0, 10)
+  }, [beritaTerfilter])
+
+  // ── Chart: Ekspos Media (top 10 media/sumber) ────────────────────────────
+  const eksposMedia = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of beritaTerfilter) {
+      map.set(b.sumber, (map.get(b.sumber) ?? 0) + 1)
+    }
+    return Array.from(map.entries())
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 10)
+  }, [beritaTerfilter])
+
+  // ── Chart: Narasumber ────────────────────────────────────────────────────
+  const JABATAN_SCAN = [
+    'Wakil Gubernur Papua', 'Gubernur Papua',
+    'Wakil Gubernur', 'Gubernur',
+    'Kepala Dinas', 'Sekretaris Daerah', 'Sekda',
+    'Pengamat Politik', 'Pengamat Ekonomi', 'Pengamat Kebijakan', 'Pengamat',
+    'Akademisi', 'Pakar', 'Peneliti',
+    'Ketua DPRD Papua', 'Ketua DPRD', 'Anggota DPRD',
+    'Kapolda', 'Kapolres', 'Dandim', 'Danrem', 'Pangdam',
+    'Bupati', 'Wali Kota', 'Walikota',
+    'Direktur', 'Ketua',
+  ]
+
+  const topNarasumber = useMemo(() => {
+    const hasKurasi = beritaTerfilter.some((b) => !!(b as any).narasumber_jabatan)
+    if (hasKurasi) {
+      const map = new Map<string, number>()
+      for (const b of beritaTerfilter) {
+        const nj = ((b as any).narasumber_jabatan as string | undefined)?.trim()
+        if (!nj) continue
+        for (const entri of nj.split(';')) {
+          const e = entri.trim()
+          if (!e || e === '-') continue
+          // Format resmi (lihat scripts/CARA_PAKAI_KURASI.md & kurasi_ai.py):
+          // "Jabatan, Instansi, Nama" atau "Jabatan, Nama" (nama selalu bagian terakhir)
+          const bagian = e.split(',').map(s => s.trim()).filter(Boolean)
+          if (bagian.length === 0) continue
+          const nama = bagian[bagian.length - 1] ?? ''
+          const jabatan = bagian.length > 1 ? bagian[0] : ''
+          if (!nama || nama === '-') continue
+          const label = jabatan && jabatan !== nama ? `${nama}||${jabatan}` : `${nama}||`
+          map.set(label, (map.get(label) ?? 0) + 1)
+        }
+      }
+      if (map.size > 0) {
+        return Array.from(map.entries())
+          .map(([label, jumlah]) => ({ label, jumlah }))
+          .sort((a, b) => b.jumlah - a.jumlah)
+          .slice(0, 10)
+      }
+    }
+    // Fallback: scan judul dengan JABATAN_SCAN
+    const map = new Map<string, number>()
+    for (const b of beritaTerfilter) {
+      const judul = b.judul.toLowerCase()
+      const matched = new Set<string>()
+      for (const kw of JABATAN_SCAN) {
+        const kwLower = kw.toLowerCase()
+        if (!judul.includes(kwLower)) continue
+        const covered = [...matched].some(
+          (m) => m.toLowerCase().includes(kwLower) || kwLower.includes(m.toLowerCase()),
+        )
+        if (!covered) matched.add(kw)
+      }
+      for (const kw of matched) {
+        map.set(kw, (map.get(kw) ?? 0) + 1)
+      }
+    }
+    return Array.from(map.entries())
+      .map(([jabatan, jumlah]) => ({ label: `${jabatan}||`, jumlah }))
+      .sort((a, b) => b.jumlah - a.jumlah)
+      .slice(0, 10)
+  }, [beritaTerfilter])
+
+  // ── Chart: Framing Kinerja (hanya jika ada kurasi AI) ───────────────────
+  const framingKinerja = useMemo(() => {
+    const map = new Map<string, number>()
+    for (const b of beritaTerfilter) {
+      const f = (b as any).framing_kinerja as string | undefined
+      if (f && f.trim()) map.set(f.trim(), (map.get(f.trim()) ?? 0) + 1)
+    }
+    return Array.from(map.entries())
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value)
+  }, [beritaTerfilter])
+
+  // Daftar pilihan filter OPD — dinamis dari SEMUA data aktif (kurasi manual + fallback
+  // kategori), bukan dari beritaTerfilter, supaya dropdown tidak menyusut saat filter aktif.
+  const opsiOpdFilter = useMemo(() => {
+    const set = new Set<string>()
+    for (const b of beritaOpd) {
+      const o = opdDari(b)
+      if (o) set.add(o)
+    }
+    return set.size > 0 ? Array.from(set).sort() : daftarOpd
+  }, [beritaOpd])
+
+  // ── OPD terpopuler (kolom kurasi manual, fallback mapping kategori) ──────
   const opdPopuler = useMemo(() => {
     const map = new Map<string, number>()
-    for (const b of beritaOpd) {
-      const opd = KATEGORI_OPD_MAP[b.kategori]
+    for (const b of beritaTerfilter) {
+      const opd = opdDari(b)
       if (opd) map.set(opd, (map.get(opd) ?? 0) + 1)
     }
     return Array.from(map.entries())
       .map(([name, value]) => ({ name: name.replace('Dinas ', '').replace('Satuan Polisi Pamong Praja', 'Satpol PP'), value }))
       .sort((a, b) => b.value - a.value)
       .slice(0, 8)
-  }, [beritaOpd])
+  }, [beritaTerfilter])
 
   return (
     <div className="space-y-6">
@@ -418,10 +431,16 @@ export function PemberitaanOpd() {
           <CardHeader title="Ekspos Media" subtitle="Top 10 media berdasarkan jumlah berita OPD" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(200, eksposMedia.length * 36)}>
-              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 12, top: 0, bottom: 0 }}>
+              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 16, right: 12, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={150} />
+                <YAxis
+                  type="category"
+                  dataKey="name"
+                  {...axisProps}
+                  width={190}
+                  tickFormatter={(v: string) => truncateLabel(v, 26)}
+                />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
                 <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={20} />
               </BarChart>
@@ -464,7 +483,7 @@ export function PemberitaanOpd() {
             <FilterSelect
               label="Filter OPD"
               value={opdFilter}
-              options={daftarOpd}
+              options={opsiOpdFilter}
               onChange={setOpdFilter}
             />
             {adaKurasi && (
@@ -477,7 +496,7 @@ export function PemberitaanOpd() {
             )}
           </div>
           <DataTable
-            data={beritaDrilldown}
+            data={beritaTerfilter}
             columns={beritaOpdColumns}
             searchPlaceholder="Cari judul berita..."
           />

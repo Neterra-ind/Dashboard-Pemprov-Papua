@@ -7,7 +7,8 @@ import { PageHeader } from '@/components/ui/PageHeader'
 import { StatusBadge } from '@/components/ui/Badge'
 import { useRole } from '@/lib/role'
 import { useDisposisi } from '@/lib/store'
-import { daftarOpd, isuById } from '@/data/mockData'
+import { daftarOpd } from '@/data/mockData'
+import { cariIsuById, useIsuEngine } from '@/lib/isuEngine'
 import type { StatusPenanganan, TindakLanjut as TindakLanjutType } from '@/types'
 
 function FormTindakLanjut({ item }: { item: TindakLanjutType }) {
@@ -62,6 +63,7 @@ function FormTindakLanjut({ item }: { item: TindakLanjutType }) {
 export function TindakLanjut() {
   const { opdAktif, setOpdAktif } = useRole()
   const { daftarTindakLanjut } = useDisposisi()
+  const { daftarIsu } = useIsuEngine()
 
   const disposisiOpd = useMemo(
     () =>
@@ -89,7 +91,7 @@ export function TindakLanjut() {
           </Card>
         )}
         {disposisiOpd.map((item) => {
-          const isu = isuById(item.isuId)
+          const isu = cariIsuById(daftarIsu, item.isuId)
           return (
             <Card key={item.id}>
               <CardHeader

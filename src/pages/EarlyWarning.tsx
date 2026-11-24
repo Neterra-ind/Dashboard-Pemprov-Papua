@@ -25,7 +25,8 @@ export function EarlyWarning() {
           if (!isRelevan(b)) return false
           // Gunakan sentimen_kurasi (AI-verified) jika ada, fallback ke sentimen IMD
           const sentimenEfektif = (b as any).sentimen_kurasi || b.sentimen
-          return sentimenEfektif === 'Negatif'
+          // "Potensi Negatif" juga wajib tampil di Early Warning — bukan hanya Negatif murni
+          return sentimenEfektif === 'Negatif' || sentimenEfektif === 'Potensi Negatif'
         })
         .sort((a, b) => b.tanggal.localeCompare(a.tanggal)),
     [berita],
@@ -106,7 +107,8 @@ export function EarlyWarning() {
                 <tbody className="divide-y divide-slate-100">
                   {sliced.map((b, idx) => {
                     const nomor = (safePage - 1) * PAGE_SIZE + idx + 1
-                    const opd = KATEGORI_OPD_MAP[b.kategori as KategoriIsu] ?? b.kategori
+                    const opd = (b as any).opd || KATEGORI_OPD_MAP[b.kategori as KategoriIsu] || b.kategori
+                    const tingkat = (b as any).sentimen_kurasi === 'Potensi Negatif' ? 'Potensi Negatif' : 'Negatif'
                     const isLink = !!b.url && b.url !== '#' && b.url.startsWith('http')
                     const ringkasan = b.isi
                       ? b.isi.length > 160
@@ -125,6 +127,16 @@ export function EarlyWarning() {
                           {b.tanggal}
                         </td>
                         <td className="px-4 py-3">
+                          <span
+                            className={`mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                              tingkat === 'Potensi Negatif'
+                                ? 'bg-amber-100 text-amber-700'
+                                : 'bg-red-100 text-red-700'
+                            }`}
+                          >
+                            {tingkat}
+                          </span>
+                          <br />
                           {isLink ? (
                             <a
                               href={b.url}

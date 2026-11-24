@@ -31,6 +31,7 @@ import {
   cursorFill,
   gridProps,
   SENTIMEN_COLOR,
+  truncateLabel,
 } from '@/lib/chartTheme'
 import { daftarJenisSumber, daftarKategoriIsu, daftarOpd, KATEGORI_OPD_MAP } from '@/data/mockData'
 import { getJenisSumber } from '@/lib/utils'
@@ -147,28 +148,30 @@ export function IsuProvinsi() {
     [beritaProvinsi],
   )
 
-  // Berita dengan filter aktif (grafik)
+  // Berita dengan filter aktif (grafik) — termasuk filter OPD, supaya semua
+  // chart (Tren, Sentimen, Isu Dominan, Ekspos Media, Narasumber, Framing)
+  // ikut berubah saat OPD dipilih, bukan hanya tabel daftar berita di bawah.
   const beritaTerfilter = useMemo(
     () =>
       beritaProvinsi.filter(
         (b) =>
           (!kategori || b.kategori === kategori) &&
           (!jenisSumber || getJenisSumber(b.sumber) === jenisSumber) &&
+          (!opdFilter || ((b as any).opd || KATEGORI_OPD_MAP[b.kategori as KategoriIsu]) === opdFilter) &&
           (!dariTanggal || b.tanggal >= dariTanggal) &&
           (!sampaiTanggal || b.tanggal <= sampaiTanggal),
       ),
-    [beritaProvinsi, kategori, jenisSumber, dariTanggal, sampaiTanggal],
+    [beritaProvinsi, kategori, jenisSumber, opdFilter, dariTanggal, sampaiTanggal],
   )
 
-  // Daftar berita drill-down: filter tambahan dari klik Isu Dominan + OPD
+  // Daftar berita drill-down: filter tambahan dari klik Isu Dominan
   const beritaDrilldown = useMemo(
     () =>
       beritaTerfilter.filter((b) => {
         if (isuDominanDipilih && b.judul !== isuDominanDipilih) return false
-        if (opdFilter && KATEGORI_OPD_MAP[b.kategori as KategoriIsu] !== opdFilter) return false
         return true
       }),
-    [beritaTerfilter, isuDominanDipilih, opdFilter],
+    [beritaTerfilter, isuDominanDipilih],
   )
 
   const rentangTanggalData = useMemo(() => {
@@ -244,12 +247,14 @@ export function IsuProvinsi() {
         for (const entri of nj.split(';')) {
           const e = entri.trim()
           if (!e || e === '-') continue
-          // Format: "Nama, Jabatan" atau "Jabatan" saja
+          // Format resmi (lihat scripts/CARA_PAKAI_KURASI.md & kurasi_ai.py):
+          // "Jabatan, Instansi, Nama" atau "Jabatan, Nama" (nama selalu bagian terakhir)
           const bagian = e.split(',').map(s => s.trim()).filter(Boolean)
-          const nama = bagian[0] ?? ''
-          const jabatan = bagian[1] ?? ''
+          if (bagian.length === 0) continue
+          const nama = bagian[bagian.length - 1] ?? ''
+          const jabatan = bagian.length > 1 ? bagian[0] : ''
           if (!nama || nama === '-') continue
-          const label = jabatan ? `${nama}||${jabatan}` : `${nama}||`
+          const label = jabatan && jabatan !== nama ? `${nama}||${jabatan}` : `${nama}||`
           map.set(label, (map.get(label) ?? 0) + 1)
         }
       }
@@ -297,8 +302,8 @@ export function IsuProvinsi() {
 
   function NameJabatanTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
     const parts = (payload?.value ?? '||').split('||')
-    const nama = parts[0]
-    const jabatan = parts[1] ?? ''
+    const nama = truncateLabel(parts[0] ?? '', 22)
+    const jabatan = truncateLabel(parts[1] ?? '', 26)
     return (
       <g transform={`translate(${x},${y})`}>
         <text x={0} y={-4} textAnchor="end" fill="#1e293b" fontSize={11} fontWeight={600}>{nama}</text>
@@ -455,10 +460,16 @@ export function IsuProvinsi() {
           <CardHeader title="Ekspos Media" />
           <CardContent>
             <ResponsiveContainer width="100%" height={Math.max(160, eksposMedia.length * 44)}>
-              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 8, right: 24, top: 0, bottom: 0 }}>
+              <BarChart data={eksposMedia} layout="vertical" margin={{ left: 16, right: 24, top: 0, bottom: 0 }}>
                 <CartesianGrid {...gridProps} horizontal={false} />
                 <XAxis type="number" {...axisProps} allowDecimals={false} />
-                <YAxis type="category" dataKey="name" {...axisProps} width={180} />
+                <YAxis
+                  type="category"
+                  dataKey="name"
+                  {...axisProps}
+                  width={190}
+                  tickFormatter={(v: string) => truncateLabel(v, 26)}
+                />
                 <Tooltip content={<ChartTooltip />} cursor={cursorFill} />
                 <Bar dataKey="value" name="Berita" fill={chart.accent} radius={[0, 6, 6, 0]} maxBarSize={22} />
               </BarChart>

@@ -15,11 +15,12 @@ import { PlatformBadge } from '@/components/PlatformBadge'
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 import { KlasifikasiBadge, StatusBadge, TrendBadge } from '@/components/ui/Badge'
 import { useDisposisi } from '@/lib/store'
-import { beritaUntukIsu, isuById } from '@/data/mockData'
+import { cariBeritaUntukIsu, cariIsuById, useIsuEngine } from '@/lib/isuEngine'
 
 export function DetailIsu() {
   const { id } = useParams<{ id: string }>()
-  const isu = id ? isuById(id) : undefined
+  const { daftarIsu, daftarBerita } = useIsuEngine()
+  const isu = id ? cariIsuById(daftarIsu, id) : undefined
   const { statusUntukIsu, tindakLanjutUntukIsu } = useDisposisi()
   const [modalTerbuka, setModalTerbuka] = useState(false)
   const [toast, setToast] = useState<string | null>(null)
@@ -37,7 +38,7 @@ export function DetailIsu() {
 
   const status = statusUntukIsu(isu.id)
   const riwayat = tindakLanjutUntukIsu(isu.id)
-  const sumberBerita = beritaUntukIsu(isu.id)
+  const sumberBerita = cariBeritaUntukIsu(daftarBerita, isu.id)
 
   return (
     <div className="space-y-5">
