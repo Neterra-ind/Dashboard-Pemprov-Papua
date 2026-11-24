@@ -151,9 +151,21 @@ export function IsuPimpinan() {
   // dari data contoh bawaan. Isu Gubernur/Wakil Gubernur ditampilkan semua (tidak
   // dibatasi top-N seperti Isu Provinsi), supaya setiap isu yang pernah diberitakan
   // tetap terlihat untuk kebutuhan monitoring pimpinan.
+  //
+  // Penyesuaian:
+  // 1) Jika ada data kurasi, berita duplikasi (status_duplikasi === 'Duplikasi')
+  //    dikeluarkan supaya hitungan isu lebih sesuai dengan data upload yang sudah dikurasi.
+  // 2) Ambang klaster diturunkan (0.35) agar berita dengan judul serupa tapi redaksi
+  //    berbeda (mis. "Evaluasi Dana Otsus, Wamendagri Ribka Haluk..." vs "...Ribka Minta...")
+  //    tergabung jadi satu isu, bukan terpisah.
   const isuGubernur = useMemo(() => {
     if (beritaTerkait.length === 0) return []
-    const klaster = ringkasKlasterIsu(beritaTerkait, 0.5)
+    // Saat data sudah dikurasi, buang berita duplikasi agar cocok dengan data upload
+    const sumberIsu = adaKurasi
+      ? beritaTerkait.filter((b) => ((b as any).status_duplikasi ?? 'Unik') !== 'Duplikasi')
+      : beritaTerkait
+    if (sumberIsu.length === 0) return []
+    const klaster = ringkasKlasterIsu(sumberIsu, 0.35)
     const scope = tab === 'Gubernur' ? 'Gubernur' : 'Wakil Gubernur'
     return ambilIsuUntukTampilan(klaster, scope)
       .filter((k) => k.jumlahBerita > 1)
@@ -173,7 +185,7 @@ export function IsuPimpinan() {
           fill: isNegatifDominan ? '#ef4444' : '#1e293b',
         }
       })
-  }, [beritaTerkait, tab])
+  }, [beritaTerkait, tab, adaKurasi])
 
   // Belum ada sumber data real untuk klasifikasi "isu personal" pimpinan —
   // dikosongkan daripada menampilkan data contoh yang tidak sinkron.
